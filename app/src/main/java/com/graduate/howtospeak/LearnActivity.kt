@@ -2,6 +2,7 @@ package com.graduate.howtospeak
 
 import android.content.Intent
 import android.content.pm.ActivityInfo
+import android.media.MediaPlayer
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_learn.*
@@ -20,6 +21,11 @@ class LearnActivity : AppCompatActivity() {
 
         mtMain1.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent) }
+
+        // 음성
+        learnsound1.setOnClickListener {
+            val mediaPlayer = MediaPlayer.create(this, R.raw.geu).start()
             startActivity(intent) }
     }
 }
