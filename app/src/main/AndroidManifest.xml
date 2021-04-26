@@ -9,7 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".minActivity"></activity>
+        <activity android:name=".Practice_RDetail"></activity>
+        <activity android:name=".Practice_Result" />
+        <activity android:name=".Practice_Vowel" />
+        <activity android:name=".Practice_vowel" />
+        <activity android:name=".Practice_Consonant" />
+        <activity android:name=".Learn_Vowel" />
+        <activity android:name=".Learn_Consonant" />
+        <activity android:name=".minActivity" />
         <activity android:name=".beaActivity" />
         <activity android:name=".hongActivity" />
         <activity android:name=".LearnListActivity" />

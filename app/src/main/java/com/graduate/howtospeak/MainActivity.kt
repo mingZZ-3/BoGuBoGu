@@ -12,13 +12,20 @@ class MainActivity : AppCompatActivity() {
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         setContentView(R.layout.activity_main)
 
-        mtLearn1.setOnClickListener {
-            val intent = Intent(this, LearnActivity::class.java)
+        learn_con1.setOnClickListener {
+            val intent = Intent(this, Learn_Consonant::class.java)
             startActivity(intent) }
 
-        mtPractice1.setOnClickListener {
-            val intent = Intent(this, PracticeActivity::class.java)
+        learn_vowel1.setOnClickListener {
+            val intent = Intent(this, Learn_Vowel::class.java)
             startActivity(intent) }
 
+        practice_con1.setOnClickListener {
+            val intent = Intent(this, Practice_Consonant::class.java)
+            startActivity(intent) }
+
+        practice_vowel1.setOnClickListener {
+            val intent = Intent(this, Practice_Vowel::class.java)
+            startActivity(intent) }
     }
 }

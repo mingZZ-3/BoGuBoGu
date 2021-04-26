@@ -4,16 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LearnActivity">
+    tools:context=".PracticeActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-
-      <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="62dp"
         android:orientation="vertical">
 
         <LinearLayout
@@ -27,33 +22,42 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:scaleType="fitStart"
-                app:srcCompat="@drawable/learn1" />
-
-            <Button
-                android:id="@+id/mtPractice1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Practice" />
+                app:srcCompat="@drawable/practice1" />
 
             <ImageButton
                 android:id="@+id/mtMain1"
-                android:layout_width="38dp"
+                android:layout_width="2dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:scaleType="centerInside"
                 app:srcCompat="@drawable/home" />
-
-
         </LinearLayout>
 
-      </LinearLayout>
-
         <ImageView
-            android:id="@+id/imageView6"
+            android:id="@+id/imageView3"
             android:layout_width="match_parent"
-            android:layout_height="327dp"
-            app:srcCompat="@drawable/example_learn" />
+            android:layout_height="290dp"
+            app:srcCompat="@drawable/example_result" />
+
+        <FrameLayout
+            android:layout_width="265dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="right">
+
+            <Button
+                android:id="@+id/mtRDetail1"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="자세히 보기" />
+
+            <Button
+                android:id="@+id/button8"
+                android:layout_width="103dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:text="다음 단어로" />
+
+        </FrameLayout>
 
     </LinearLayout>
 
