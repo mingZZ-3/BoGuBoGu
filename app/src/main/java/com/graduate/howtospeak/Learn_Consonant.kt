@@ -26,5 +26,7 @@ class Learn_Consonant : AppCompatActivity() {
         lcon1.setOnClickListener {
             val intent = Intent(this, LearnActivity::class.java)
             startActivity(intent) }
+
+
     }
 }

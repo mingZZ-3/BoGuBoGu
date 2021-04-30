@@ -33,11 +33,10 @@
                 app:srcCompat="@drawable/home" />
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/imageView8"
+        <com.graduate.howtospeak.LineBarVisualizer
+            android:id="@+id/visualizer"
             android:layout_width="match_parent"
-            android:layout_height="324dp"
-            app:srcCompat="@drawable/example_more" />
+            android:layout_height="250dp"/>
 
 
     </LinearLayout>
