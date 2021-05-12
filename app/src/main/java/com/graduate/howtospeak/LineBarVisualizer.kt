@@ -8,7 +8,7 @@ import android.util.AttributeSet
 import kotlin.math.abs
 
 
-class LineBarVisualizer : BaseVisualizer {
+/* class LineBarVisualizer : BaseVisualizer {
     private var middleLine: Paint? = null
     private var density = 0f
     private var gap = 0
@@ -65,7 +65,7 @@ class LineBarVisualizer : BaseVisualizer {
                 canvas.drawLine(barX, top.toFloat(), barX, (height / 2).toFloat(), paint!!)
                 i++
             }
-            super.onDraw(canvas)
-        }
+            super.onDraw(canvas)}
     }
 }
+*/

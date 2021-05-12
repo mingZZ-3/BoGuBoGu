@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PracticeActivity">
+    tools:context=".Practice_RDetail">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -33,11 +33,13 @@
                 app:srcCompat="@drawable/home" />
         </LinearLayout>
 
+        <!--
         <com.graduate.howtospeak.LineBarVisualizer
-            android:id="@+id/visualizer"
+            android:id="@+id/LinebarVisualizer"
             android:layout_width="match_parent"
             android:layout_height="250dp"/>
 
+        -->
 
     </LinearLayout>
 

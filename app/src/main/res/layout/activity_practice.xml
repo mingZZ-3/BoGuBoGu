@@ -11,27 +11,27 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-      <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="62dp"
-        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="62dp"
+            android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="543dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:scaleType="fitStart"
-            app:srcCompat="@drawable/practice1" />
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="543dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:scaleType="fitStart"
+                app:srcCompat="@drawable/practice1" />
 
-        <ImageButton
-            android:id="@+id/mtMain1"
-            android:layout_width="2dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:scaleType="centerInside"
-            app:srcCompat="@drawable/home" />
-      </LinearLayout>
+            <ImageButton
+                android:id="@+id/mtMain1"
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/home" />
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/imageView7"
@@ -39,17 +39,29 @@
             android:layout_height="286dp"
             app:srcCompat="@drawable/example_practice" />
 
-        <FrameLayout
-            android:layout_width="137dp"
+        <TableRow
+            android:layout_width="321dp"
             android:layout_height="match_parent"
             android:layout_gravity="right">
 
             <Button
+                android:id="@+id/bt_rstart"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:text="연습 시작"/>
+
+            <Button
+                android:id="@+id/bt_rstop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="연습 멈춤" />
+
+            <Button
                 android:id="@+id/mtResult1"
-                android:layout_width="match_parent"
+                android:layout_width="98dp"
                 android:layout_height="wrap_content"
                 android:text="결과보기" />
-        </FrameLayout>
+        </TableRow>
     </LinearLayout>
 
 </LinearLayout>

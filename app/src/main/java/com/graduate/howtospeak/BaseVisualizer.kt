@@ -3,12 +3,12 @@ package com.graduate.howtospeak
 import android.content.Context
 import android.graphics.Color
 import android.graphics.Paint
-import android.media.MediaPlayer
 import android.media.audiofx.Visualizer
 import android.media.audiofx.Visualizer.OnDataCaptureListener
 import android.util.AttributeSet
 import android.view.View
 
+/*
 abstract class BaseVisualizer : View {
     protected var bytes: ByteArray? = null
     protected var paint: Paint? = null
@@ -16,8 +16,8 @@ abstract class BaseVisualizer : View {
     protected var color = Color.BLUE
 
 
-    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(
-        context, attrs, defStyleAttr) {
+    constructor(context: Context?, attrs: AttributeSet?) : super(
+        context, attrs) {
         init(attrs)
         init()
     }
@@ -26,13 +26,6 @@ abstract class BaseVisualizer : View {
         paint = Paint()
     }
 
-
-    @Deprecated(
-        """will be removed in next version use {@link com.graduate.howtospeak.BaseVisualizer#setPlayer(int)} instead
-      """)
-    fun setPlayer(mediaPlayer: MediaPlayer) {
-        setPlayer(mediaPlayer.audioSessionId)
-    }
 
     fun setPlayer(audioSessionId: Int) {
         visualizer = Visualizer(audioSessionId)
@@ -57,12 +50,17 @@ abstract class BaseVisualizer : View {
     }
 
     fun release() {
-        //will be null if setPlayer hasn't yet been called
         if (visualizer == null) return
         visualizer!!.release()
         bytes = null
         invalidate()
     }
 
+    fun getVisualizer(): Visualizer? {
+        return visualizer
+    }
+
     protected abstract fun init()
 }
+
+ */

@@ -16,6 +16,5 @@ class Practice_RDetail : AppCompatActivity() {
         mtMain1.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent) }
-
     }
 }

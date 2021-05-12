@@ -9,23 +9,31 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".Practice_RDetail"></activity>
-        <activity android:name=".Practice_Result" />
-        <activity android:name=".Practice_Vowel" />
-        <activity android:name=".Practice_vowel" />
-        <activity android:name=".Practice_Consonant" />
-        <activity android:name=".Learn_Vowel" />
-        <activity android:name=".Learn_Consonant" />
-        <activity android:name=".minActivity" />
-        <activity android:name=".beaActivity" />
-        <activity android:name=".hongActivity" />
-        <activity android:name=".LearnListActivity" />
+        <activity
+            android:name=".Practice_RDetail"
+            android:screenOrientation="landscape"/>
+        <activity
+            android:name=".Practice_Result"
+            android:screenOrientation="landscape"/>
+        <activity
+            android:name=".Practice_Vowel"
+            android:screenOrientation="landscape"/>
+        <activity
+            android:name=".Practice_Consonant"
+            android:screenOrientation="landscape"/>
+        <activity
+            android:name=".Learn_Vowel"
+            android:screenOrientation="landscape"/>
+        <activity
+            android:name=".Learn_Consonant"
+            android:screenOrientation="landscape"/>
         <activity
             android:name=".LearnActivity"
             android:screenOrientation="landscape" />
         <activity
             android:name=".PracticeActivity"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape"
+            />
         <activity
             android:name=".MainActivity"
             android:screenOrientation="landscape">
@@ -35,6 +43,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
     </application>
+
+    <!-- 접근 권한 -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 </manifest>
