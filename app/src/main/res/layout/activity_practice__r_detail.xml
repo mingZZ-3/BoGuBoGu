@@ -33,13 +33,12 @@
                 app:srcCompat="@drawable/home" />
         </LinearLayout>
 
-        <!--
-        <com.graduate.howtospeak.LineBarVisualizer
-            android:id="@+id/LinebarVisualizer"
+
+        <com.graduate.howtospeak.Barvisualizer
+            android:id="@+id/barVisualizerPanel"
             android:layout_width="match_parent"
             android:layout_height="250dp"/>
 
-        -->
 
     </LinearLayout>
 

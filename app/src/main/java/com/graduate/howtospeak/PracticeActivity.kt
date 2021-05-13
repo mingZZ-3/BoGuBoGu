@@ -22,6 +22,7 @@ import java.io.IOException
 import java.util.*
 
 
+@Suppress("DEPRECATION")
 class PracticeActivity : AppCompatActivity() {
 
     var mRecorder: MediaRecorder? = null
@@ -33,7 +34,7 @@ class PracticeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
-        setContentView(R.layout.activity_practice)
+        setContentView(com.graduate.howtospeak.R.layout.activity_practice)
 
         mtMain1.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
@@ -59,62 +60,41 @@ class PracticeActivity : AppCompatActivity() {
         bt_rstop.setOnClickListener {
             stopRecording()
         }
-
-
-
-        // 음성 녹음 및 저장
-        fun startRecording(){
-            //config and create MediaRecorder Object
-            val fileName: String = Date().time.toString() + ".mp3"
-            recordoutput = Environment.getExternalStorageDirectory().absolutePath + "/Download/" + fileName //내장메모리 밑에 위치
-            mRecorder = MediaRecorder()
-            mRecorder?.setAudioSource((MediaRecorder.AudioSource.MIC))
-            mRecorder?.setOutputFormat((MediaRecorder.OutputFormat.MPEG_4))
-            mRecorder?.setAudioEncoder(MediaRecorder.AudioEncoder.AAC)
-            mRecorder?.setOutputFile(recordoutput)
-
-            try {
-                mRecorder?.prepare()
-                mRecorder?.start()
-                isRecording = true
-                Toast.makeText(this, "레코딩 시작되었습니다.", Toast.LENGTH_SHORT).show()
-            } catch (e: IllegalStateException){
-                e.printStackTrace()
-            } catch (e: IOException){
-                e.printStackTrace()
-            }
-        }
-
-        fun stopRecording(){
-            if(isRecording){
-                mRecorder?.stop()
-                mRecorder?.reset()
-                mRecorder?.release()
-                isRecording = false
-                Toast.makeText(this, "중지 되었습니다.", Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(this, "레코딩 상태가 아닙니다.", Toast.LENGTH_SHORT).show()
-            }
-        }
-
-
-        /*void initAudioRecorder {
-            mRecorder?.setAudioSource(MediaRecorder.AudioSource.MIC)
-            mRecorder?.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4)
-            mRecorder?.setAudioEncoder(MediaRecorder.AudioEncoder.DEFAULT)
-
-            val file = File(filesDir, "practice_record.mpeg4")
-
-            mPath = File(getFileStreamPath())
-            mRecorder?.setOutputFile(mPath)
-            try {
-                mRecorder?.prepare()
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }*/
-
-
-
     }
+
+
+    // 음성 녹음
+    private fun stopRecording() {
+        if(isRecording){
+            mRecorder?.stop()
+            mRecorder?.reset()
+            mRecorder?.release()
+            isRecording = false
+            Toast.makeText(this, "중지 되었습니다.", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(this, "레코딩 상태가 아닙니다.", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun startRecording() {
+        val fileName: String = Date().time.toString() + ".mp3"
+        recordoutput = Environment.getExternalStorageDirectory().absolutePath + "/Download/" + fileName //내장메모리 밑에 위치
+        mRecorder = MediaRecorder()
+        mRecorder?.setAudioSource((MediaRecorder.AudioSource.MIC))
+        mRecorder?.setOutputFormat((MediaRecorder.OutputFormat.MPEG_4))
+        mRecorder?.setAudioEncoder(MediaRecorder.AudioEncoder.AAC)
+        mRecorder?.setOutputFile(recordoutput)
+
+        try {
+            mRecorder?.prepare()
+            mRecorder?.start()
+            isRecording = true
+            Toast.makeText(this, "레코딩 시작되었습니다.", Toast.LENGTH_SHORT).show()
+        } catch (e: IllegalStateException){
+            e.printStackTrace()
+        } catch (e: IOException){
+            e.printStackTrace()
+        }
+    }
+
 }
