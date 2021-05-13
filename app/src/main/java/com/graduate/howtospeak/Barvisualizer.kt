@@ -5,12 +5,10 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.RectF
-import android.support.annotation.ColorInt
-import android.support.v4.graphics.ColorUtils
 import android.util.AttributeSet
 import android.util.DisplayMetrics
 import android.util.TypedValue
-import java.util.*
+
 
 class Barvisualizer
 @JvmOverloads
@@ -27,20 +25,10 @@ constructor(
 
     private val paint: Paint
 
-    // Bars sizes
     private val barWidthPix: Float
     private val gapWidthPix: Float
 
     private var barXBoards: List<Pair<Float, Float>>? = null
-
-    private var priorData: ByteArray? = null
-
-    // Colors blending
-    private val colorRandomize = Random()
-    private val colorBlendSpeed = 0.05f
-    private var startColor = getRandomColor()
-    private var nextColor = getRandomColor()
-    private var colorBlendFactor = 0f
 
     /**
      *
@@ -48,7 +36,7 @@ constructor(
     init {
         paint = Paint()
             .apply {
-                this.color = startColor
+                this.color = Color.GREEN
                 this.style = Paint.Style.FILL
                 this.isAntiAlias = true
             }
@@ -68,30 +56,13 @@ constructor(
             barXBoards = calculateBarXBoards(canvas.width)
         }
 
-        // Current and previous data mixing
-        val dataToProcess = if(priorData == null) {
-            priorData = rawData
-            rawData
-        }
-        else {
-            val mixedData = ByteArray(rawData.size)
-            for(i in 0 until mixedData.size) {
-                mixedData[i] = ((priorData!![i] + rawData[i])/2).toByte()
-            }
-            priorData = mixedData
-            mixedData
-        }
-
-        // Bars calculation
-        val dataItemsInBar = dataToProcess.size / barXBoards!!.size
+        val dataItemsInBar = rawData.size / barXBoards!!.size
 
         var dataItemsCounter = 0
         var barsCounter = 0
         var dataItemsSum = 0
 
-        paint.color = calculateCurrentColor()
-
-        dataToProcess.forEach { dataItem ->
+        rawData.forEach { dataItem ->
             dataItemsSum += dataItem
             dataItemsCounter++
 
@@ -155,33 +126,5 @@ constructor(
         val barRect = RectF(xBoards.first, barTop, xBoards.second, canvas.height-barTop)
 
         canvas.drawRoundRect(barRect, 100f, 100f, paint)
-    }
-
-    /**
-     *
-     */
-    @ColorInt
-    private fun getRandomColor(): Int =
-        Color.rgb(
-            colorRandomize.nextInt(224)+32,
-            colorRandomize.nextInt(224)+32,
-            colorRandomize.nextInt(224)+32)
-
-    /**
-     *
-     */
-    @ColorInt
-    private fun calculateCurrentColor(): Int {
-        colorBlendFactor += colorBlendSpeed
-
-        return if(colorBlendFactor <= 1f) {
-            ColorUtils.blendARGB(startColor, nextColor, colorBlendFactor)
-        }
-        else {
-            colorBlendFactor = 0f
-            startColor = nextColor
-            nextColor = getRandomColor()
-            startColor
-        }
     }
 }

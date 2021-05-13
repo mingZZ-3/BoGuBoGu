@@ -26,12 +26,11 @@ class Visualizerutil {
                     completedCallback()
                 }
 
+                this.isLooping = true
                 this.start()
+                this.isLooping
             }
     }
 
-    /**
-     *
-     */
     fun getAudioSessionId(): Int? = mediaPlayer?.audioSessionId
 }
