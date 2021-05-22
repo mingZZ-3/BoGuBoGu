@@ -46,9 +46,7 @@ constructor(
             }
     }
 
-    /**
-     * Releases the visualizer
-     */
+
     fun release() {
         visualizer?.also { it.release() }
     }

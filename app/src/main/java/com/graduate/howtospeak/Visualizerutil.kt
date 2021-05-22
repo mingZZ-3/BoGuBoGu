@@ -26,9 +26,9 @@ class Visualizerutil {
                     completedCallback()
                 }
 
-                this.isLooping = true
+                //this.isLooping = true
                 this.start()
-                this.isLooping
+                //this.isLooping
             }
     }
 

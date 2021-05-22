@@ -19,8 +19,8 @@ constructor(
 ) : VisualizerBase(context, attrs, defStyleAttr) {
 
     companion object {
-        private const val barWidth = 5f        // [dp]
-        private const val gapWidth = 5f        // [dp]
+        private const val barWidth = 1.5f        // [dp]
+        private const val gapWidth = 1.5f        // [dp]
     }
 
     private val paint: Paint
@@ -30,9 +30,7 @@ constructor(
 
     private var barXBoards: List<Pair<Float, Float>>? = null
 
-    /**
-     *
-     */
+
     init {
         paint = Paint()
             .apply {
@@ -48,9 +46,7 @@ constructor(
             }
     }
 
-    /**
-     *
-     */
+
     override fun draw(rawData: ByteArray, canvas: Canvas) {
         if(barXBoards == null) {
             barXBoards = calculateBarXBoards(canvas.width)
@@ -114,13 +110,10 @@ constructor(
         return result
     }
 
-    /**
-     *
-     */
     private fun drawBar(sourceData: Int, xBoards: Pair<Float, Float>, canvas: Canvas) {
-        val normalizedData = sourceData + 128
+        val normalizedData = sourceData + 128 //128
 
-        val barHeight = canvas.height * (normalizedData / 256f)
+        val barHeight = canvas.height * (normalizedData / 256f) //256
 
         val barTop = (canvas.height-barHeight)/2
         val barRect = RectF(xBoards.first, barTop, xBoards.second, canvas.height-barTop)
