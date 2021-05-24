@@ -19,8 +19,8 @@ constructor(
 ) : VisualizerBase(context, attrs, defStyleAttr) {
 
     companion object {
-        private const val barWidth = 1.5f        // [dp]
-        private const val gapWidth = 1.5f        // [dp]
+        private const val barWidth = 1.1f        // [dp] 1.5
+        private const val gapWidth = 1.1f        // [dp] 1.5
     }
 
     private val paint: Paint
@@ -75,21 +75,18 @@ constructor(
         }
     }
 
-    /**
-     *
-     */
+
+
     private fun convertDpToPx(dpValue: Float, displayMetrics: DisplayMetrics): Float =
         TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dpValue, displayMetrics)
 
-    /**
-     * Calculates offset from edges of a canvas to bars
-     */
+
+    // Calculates offset from edges of a canvas to bars
     private fun calculateEdgeOffset(canvasWidth: Int): Int =
         ((canvasWidth/2 - barWidthPix/2) % (barWidthPix + gapWidthPix)).toInt()
 
-    /**
-     * Calculates bar boards in a canvas
-     */
+
+    // Calculates bar boards in a canvas
     private fun calculateBarXBoards(canvasWidth: Int): List<Pair<Float, Float>> {
 
         val edgeOffset = calculateEdgeOffset(canvasWidth)

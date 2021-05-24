@@ -51,7 +51,7 @@
 
                 <VideoView
                     android:id="@+id/video_View"
-                    android:layout_width="371dp"
+                    android:layout_width="357dp"
                     android:layout_height="226dp" />
 
             </LinearLayout>

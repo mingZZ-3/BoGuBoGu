@@ -37,7 +37,7 @@ class Practice_RDetail : AppCompatActivity() {
     // 실행
     override fun onStart() {
         super.onStart()
-        startPlayingAudio(R.raw.test2)
+        startPlayingAudio(R.raw.geu)
     }
 
     // 정지

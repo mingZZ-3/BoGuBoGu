@@ -27,7 +27,7 @@ import java.util.*
 @Suppress("DEPRECATION")
 class PracticeActivity : AppCompatActivity() {
 
-    // 음
+    // 음성
     private var mRecorder: MediaRecorder? = null
     private var recordoutput: String? = null
     private var isRecording: Boolean = false
@@ -154,7 +154,6 @@ class PracticeActivity : AppCompatActivity() {
             }
         }
     }
-
 
 
 }
