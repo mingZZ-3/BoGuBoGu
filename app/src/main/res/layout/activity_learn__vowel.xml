@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".Learn_Vowel">
 
     <LinearLayout
@@ -24,202 +25,121 @@
                 android:scaleType="fitStart"
                 app:srcCompat="@drawable/learn1" />
 
-            <Button
-                android:id="@+id/mtPractice3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Practice" />
-
             <ImageButton
                 android:id="@+id/mtMain3"
                 android:layout_width="38dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="#FFFFFF"
                 android:scaleType="centerInside"
                 app:srcCompat="@drawable/home" />
 
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="단모음 "
-            android:textSize="30dp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="91dp"
+        <FrameLayout
+            android:layout_width="650dp"
+            android:layout_height="95dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
             android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/vowel1"
+            <ImageButton
+                android:id="@+id/lvowel_a"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="ㅏ"
-                />
+                android:layout_marginLeft="40dp"
+                android:tag="a"
 
-            <Button
-                android:id="@+id/vowel2"
+                android:layout_gravity="left"
+                android:adjustViewBounds="true"
+                android:background="#FFFFFF"
+                android:scaleType="fitCenter"
+
+                app:srcCompat="@drawable/a_bt2" />
+
+            <ImageButton
+                android:id="@+id/lvowel_eo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="ㅐ" />
+                android:tag="eo"
 
-            <Button
-                android:id="@+id/button11"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:background="#FFFFFF"
+                android:scaleType="fitCenter"
+
+                app:srcCompat="@drawable/eo_bt2" />
+
+            <ImageButton
+                android:id="@+id/lvowel_u"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="ㅓ" />
+                android:layout_marginRight="40dp"
+                android:tag="u"
 
-            <Button
-                android:id="@+id/button12"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="ㅔ" />
+                android:layout_gravity="right"
+                android:adjustViewBounds="true"
+                android:background="#FFFFFF"
+                android:scaleType="fitCenter"
 
-            <Button
-                android:id="@+id/button13"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="ㅗ" />
+                app:srcCompat="@drawable/u_bt2" />
 
-            <Button
-                android:id="@+id/button14"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="ㅚ" />
 
-            <Button
-                android:id="@+id/button18"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="ㅜ" />
+        </FrameLayout>
 
-            <Button
-                android:id="@+id/button15"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="ㅟ" />
+        <FrameLayout
+            android:layout_width="650dp"
+            android:layout_height="95dp"
+            android:layout_gravity="center"
+            android:layout_margin="30dp"
 
-            <Button
-                android:id="@+id/button16"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="ㅡ" />
-
-            <Button
-                android:id="@+id/button17"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="ㅣ" />
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="이중 모음"
-            android:textSize="30dp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="91dp"
             android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/button23"
+            <ImageButton
+                android:id="@+id/lvowel_o"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="ㅑ" />
+                android:layout_marginLeft="40dp"
+                android:tag="o"
 
-            <Button
-                android:id="@+id/button24"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="ㅒ" />
+                android:layout_gravity="left"
+                android:adjustViewBounds="true"
+                android:background="#FFFFFF"
+                android:scaleType="fitCenter"
 
-            <Button
-                android:id="@+id/button25"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="ㅕ" />
+                app:srcCompat="@drawable/o_bt2" />
 
-            <Button
-                android:id="@+id/button26"
+            <ImageButton
+                android:id="@+id/lvowel_i"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="ㅖ" />
+                android:tag="i"
 
-            <Button
-                android:id="@+id/button27"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="ㅘ" />
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:background="#FFFFFF"
+                android:scaleType="fitCenter"
 
-            <Button
-                android:id="@+id/button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="ㅙ" />
+                app:srcCompat="@drawable/i_bt" />
 
-            <Button
-                android:id="@+id/button2"
+            <ImageButton
+                android:id="@+id/lvowel_e"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="ㅛ" />
+                android:layout_marginRight="11dp"
+                android:tag="e"
 
-            <Button
-                android:id="@+id/button3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="ㅝ" />
+                android:layout_gravity="right"
+                android:adjustViewBounds="true"
+                android:background="#FFFFFF"
+                android:scaleType="fitCenter"
 
-            <Button
-                android:id="@+id/button4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="ㅞ" />
+                app:srcCompat="@drawable/e_bt2" />
 
-            <Button
-                android:id="@+id/button5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="ㅠ" />
 
-            <Button
-                android:id="@+id/button6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="ㅢ" />
-        </LinearLayout>
+        </FrameLayout>
 
     </LinearLayout>
-
 
 </LinearLayout>

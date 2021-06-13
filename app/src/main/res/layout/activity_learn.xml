@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".LearnActivity">
 
     <LinearLayout
@@ -29,18 +30,12 @@
                 android:scaleType="fitStart"
                 app:srcCompat="@drawable/learn1" />
 
-            <Button
-                android:id="@+id/mtPractice1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Practice" />
-
             <ImageButton
                 android:id="@+id/mtMain1"
                 android:layout_width="38dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="#FFFFFF"
                 android:scaleType="centerInside"
                 app:srcCompat="@drawable/home" />
 
@@ -55,22 +50,72 @@
             android:orientation="vertical">
 
             <FrameLayout
-                android:layout_width="73dp"
+                android:layout_width="196dp"
                 android:layout_height="52dp"
                 android:layout_gravity="right">
 
                 <ImageButton
-                    android:id="@+id/learnsound1"
-                    android:layout_width="67dp"
-                    android:layout_height="match_parent"
-                    app:srcCompat="@android:drawable/ic_lock_silent_mode_off" />
+                    android:id="@+id/learnsound_play"
+                    android:layout_width="54dp"
+                    android:layout_height="42dp"
+
+                    android:layout_gravity="center"
+                    android:adjustViewBounds="true"
+                    android:background="#FFFFFF"
+                    android:scaleType="fitCenter"
+
+                    app:srcCompat="@drawable/volume" />
+
+                <ImageButton
+                    android:id="@+id/learnVideo_play"
+                    android:layout_width="64dp"
+                    android:layout_height="41dp"
+
+                    android:layout_gravity="right"
+                    android:adjustViewBounds="true"
+                    android:background="#FFFFFF"
+                    android:scaleType="fitCenter"
+
+                    app:srcCompat="@drawable/play_button" />
+
+                <ImageButton
+                    android:id="@+id/mtLearn_vowel"
+                    android:layout_width="59dp"
+                    android:layout_height="63dp"
+
+                    android:layout_gravity="left"
+                    android:background="#FFFFFF"
+
+                    app:srcCompat="@android:drawable/ic_menu_revert" />
+
             </FrameLayout>
 
-            <ImageView
-                android:id="@+id/imageView6"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="292dp"
-                app:srcCompat="@drawable/example_learn" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/whichVoweltoLearn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="262dp"
+
+                    android:textColor="#000000"
+                    android:textSize="200sp"
+                    android:gravity="center_horizontal"
+
+                    android:layout_weight="1"
+                    android:text="" />
+
+                <ImageView
+                    android:id="@+id/imageView6"
+                    android:layout_width="429dp"
+                    android:layout_height="292dp"
+                    android:layout_gravity="right"
+
+                    app:srcCompat="@drawable/example_learn2" />
+
+            </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>

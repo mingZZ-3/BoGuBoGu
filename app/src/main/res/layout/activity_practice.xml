@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".PracticeActivity">
 
     <LinearLayout
@@ -30,6 +31,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:scaleType="centerInside"
+                android:background="#FFFFFF"
                 app:srcCompat="@drawable/home" />
         </LinearLayout>
 
@@ -38,23 +40,30 @@
             android:layout_height="288dp"
             android:orientation="vertical">
 
-            <LinearLayout
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="226dp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/learning_View"
-                    android:layout_width="371dp"
+                    android:layout_width="350dp"
                     android:layout_height="226dp"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="10dp"
+
+                    android:textSize="30sp"
+                    android:textColor="#FF000000"
                     android:text="학습 영상 영역" />
 
-                <VideoView
-                    android:id="@+id/video_View"
-                    android:layout_width="357dp"
-                    android:layout_height="226dp" />
+                <SurfaceView
+                    android:id="@+id/camera_preview"
+                    android:layout_width="350dp"
+                    android:layout_height="226dp"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="10dp"/>
 
-            </LinearLayout>
+            </FrameLayout>
 
             <ImageView
                 android:id="@+id/voicehight"
@@ -64,27 +73,45 @@
         </LinearLayout>
 
         <TableRow
-            android:layout_width="306dp"
+            android:layout_width="300dp"
             android:layout_height="match_parent"
             android:layout_gravity="right">
 
-            <Button
+            <ImageButton
                 android:id="@+id/bt_rstart"
-                android:layout_width="110dp"
+                android:layout_width="98dp"
                 android:layout_height="wrap_content"
-                android:text="연습 시작" />
 
-            <Button
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:background="#FFFFFF"
+                android:scaleType="fitCenter"
+
+                app:srcCompat="@drawable/practicestart" />
+
+            <ImageButton
                 android:id="@+id/bt_rstop"
-                android:layout_width="wrap_content"
+                android:layout_width="98dp"
                 android:layout_height="wrap_content"
-                android:text="연습 멈춤" />
 
-            <Button
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:background="#FFFFFF"
+                android:scaleType="fitCenter"
+
+                app:srcCompat="@drawable/practicecomplete" />
+
+            <ImageButton
                 android:id="@+id/mtResult1"
                 android:layout_width="98dp"
                 android:layout_height="wrap_content"
-                android:text="결과보기" />
+
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:background="#FFFFFF"
+                android:scaleType="fitCenter"
+
+                app:srcCompat="@drawable/result" />
         </TableRow>
     </LinearLayout>
 

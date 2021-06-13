@@ -16,6 +16,10 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
     lateinit var binding : ActivityMainBinding
+
+
+
+    //Permission
     private val CAMERA_PERMISSION = arrayOf(Manifest.permission.CAMERA)
     private val CAMERA_PERMISSION_FLAG = 100
     private val STORAGE_PERMISSION = arrayOf(
@@ -24,39 +28,44 @@ class MainActivity : AppCompatActivity() {
     private val STORAGE_PERMISSION_FLAG = 200
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+        setContentView(R.layout.activity_main)
+
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
 
-        setContentView(R.layout.activity_main)
 
-        learn_con1.setOnClickListener {
+        /* learn_con1.setOnClickListener {
             val intent = Intent(this, Learn_Consonant::class.java)
-            startActivity(intent) }
+            startActivity(intent) } */
 
         learn_vowel1.setOnClickListener {
             val intent = Intent(this, Learn_Vowel::class.java)
             startActivity(intent) }
 
-        practice_con1.setOnClickListener {
+        /* practice_con1.setOnClickListener {
             val intent = Intent(this, Practice_Consonant::class.java)
-            startActivity(intent) }
+            startActivity(intent) } */
 
         practice_vowel1.setOnClickListener {
             val intent = Intent(this, Practice_Vowel::class.java)
             startActivity(intent) }
 
 
+        /*
         // permission
         if(checkPermission(CAMERA_PERMISSION, CAMERA_PERMISSION_FLAG)){
             checkPermission(STORAGE_PERMISSION, STORAGE_PERMISSION_FLAG)
         }
+         */
     }
 
 
+    /*
     //permission
     private fun checkPermission(permissions : Array<out String>, flag : Int):Boolean{
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -101,5 +110,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+     */
 
 }

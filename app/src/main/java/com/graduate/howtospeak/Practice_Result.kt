@@ -22,5 +22,9 @@ class Practice_Result : AppCompatActivity() {
         mtRDetail1.setOnClickListener {
             val intent = Intent(this, Practice_RDetail::class.java)
             startActivity(intent) }
+
+        mtVowelPractice.setOnClickListener {
+            val intent = Intent(this, Practice_Vowel::class.java)
+            startActivity(intent) }
     }
 }

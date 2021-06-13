@@ -27,13 +27,13 @@ import java.util.*
 @Suppress("DEPRECATION")
 class PracticeActivity : AppCompatActivity() {
 
-    // 음성
+    // voice
     private var mRecorder: MediaRecorder? = null
     private var recordoutput: String? = null
     private var isRecording: Boolean = false
     private var recordingStopped: Boolean = false
 
-    // 동영상
+    // video
     private val REQUEST_VIDEO_CAPTURE_CODE = 1
     private var videoUri : Uri? = null
     lateinit var binding : ActivityPracticeBinding
@@ -43,7 +43,7 @@ class PracticeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
-        setContentView(com.graduate.howtospeak.R.layout.activity_practice)
+        setContentView(R.layout.activity_practice)
 
 
         binding = ActivityPracticeBinding.inflate(layoutInflater)
@@ -60,11 +60,13 @@ class PracticeActivity : AppCompatActivity() {
             val intent = Intent(this, Practice_Result::class.java)
             startActivity(intent) }
 
-        // 음성/영상 실행 버튼
+
+
+        // play button
         bt_rstart.setOnClickListener {
             val recordVideoIntent = Intent(MediaStore.ACTION_VIDEO_CAPTURE)
 
-            //
+            // video part
             val videoFile = File(
                 File("${filesDir}/video").apply {
                     if(!this.exists()){
@@ -83,6 +85,7 @@ class PracticeActivity : AppCompatActivity() {
             }
             //
 
+            // voice part
             if (ContextCompat.checkSelfPermission(this,
                     Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this,
                     Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -101,7 +104,7 @@ class PracticeActivity : AppCompatActivity() {
     }
 
 
-    // 음성 녹음
+    // voice recording
     private fun stopRecording() {
         if(isRecording){
             mRecorder?.reset()
@@ -135,6 +138,7 @@ class PracticeActivity : AppCompatActivity() {
     }
 
 
+    // file name
     private fun FileName() : String{
         val sdf = SimpleDateFormat("yyyMMdd_HHmmss")
         val filename = sdf.format(System.currentTimeMillis())
@@ -142,6 +146,7 @@ class PracticeActivity : AppCompatActivity() {
     }
 
 
+    // video result binding --> surfaceview 수정 예정
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(resultCode == RESULT_OK){
