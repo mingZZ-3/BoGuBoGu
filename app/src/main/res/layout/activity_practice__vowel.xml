@@ -53,6 +53,7 @@
                 android:background="#FFFFFF"
                 android:scaleType="fitCenter"
 
+                android:tag="a"
                 app:srcCompat="@drawable/a_bt2" />
 
             <ImageButton
@@ -65,6 +66,7 @@
                 android:background="#FFFFFF"
                 android:scaleType="fitCenter"
 
+                android:tag="eo"
                 app:srcCompat="@drawable/eo_bt2" />
 
             <ImageButton
@@ -78,6 +80,7 @@
                 android:background="#FFFFFF"
                 android:scaleType="fitCenter"
 
+                android:tag="u"
                 app:srcCompat="@drawable/u_bt2" />
 
 
@@ -102,6 +105,7 @@
                 android:background="#FFFFFF"
                 android:scaleType="fitCenter"
 
+                android:tag="o"
                 app:srcCompat="@drawable/o_bt2" />
 
             <ImageButton
@@ -114,6 +118,7 @@
                 android:background="#FFFFFF"
                 android:scaleType="fitCenter"
 
+                android:tag="i"
                 app:srcCompat="@drawable/i_bt" />
 
             <ImageButton
@@ -127,6 +132,7 @@
                 android:background="#FFFFFF"
                 android:scaleType="fitCenter"
 
+                android:tag="e"
                 app:srcCompat="@drawable/e_bt2" />
 
 

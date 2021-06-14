@@ -19,8 +19,8 @@ constructor(
 ) : VisualizerBase(context, attrs, defStyleAttr) {
 
     companion object {
-        private const val barWidth = 1.1f        // [dp] 1.5
-        private const val gapWidth = 1.1f        // [dp] 1.5
+        private const val barWidth = 1.5f        // [dp] 5
+        private const val gapWidth = 2f        // [dp] 5
     }
 
     private val paint: Paint
@@ -104,8 +104,7 @@ constructor(
         }
         while(right <= canvasWidth)
 
-        return result
-    }
+        return result }
 
     private fun drawBar(sourceData: Int, xBoards: Pair<Float, Float>, canvas: Canvas) {
         val normalizedData = sourceData + 128 //128

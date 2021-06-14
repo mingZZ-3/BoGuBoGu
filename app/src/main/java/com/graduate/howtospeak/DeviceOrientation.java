@@ -1,8 +1,10 @@
+package com.graduate.howtospeak;
+
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.support.media.ExifInterface;
+import androidx.exifinterface.media.ExifInterface;
 
 //import androidx.exifinterface.media.ExifInterface;
 

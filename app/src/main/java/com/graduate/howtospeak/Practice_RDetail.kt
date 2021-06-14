@@ -3,16 +3,16 @@ package com.graduate.howtospeak
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
-import android.support.annotation.RawRes
-import android.support.v7.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_learn.*
-import kotlinx.android.synthetic.main.activity_learn.mtMain1
+import androidx.annotation.RawRes
+import androidx.appcompat.app.AppCompatActivity
+//import kotlinx.android.synthetic.main.activity_learn.mtMain1
 import kotlinx.android.synthetic.main.activity_practice__r_detail.*
 
 
 class Practice_RDetail : AppCompatActivity() {
     // 접근 권한
-    private lateinit var audioPlayer: Visualizerutil
+    private lateinit var audioPlayer1: Visualizerutil
+    private lateinit var audioPlayer2: Visualizerutil
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,12 +26,15 @@ class Practice_RDetail : AppCompatActivity() {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent) }
 
-        // 다시 학습하기 버튼
-
+        // 뒤로가기 버튼
+        mtPractice_result.setOnClickListener {
+            val intent = Intent(this, Practice_Result::class.java)
+            startActivity(intent) }
 
 
         // 음성 시각화
-        audioPlayer = Visualizerutil()
+        audioPlayer1 = Visualizerutil()
+        audioPlayer2 = Visualizerutil()
     }
 
     // 실행
@@ -48,19 +51,29 @@ class Practice_RDetail : AppCompatActivity() {
 
     //
     private fun startPlayingAudio(@RawRes resId: Int) {
-        audioPlayer.play(this, resId) {
+        audioPlayer1.play(this, resId) {
         }
-        audioPlayer.getAudioSessionId()
+        audioPlayer1.getAudioSessionId()
             ?.also {
-                barVisualizerPanel.setAudioSessionId(it)
+                barVisualizerPanel1.setAudioSessionId(it)
+            }
+
+        audioPlayer2.play(this, resId) {
+        }
+        audioPlayer2.getAudioSessionId()
+            ?.also {
+                barVisualizerPanel2.setAudioSessionId(it)
             }
     }
 
     private fun stopPlayingAudio() {
-        audioPlayer.stop();
-        barVisualizerPanel.release()
+        audioPlayer1.stop()
+        barVisualizerPanel1.release()
+
+        audioPlayer2.stop()
+        barVisualizerPanel1.release()
     }
-
-
 }
 
+
+// https://github.com/AlShevelev/music-visualization/blob/master/app/src/main/java/com/shevelev/music_visualization/demo/DemoActivity.kt

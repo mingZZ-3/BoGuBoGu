@@ -19,100 +19,145 @@
 
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="543dp"
+                android:layout_width="346dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:scaleType="fitStart"
                 app:srcCompat="@drawable/practice1" />
 
             <ImageButton
-                android:id="@+id/mtMain1"
-                android:layout_width="2dp"
+                android:id="@+id/btn_convert"
+                android:layout_width="75dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:scaleType="centerInside"
+
+                android:layout_gravity="left"
+                android:adjustViewBounds="true"
                 android:background="#FFFFFF"
+
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/bt_camerachange" />
+
+            <ImageButton
+                android:id="@+id/mtPractice_vowel"
+                android:layout_width="49dp"
+                android:layout_height="match_parent"
+
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:background="#FFFFFF"
+                android:scaleType="fitCenter"
+
+                android:layout_margin="5dp"
+                app:srcCompat="@drawable/bt_back" />
+
+            <ImageButton
+                android:id="@+id/mtMain1"
+                android:layout_width="53dp"
+                android:layout_height="match_parent"
+
+                android:layout_gravity="right"
+                android:adjustViewBounds="true"
+                android:background="#FFFFFF"
+                android:scaleType="fitCenter"
+
+                android:layout_margin="5dp"
                 app:srcCompat="@drawable/home" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="288dp"
-            android:orientation="vertical">
+            android:layout_height="230dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/learning_View"
+                android:layout_width="350dp"
+                android:layout_height="226dp"
+                android:layout_gravity="left"
+                android:layout_marginLeft="10dp"
+
+                android:textSize="30sp"
+                android:textColor="#FF000000"
+                android:text="학습 영상 영역" />
 
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="226dp"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/learning_View"
-                    android:layout_width="350dp"
-                    android:layout_height="226dp"
-                    android:layout_gravity="left"
-                    android:layout_marginLeft="10dp"
-
-                    android:textSize="30sp"
-                    android:textColor="#FF000000"
-                    android:text="학습 영상 영역" />
-
                 <SurfaceView
                     android:id="@+id/camera_preview"
                     android:layout_width="350dp"
                     android:layout_height="226dp"
                     android:layout_gravity="right"
+                    android:rotationX="180"
                     android:layout_marginRight="10dp"/>
 
             </FrameLayout>
 
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            >
             <ImageView
                 android:id="@+id/voicehight"
                 android:layout_width="701dp"
                 android:layout_height="50dp"
                 app:srcCompat="@drawable/voicebar" />
+
         </LinearLayout>
 
-        <TableRow
-            android:layout_width="300dp"
+        <FrameLayout
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="right">
+            android:orientation="horizontal">
 
-            <ImageButton
-                android:id="@+id/bt_rstart"
-                android:layout_width="98dp"
-                android:layout_height="wrap_content"
+            <TableRow
+                android:layout_width="300dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="right">
 
-                android:layout_gravity="center"
-                android:adjustViewBounds="true"
-                android:background="#FFFFFF"
-                android:scaleType="fitCenter"
+                <ImageButton
+                    android:id="@+id/bt_rstart"
+                    android:layout_width="98dp"
+                    android:layout_height="wrap_content"
 
-                app:srcCompat="@drawable/practicestart" />
+                    android:layout_gravity="center"
+                    android:adjustViewBounds="true"
+                    android:background="#FFFFFF"
+                    android:scaleType="fitCenter"
 
-            <ImageButton
-                android:id="@+id/bt_rstop"
-                android:layout_width="98dp"
-                android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/practicestart" />
 
-                android:layout_gravity="center"
-                android:adjustViewBounds="true"
-                android:background="#FFFFFF"
-                android:scaleType="fitCenter"
+                <ImageButton
+                    android:id="@+id/bt_rstop"
+                    android:layout_width="98dp"
+                    android:layout_height="wrap_content"
 
-                app:srcCompat="@drawable/practicecomplete" />
+                    android:layout_gravity="center"
+                    android:adjustViewBounds="true"
+                    android:background="#FFFFFF"
+                    android:scaleType="fitCenter"
 
-            <ImageButton
-                android:id="@+id/mtResult1"
-                android:layout_width="98dp"
-                android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/practicecomplete" />
 
-                android:layout_gravity="center"
-                android:adjustViewBounds="true"
-                android:background="#FFFFFF"
-                android:scaleType="fitCenter"
+                <ImageButton
+                    android:id="@+id/mtResult1"
+                    android:layout_width="98dp"
+                    android:layout_height="wrap_content"
 
-                app:srcCompat="@drawable/result" />
-        </TableRow>
+                    android:layout_gravity="center"
+                    android:adjustViewBounds="true"
+                    android:background="#FFFFFF"
+                    android:scaleType="fitCenter"
+
+                    app:srcCompat="@drawable/result" />
+            </TableRow>
+        </FrameLayout>
     </LinearLayout>
 
 </LinearLayout>

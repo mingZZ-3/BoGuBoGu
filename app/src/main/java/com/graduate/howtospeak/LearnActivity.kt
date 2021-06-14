@@ -3,7 +3,7 @@ package com.graduate.howtospeak
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.media.MediaPlayer
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
@@ -22,7 +22,6 @@ class LearnActivity : AppCompatActivity() {
         setContentView(R.layout.activity_learn)
 
         textView_vowel = findViewById(R.id.whichVoweltoLearn) as TextView
-
         vowel_getby = intent.getStringExtra("vowel_tolearn").toString()
 
         when (vowel_getby) {

@@ -2,7 +2,7 @@ package com.graduate.howtospeak
 
 import android.content.Context
 import android.media.MediaPlayer
-import android.support.annotation.RawRes
+import androidx.annotation.RawRes
 
 class Visualizerutil {
     private var mediaPlayer: MediaPlayer? = null
