@@ -18,6 +18,7 @@ import android.media.ImageReader
 import android.media.MediaRecorder
 import android.net.Uri
 import android.os.*
+import android.provider.ContactsContract
 import android.util.DisplayMetrics
 import android.util.SparseIntArray
 import android.view.SurfaceHolder
@@ -27,10 +28,12 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_learn.mtMain1
 import kotlinx.android.synthetic.main.activity_practice.*
 import java.io.File
 import java.io.IOException
+import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -51,6 +54,7 @@ class PracticeActivity : AppCompatActivity() {
     private lateinit var mCameraDevice: CameraDevice
     private lateinit var mPreviewBuilder: CaptureRequest.Builder
     private lateinit var mSession: CameraCaptureSession
+    private var mDeviceRotation: Int ?= 0
 
     private var mHandler: Handler? = null
 
@@ -72,10 +76,17 @@ class PracticeActivity : AppCompatActivity() {
         private val ORIENTATIONS = SparseIntArray()
 
         init {
+            ORIENTATIONS.append(ExifInterface.ORIENTATION_NORMAL, 0);
+            ORIENTATIONS.append(ExifInterface.ORIENTATION_ROTATE_90, 90);
+            ORIENTATIONS.append(ExifInterface.ORIENTATION_ROTATE_180, 180);
+            ORIENTATIONS.append(ExifInterface.ORIENTATION_ROTATE_270, 270);
+
+            /* 기존1
             ORIENTATIONS.append(ExifInterface.ORIENTATION_NORMAL, 0)
             ORIENTATIONS.append(ExifInterface.ORIENTATION_ROTATE_90, 90)
             ORIENTATIONS.append(ExifInterface.ORIENTATION_ROTATE_180, 180)
             ORIENTATIONS.append(ExifInterface.ORIENTATION_ROTATE_270, 270)
+             */
         }
     }
 
@@ -84,19 +95,19 @@ class PracticeActivity : AppCompatActivity() {
 
     // voice
     private var mRecorder: MediaRecorder? = null
-    private var recordoutput: String? = null
+    var recordoutput: File? =null
+    //var recordoutput: String? = null
     private var isRecording: Boolean = false
     private var recordingStopped: Boolean = false
     // video
     private val REQUEST_VIDEO_CAPTURE_CODE = 1
     private var videoUri : Uri? = null
     private var isVideoPlaying = false
-
     // take pic
     private var file: File? = null
 
 
-
+// ================================== onCreate ==================================== //
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
@@ -115,13 +126,6 @@ class PracticeActivity : AppCompatActivity() {
         mtPractice_vowel.setOnClickListener {
             val intent = Intent(this, Practice_Vowel::class.java)
             startActivity(intent) }
-
-
-        // take pic 실행
-        bt_rstop.setOnClickListener {
-            takePicture()
-        }
-
 
 
 
@@ -147,13 +151,14 @@ class PracticeActivity : AppCompatActivity() {
 
 
 
-/*
+
         // play button
         bt_rstart.setOnClickListener {
-            //val recordVideoIntent = Intent(MediaStore.ACTION_VIDEO_CAPTURE)
 
             /*
             // video part
+
+            val recordVideoIntent = Intent(MediaStore.ACTION_VIDEO_CAPTURE)
             val videoFile = File(
                 File("${filesDir}/video").apply {
                     if(!this.exists()){
@@ -173,7 +178,7 @@ class PracticeActivity : AppCompatActivity() {
             //
              */
 
-            // voice part
+            //  voice part
             if (ContextCompat.checkSelfPermission(this,
                     Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this,
                     Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -182,67 +187,172 @@ class PracticeActivity : AppCompatActivity() {
                 ActivityCompat.requestPermissions(this, permissions,0)
 
             } else {
-                //startRecording()
+                startRecording()
             }
         }
 
         bt_rstop.setOnClickListener {
-           // stopRecording()
+            // recording 중지
+           stopRecording()
+            // take pic 실행
+            takePicture()
         }
-
- */
-
-
 
 
     }
 
+
+// ================================== functions ==================================== //
 
     // ============= voice recording
     private fun stopRecording() {
-        if(isRecording){
-            mRecorder?.reset()
-            mRecorder?.release()
-            isRecording = false
-            Toast.makeText(this, "중지 되었습니다.", Toast.LENGTH_SHORT).show()
-        } else {
-            Toast.makeText(this, "레코딩 상태가 아닙니다.", Toast.LENGTH_SHORT).show()
-        }
+        if (mRecorder != null) {
+            if (isRecording) {
+                try {
+                    mRecorder?.reset()
+                    mRecorder?.release()
+                    Toast.makeText(this, "중지 되었습니다.", Toast.LENGTH_SHORT).show()
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+           mRecorder = null
+           isRecording = false
+        } else Toast.makeText(this, "레코딩 상태가 아닙니다.", Toast.LENGTH_SHORT).show()
     }
 
-    private fun startRecording() {
+    private fun startRecording() : Boolean {
+
+        /*0804 봉인
         val fileName: String = Date().time.toString() + ".mp3"
-        recordoutput = Environment.getExternalStorageDirectory().absolutePath + "/Download/" + fileName //내장메모리 밑에 위치
-        mRecorder = MediaRecorder()
-        mRecorder?.setAudioSource((MediaRecorder.AudioSource.MIC))
-        mRecorder?.setOutputFormat((MediaRecorder.OutputFormat.MPEG_4))
-        mRecorder?.setAudioEncoder(MediaRecorder.AudioEncoder.AAC)
-        mRecorder?.setOutputFile(recordoutput)
+        recordoutput = Environment.getExternalStorageDirectory().absolutePath + "/files/" + fileName //내장메모리 밑에 위치
+         */
 
         try {
+            mRecorder = MediaRecorder()
+
+            mRecorder?.setAudioSource((MediaRecorder.AudioSource.MIC))
+
+            //0804 added
+            mRecorder?.setOutputFormat((MediaRecorder.OutputFormat.THREE_GPP))
+            mRecorder?.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
+            mRecorder?.setOutputFile(recordoutput!!.getAbsolutePath())
+            /*
+            mRecorder?.setOutputFormat((MediaRecorder.OutputFormat.MPEG_4))
+            mRecorder?.setAudioEncoder(MediaRecorder.AudioEncoder.AAC)
+            mRecorder?.setOutputFile(recordoutput)
+             */
+
             mRecorder?.prepare()
             mRecorder?.start()
             isRecording = true
+            return true;
             Toast.makeText(this, "시작되었습니다.", Toast.LENGTH_SHORT).show()
         } catch (e: IllegalStateException){
+            stopRecording()
             e.printStackTrace()
+            isRecording = false
         } catch (e: IOException){
+            mRecorder?.reset()
+            mRecorder?.release()
+            mRecorder = null
+            isRecording = false
             e.printStackTrace()
         }
+        return false
     }
 
-
-    /*
     // file name
     private fun FileName() : String{
         val sdf = SimpleDateFormat("yyyMMdd_HHmmss")
         val filename = sdf.format(System.currentTimeMillis())
         return "${filename}.mp4"
     }
-     */
+
+    // decibel level
+    private fun getMaxAmplitude() : Float {
+        if (mRecorder != null) {
+            try {
+                return mRecorder!!.getMaxAmplitude().toFloat()
+            } catch (e: IllegalArgumentException) {
+                e.printStackTrace()
+                return 0F
+            }
+        } else {
+            return 5F
+        }
+    }
+    private fun getMyRecAudioFile(): File {
+        return recordoutput!!
+    }
+
+    private fun setMyRecAudioFile(recordoutput: File){
+        this.recordoutput = recordoutput
+    }
+
+    private fun startListenAudio() {
+
+    }
+/*
+    private void startListenAudio() {
+        thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (isThreadRun) {
+                    try {
+                        if(bListener) {
+                            volume = mRecorder.getMaxAmplitude(); //Get sound pressure value
+                            if(volume > 0 && volume < 1000000) {
+                                World.setDbCount(20 * (float)(Math.log10(volume))); //Convert sound pressure value to decibel value
+                            }
+                        }
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                        bListener = false;
+                    }
+                }
+            }
+        });
+        thread.start();
+    }
+ */
 
 
-    // ============== camera preview 함수
+        // ======================================
+
+    // ============== take pic
+    private fun takePicture() {
+
+
+
+        if (mCameraDevice == null) return
+
+        val captureRequestBuilder: CaptureRequest.Builder
+        try {
+            captureRequestBuilder = mCameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_STILL_CAPTURE)
+            captureRequestBuilder.addTarget(mImageReader.getSurface())
+
+            captureRequestBuilder.set(CaptureRequest.CONTROL_AF_MODE, CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_PICTURE)
+            captureRequestBuilder.set(CaptureRequest.CONTROL_AE_MODE, CaptureRequest.CONTROL_AE_MODE_ON_AUTO_FLASH)
+
+            // 0804 added
+            mDeviceRotation = ORIENTATIONS.get(deviceOrientation.getOrientation())
+            //
+            //val rotation = getWindowManager().getDefaultDisplay().getRotation()
+
+            captureRequestBuilder.set(CaptureRequest.JPEG_ORIENTATION, mDeviceRotation)
+            val mCaptureRequest : CaptureRequest = captureRequestBuilder.build()
+            mSession.capture(mCaptureRequest, null, mHandler)
+
+        } catch ( e : CameraAccessException) {
+            e.printStackTrace()
+        }
+
+    }
+    // ======================================
+
+    // ============== camera preview part
 
     private fun initSensor() {
         mSensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
@@ -328,7 +438,7 @@ class PracticeActivity : AppCompatActivity() {
 
 
         } catch (e: CameraAccessException) {
-            // toast("카메라를 열지 못했습니다.")
+            //toast("카메라를 열지 못했습니다.")
         }
     }
 
@@ -427,35 +537,4 @@ class PracticeActivity : AppCompatActivity() {
     }
 
     // ======================================
-
-
-    // ============== take pic
-    private fun takePicture() {
-        if (mCameraDevice == null) return
-        // Create a CaptureRequest.Builder for taking photos
-        val captureRequestBuilder: CaptureRequest.Builder
-        try {
-            captureRequestBuilder = mCameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_STILL_CAPTURE)
-            // The imageReader surface as the target of CaptureRequest.Builder
-            captureRequestBuilder.addTarget(mImageReader.getSurface())
-            // auto focus
-            captureRequestBuilder.set(CaptureRequest.CONTROL_AF_MODE, CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_PICTURE)
-            // automatic exposure
-            captureRequestBuilder.set(CaptureRequest.CONTROL_AE_MODE, CaptureRequest.CONTROL_AE_MODE_ON_AUTO_FLASH)
-            // Get the phone direction
-            val rotation = getWindowManager().getDefaultDisplay().getRotation()
-            // Calculate the direction of the photo based on the device orientation
-            captureRequestBuilder.set(CaptureRequest.JPEG_ORIENTATION, ORIENTATIONS.get(rotation))
-            //photograph
-            val mCaptureRequest : CaptureRequest = captureRequestBuilder.build()
-            mSession.capture(mCaptureRequest, null, mHandler)
-        } catch ( e : CameraAccessException) {
-            e.printStackTrace();
-        }
-    }
-
-
-
-
 }
-

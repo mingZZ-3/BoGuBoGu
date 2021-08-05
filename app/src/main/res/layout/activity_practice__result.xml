@@ -35,11 +35,17 @@
                 app:srcCompat="@drawable/home" />
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/imageView3"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="275dp"
-            app:srcCompat="@drawable/example_result" />
+            android:layout_height="275dp">
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="match_parent"
+                android:layout_height="275dp"
+                app:srcCompat="@drawable/example_result2" />
+
+        </LinearLayout>
 
         <FrameLayout
             android:layout_width="297dp"

@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
+
     <uses-feature
         android:name="android.hardware.camera2"
         android:required="true"/>
@@ -29,13 +30,7 @@
             android:name=".Practice_Vowel"
             android:screenOrientation="landscape"/>
         <activity
-            android:name=".Practice_Consonant"
-            android:screenOrientation="landscape"/>
-        <activity
             android:name=".Learn_Vowel"
-            android:screenOrientation="landscape"/>
-        <activity
-            android:name=".Learn_Consonant"
             android:screenOrientation="landscape"/>
         <activity
             android:name=".LearnActivity"
@@ -52,7 +47,15 @@
             </intent-filter>
         </activity>
 
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.graduate.howtospeak.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/filepaths"/>
+        </provider>
 
     </application>
-
 </manifest>

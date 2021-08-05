@@ -45,6 +45,9 @@ dependencies {
     //implementation("com.louiscad.splitties:splitties-activities:3.0.0-beta01")
     implementation("com.louiscad.splitties:splitties-toast:3.0.0-beta01")
 
+    implementation 'com.squareup.retrofit2:retrofit:2.7.2'
+    implementation 'com.squareup.retrofit2:converter-gson:2.7.2'
+
     //implementation "org.bytedeco:javacv:1.4.1"
     //implementation "org.bytedeco.javacpp-presets:opencv:3.4.1-1.4.1:android-arm"
 }

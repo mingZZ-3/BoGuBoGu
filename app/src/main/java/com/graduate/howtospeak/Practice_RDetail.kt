@@ -46,7 +46,7 @@ class Practice_RDetail : AppCompatActivity() {
     // 정지
     override fun onStop() {
         super.onStop()
-        stopPlayingAudio();
+        stopPlayingAudio()
     }
 
     //

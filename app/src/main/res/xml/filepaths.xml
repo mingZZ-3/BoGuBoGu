@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <paths xmlns:android="http://schemas.android.com/apk/res/android">
-    <external-files-path name="my_external_video" path="video/" />
-    <root-path name="root" path="./"/>
+    <external-path
+        name="my_external_image"
+        path="Android/data/com.graduate.howtospeak/files/Pictrues" />
 </paths>

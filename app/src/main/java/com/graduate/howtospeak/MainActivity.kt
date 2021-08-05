@@ -58,16 +58,16 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent) }
 
 
-        /*
+
         // permission
         if(checkPermission(CAMERA_PERMISSION, CAMERA_PERMISSION_FLAG)){
             checkPermission(STORAGE_PERMISSION, STORAGE_PERMISSION_FLAG)
         }
-         */
+
     }
 
 
-    /*
+
     //permission
     private fun checkPermission(permissions : Array<out String>, flag : Int):Boolean{
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -113,6 +113,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-     */
+
+
 
 }

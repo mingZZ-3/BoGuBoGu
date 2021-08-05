@@ -90,7 +90,7 @@
                     android:layout_width="350dp"
                     android:layout_height="226dp"
                     android:layout_gravity="right"
-                    android:rotationX="180"
+
                     android:layout_marginRight="10dp"/>
 
             </FrameLayout>
@@ -103,12 +103,12 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             >
-            <ImageView
-                android:id="@+id/voicehight"
-                android:layout_width="701dp"
-                android:layout_height="50dp"
-                app:srcCompat="@drawable/voicebar" />
 
+            <SeekBar
+                android:id="@+id/seekBar"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
         </LinearLayout>
 
         <FrameLayout
