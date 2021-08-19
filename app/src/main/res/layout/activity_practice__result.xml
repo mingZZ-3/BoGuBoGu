@@ -35,17 +35,26 @@
                 app:srcCompat="@drawable/home" />
         </LinearLayout>
 
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="275dp">
 
             <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="match_parent"
+                android:id="@+id/picView"
+                android:layout_width="350dp"
                 android:layout_height="275dp"
+                android:layout_gravity="left"
+                android:layout_marginLeft="15dp"/>
+
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="350dp"
+                android:layout_height="275dp"
+                android:layout_gravity="right"
                 app:srcCompat="@drawable/example_result2" />
 
-        </LinearLayout>
+        </FrameLayout>
 
         <FrameLayout
             android:layout_width="297dp"

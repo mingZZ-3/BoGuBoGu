@@ -27,6 +27,18 @@
                 app:srcCompat="@drawable/practice1" />
 
             <ImageButton
+                android:id="@+id/mtPractice_result"
+                android:layout_width="59dp"
+                android:layout_height="match_parent"
+
+                android:layout_gravity="right"
+                android:adjustViewBounds="true"
+                android:background="#FFFFFF"
+                android:scaleType="fitCenter"
+
+                app:srcCompat="@drawable/bt_back" />
+
+            <ImageButton
                 android:id="@+id/mtMain1"
                 android:layout_width="2dp"
                 android:layout_height="match_parent"
@@ -74,25 +86,6 @@
                     android:layout_height="50dp"
                     android:layout_gravity="center"
                     app:srcCompat="@drawable/voicebar" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <ImageButton
-                    android:id="@+id/mtPractice_result"
-                    android:layout_width="59dp"
-                    android:layout_height="match_parent"
-
-                    android:layout_gravity="right"
-                    android:adjustViewBounds="true"
-                    android:background="#FFFFFF"
-                    android:scaleType="fitCenter"
-
-                    app:srcCompat="@drawable/bt_back" />
 
             </LinearLayout>
 

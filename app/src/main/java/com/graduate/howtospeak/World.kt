@@ -1,5 +1,6 @@
-package com.graduate.howtospeak
+package com.graduate.howtospeak.com.graduate.howtospeak
 
+/*
 class World {
     var dbCount = 40f
 
@@ -18,3 +19,5 @@ class World {
         lastDbCount = dbCount
     }
 }
+
+ */

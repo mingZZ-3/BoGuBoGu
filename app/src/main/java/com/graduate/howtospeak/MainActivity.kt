@@ -10,7 +10,7 @@ import android.os.Bundle
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import android.widget.Toast
-import com.graduate.howtospeak.databinding.ActivityMainBinding
+//import com.graduate.howtospeak.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
