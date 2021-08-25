@@ -20,8 +20,8 @@ import java.lang.Exception
 class Practice_Result : AppCompatActivity() {
     // 크롤링 테스트
     private lateinit var test_Jsoup: TextView
-    //private val searchUrl = "http://13.124.114.1/"
-    private val searchUrl = "http://13.124.114.1/vowel_recognition/result"
+    private val searchUrl = "http://13.124.114.1/result/"
+    //private val searchUrl = "http://13.124.114.1/vowel_recognition/"
     var result_opencv :String = ""
 
 
@@ -58,8 +58,8 @@ class Practice_Result : AppCompatActivity() {
         val bring_html = CoroutineScope(Dispatchers.IO).async {
             try {
                 val doc : Document = Jsoup.connect(searchUrl).get()
-                val contents: Elements = doc.select("body h1")
-                contents.text()
+                val contents: Elements = doc.select("body")
+                //contents.text()
                 result_opencv = contents.toString()
 
                 Log.d("Test", result_opencv)
@@ -68,6 +68,7 @@ class Practice_Result : AppCompatActivity() {
                 Log.i("get_result_opencv","error")
                 e.printStackTrace()}
         }
+        bring_html.start()
 
         return result_opencv
     }

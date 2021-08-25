@@ -7,14 +7,11 @@ import retrofit2.Call
 import retrofit2.http.*
 
 open interface IUploadAPI {
-    //@FormUrlEncoded
     @Multipart
-    //@POST("vowel_recognition")
-    @POST("media/images/2021/08/24")
-    //@POST("srv")
+    @POST("/vowel_recognition/")
     fun post_image(
-        @Part PostImg: MultipartBody.Part
-    ) :  Call<String>
+        @Part imageFile: MultipartBody.Part
+    ) : Call<String>
 }
 
-//   cd /srv/django_aws_test/media/images/2021/08/24/
+//   cd /srv/django_aws_test/media/tmp/

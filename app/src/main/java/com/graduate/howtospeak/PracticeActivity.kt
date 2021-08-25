@@ -1,6 +1,7 @@
 package com.graduate.howtospeak
 
 
+//import com.graduate.howtospeak.Retrofit.RetrofitBuilder
 import android.Manifest
 import android.annotation.TargetApi
 import android.content.ContentResolver
@@ -19,7 +20,6 @@ import android.hardware.camera2.*
 import android.hardware.camera2.CameraAccessException
 import android.hardware.camera2.CameraCaptureSession.CaptureCallback
 import android.media.ExifInterface
-import android.media.Image
 import android.media.ImageReader
 import android.media.ImageReader.OnImageAvailableListener
 import android.media.MediaRecorder
@@ -32,23 +32,23 @@ import android.util.Size
 import android.util.SparseIntArray
 import android.view.SurfaceHolder
 import android.view.SurfaceView
-import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.google.gson.annotations.SerializedName
 import com.graduate.howtospeak.Retrofit.RetrofitBuilder
 import kotlinx.android.synthetic.main.activity_learn.mtMain1
 import kotlinx.android.synthetic.main.activity_practice.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import okhttp3.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.io.*
-import java.nio.ByteBuffer
-import java.security.AccessController.getContext
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.Semaphore
@@ -89,10 +89,6 @@ class PracticeActivity : AppCompatActivity() {
         ORIENTATIONS.append(ExifInterface.ORIENTATION_ROTATE_180, 0)
         ORIENTATIONS.append(ExifInterface.ORIENTATION_ROTATE_270, 90)
     }
-
-
-    // 이미지 post
-    var url_postImg: Uri? = null
 
 
     // =======================
@@ -160,7 +156,7 @@ class PracticeActivity : AppCompatActivity() {
         }
 
 
-        //
+
         /*
         var amplitudeLevel = findViewById(R.id.amplitudelevel)
         amplitudeLevel.setProgress(dBvalue)
@@ -195,7 +191,7 @@ class PracticeActivity : AppCompatActivity() {
         bt_rstop.setOnClickListener {
             // recording 중지
             stopRecording()
-            // take pic 실행
+            // take pic 실행 
             takePicture()
 
         }
@@ -222,6 +218,7 @@ class PracticeActivity : AppCompatActivity() {
 
     private fun startRecording(): Boolean {
 
+        /*
         // 기존
         val fileName: String = Date().time.toString() + ".mp3"
         recordoutput =
@@ -243,6 +240,7 @@ class PracticeActivity : AppCompatActivity() {
         } catch (e: IOException) {
             e.printStackTrace()
         }
+         */
 
 
         // 0804 봉인
@@ -252,9 +250,7 @@ class PracticeActivity : AppCompatActivity() {
 
         try {
             mRecorder = MediaRecorder()
-
             mRecorder?.setAudioSource((MediaRecorder.AudioSource.MIC))
-
             //0804 added
             /*
             mRecorder?.setOutputFormat((MediaRecorder.OutputFormat.THREE_GPP))
@@ -291,9 +287,11 @@ class PracticeActivity : AppCompatActivity() {
         return "${filename}.mp4"
     }
 
+
     /*
-    //powerDb = 20 * log10(getAmplitude() / referenceAmp);
     // ============ decibel level
+    //powerDb = 20 * log10(getAmplitude() / referenceAmp);
+
     private fun getMaxAmplitude() : Int {
         if (mRecorder != null) {
             try {
@@ -441,6 +439,7 @@ class PracticeActivity : AppCompatActivity() {
         }
     }
 
+    /*
     private val ImageAvailableListener =
         ImageReader.OnImageAvailableListener { reader ->
             val image: Image = reader.acquireNextImage()
@@ -451,6 +450,7 @@ class PracticeActivity : AppCompatActivity() {
             //SaveImageTask().execute(bitmap)
             insertImage(getContentResolver(), bitmap, "" + System.currentTimeMillis(), "")
         }
+     */
 
     private val deviceStateCallback = object : CameraDevice.StateCallback() {
 
@@ -503,14 +503,6 @@ class PracticeActivity : AppCompatActivity() {
                         //CaptureRequest.CONTROL_AE_MODE_OFF
                         CaptureRequest.CONTROL_AE_MODE_ON_AUTO_FLASH
                     )
-                    // added
-                    /*
-                    mPreviewBuilder.set(
-                        CaptureRequest.SENSOR_EXPOSURE_TIME,
-                        1000000000 / 80
-                    )
-                     */
-
                     mSession.setRepeatingRequest(mPreviewBuilder.build(), null, mHandler)
                 } catch (e: CameraAccessException) {
                     e.printStackTrace()
@@ -644,17 +636,51 @@ class PracticeActivity : AppCompatActivity() {
             url = cr.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
             if (source != null) {
                 val imageOut: OutputStream? = cr.openOutputStream(url!!)
-                //+
-                val immm = ByteArrayOutputStream()
 
                 try {
                     source.compress(Bitmap.CompressFormat.JPEG, 20, imageOut)
-                    source.compress(Bitmap.CompressFormat.JPEG, 20, immm)  //+
+                    //source.compress(Bitmap.CompressFormat.JPEG, 20, immm)
                     //test_bitmap.compress(Bitmap.CompressFormat.JPEG, 20, immm)  //+
                     Log.d("retrofit_image_check", "사진 bitmap : "+source)
 
-                    // 코루틴 :  서버 전송
+                    Log.d("path 확", url.toString())
+                    Log.d("path 확", url.path.toString())
 
+
+                    //시도중_inputstream
+                    val test_post_image = CoroutineScope(Dispatchers.IO).launch {
+                        var post_filename = Date().time.toString()
+                        post_filename = "PostImg_" + post_filename + ".jpeg"
+                        Log.d("post_img_name : ", post_filename)
+
+                        var post_inputstream :InputStream? = null
+                        try{
+                            post_inputstream = contentResolver.openInputStream(url!!)
+                        } catch (e:Exception){
+                            e.printStackTrace()
+                        }
+                        var post_bitmap : Bitmap = BitmapFactory.decodeStream(post_inputstream)
+                        val post_byteArrayOutputStream = ByteArrayOutputStream()
+                        post_bitmap.compress(Bitmap.CompressFormat.JPEG, 70, post_byteArrayOutputStream)
+
+                        val requestBody : RequestBody = RequestBody
+                            .create(MediaType.parse("image/*"), post_byteArrayOutputStream.toByteArray())
+                        val uploadFile = MultipartBody.Part
+                            .createFormData("image", post_filename, requestBody)
+
+                        RetrofitBuilder.api.post_image(uploadFile).enqueue(object: Callback<String>{
+                            override fun onFailure(call: Call<String>, t: Throwable) {
+                                Log.e("Post_result", "실패,,,!!ㅗㅗㅗㅗ")
+                                t.printStackTrace()
+                            }
+                            override fun onResponse(call: Call<String>, response: Response<String>) {
+                                Log.d("Post_result","성공,,,!!")
+                            }
+                        })
+                    }
+
+                    /*
+                    // 코루틴 :  서버 전송
                     val test_post_image = CoroutineScope(Dispatchers.IO).launch {
                         var post_filename = Date().time.toString()
                         post_filename = "PostImg_" + post_filename + ".jpeg"
@@ -662,34 +688,14 @@ class PracticeActivity : AppCompatActivity() {
 
                         val requestBody: RequestBody = RequestBody.create(
                             MediaType.parse("image/jpg"), immm.toByteArray())
-                        Log.d("retrofit_image_check", "사진 requestBody : "+requestBody)
+
                         val uploadFile =
-                            MultipartBody.Part.createFormData("postImg", post_filename, requestBody)
+                            MultipartBody.Part.createFormData("image", post_filename, requestBody)
 
                         RetrofitBuilder.api.post_image(uploadFile)
                         Log.d("Post", "line done")
                     }
-
-
-
-                    /*
-                    //==== retrofit  //+
-                    var post_filename = Date().time.toString()
-                    post_filename = "/IMG_AD_" + post_filename + ".jpeg"
-                    Log.d("post_img_name : ", post_filename)
-
-                    val requestBody: RequestBody = RequestBody.create(
-                        MediaType.parse("image/jpg"), immm.toByteArray())
-                    Log.d("retrofit_image_check", "사진 requestBody : "+requestBody)
-                    val uploadFile =
-                        MultipartBody.Part.createFormData("postImg", post_filename, requestBody)
-
-                    RetrofitBuilder.api.post_image(uploadFile)
-                    Log.d("Post", "line done")
-                    //=====
-
                      */
-
 
                 }catch (e:Exception){
                     Log.d("Post", "error")
@@ -717,50 +723,6 @@ class PracticeActivity : AppCompatActivity() {
     }
 
 
-    /* --> cor
-    fun SaveImageTask(data: Bitmap) {
-        CoroutineScope(Dispatchers.IO).launch {
-            var bitmap: Bitmap? = null
-
-            CoroutineScope(Dispatchers.Main).launch {
-                try {
-                    bitmap = getRotatedBitmap(data[0], mDeviceRotation)
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
-                insertImage(getContentResolver(), bitmap, "" + System.currentTimeMillis(), "")
-
-            }
-        }
-
-    }
-
-     */
-
-    /*
-    private class SaveImageTask : AsyncTask<Bitmap, Void?, Void?>() {
-        override fun onPostExecute(aVoid: Void?) {
-            super.onPostExecute(aVoid)
-            //Toast.makeText(this, "사진을 저장하였습니다.", Toast.LENGTH_SHORT).show()
-        }
-
-
-        override fun doInBackground(vararg data: Bitmap): Void? {
-            var bitmap: Bitmap? = null
-            try {
-                bitmap = getRotatedBitmap(data[0], mDeviceRotation)
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-            insertImage(getContentResolver(), bitmap, "" + System.currentTimeMillis(), "")
-
-            return null
-        }
-    }
-
-     */
-
-
     private fun setAspectRatioTextureView(ResolutionWidth: Int, ResolutionHeight: Int) {
         if (ResolutionWidth > ResolutionHeight) {
             val newWidth = mDSI_width
@@ -776,7 +738,7 @@ class PracticeActivity : AppCompatActivity() {
     private fun updateTextureViewSize(viewWidth: Int, viewHeight: Int) {
         Log.d("@@@", "TextureView Width : $viewWidth TextureView Height : $viewHeight")
         //mSurfaceView.layoutParams = FrameLayout.LayoutParams(viewWidth, viewHeight)
-        //mSurfaceView.layoutParams = FrameLayout.LayoutParams(320, 480)
     }
     //==============================================
 }
+
