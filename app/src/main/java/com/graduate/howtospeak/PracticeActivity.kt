@@ -38,14 +38,17 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.graduate.howtospeak.Retrofit.RetrofitBuilder
 import kotlinx.android.synthetic.main.activity_learn.mtMain1
 import kotlinx.android.synthetic.main.activity_practice.*
-import okhttp3.MediaType
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
-import java.io.IOException
-import java.io.OutputStream
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
+import okhttp3.*
+import java.io.*
 import java.nio.ByteBuffer
+import java.security.AccessController.getContext
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.Semaphore
@@ -58,53 +61,7 @@ class PracticeActivity : AppCompatActivity() {
     private lateinit var textView_vowel: TextView
     private lateinit var vowel_getby: String
 
-    // take pic __ delete
-    //var camera: Camera2? = null
-/*
-    // ======== camera preview
-    private lateinit var mSurfaceView: SurfaceView
-    private lateinit var mSurfaceViewHolder: SurfaceHolder
-    private lateinit var mImageReader: ImageReader
-    private lateinit var mCameraDevice: CameraDevice
-    private lateinit var mPreviewBuilder: CaptureRequest.Builder
-    private lateinit var mSession: CameraCaptureSession
-    private var mDeviceRotation: Int ?= 0
-
-    private var mHandler: Handler? = null
-
-    private lateinit var mAccelerometer: Sensor
-    private lateinit var mMagnetometer: Sensor
-    private lateinit var mSensorManager: SensorManager
-
-    private val deviceOrientation: DeviceOrientation by lazy { DeviceOrientation() }
-    private var mHeight: Int = 0
-    private var mWidth:Int = 0
-
-    private var mCameraId = CAMERA_BACK
-
-    companion object
-    {
-        const val CAMERA_BACK = "1"
-        const val CAMERA_FRONT = "0"
-
-        private val ORIENTATIONS = SparseIntArray()
-
-        init {
-            ORIENTATIONS.append(ExifInterface.ORIENTATION_NORMAL, 90)
-            ORIENTATIONS.append(ExifInterface.ORIENTATION_ROTATE_90, 180)
-            ORIENTATIONS.append(ExifInterface.ORIENTATION_ROTATE_180, 270)
-            ORIENTATIONS.append(ExifInterface.ORIENTATION_ROTATE_270, 0)
-
-            /* 기존1
-            ORIENTATIONS.append(ExifInterface.ORIENTATION_NORMAL, 0)
-            ORIENTATIONS.append(ExifInterface.ORIENTATION_ROTATE_90, 90)
-            ORIENTATIONS.append(ExifInterface.ORIENTATION_ROTATE_180, 180)
-            ORIENTATIONS.append(ExifInterface.ORIENTATION_ROTATE_270, 270)
-             */
-        }
-    }
-    */
-    // 시도중
+    // surfaceview 시도중 -- done
     private lateinit var mSurfaceView: SurfaceView
     private lateinit var mCameraPreview: CameraPreview
     private lateinit var mSurfaceViewHolder: SurfaceHolder
@@ -127,11 +84,16 @@ class PracticeActivity : AppCompatActivity() {
     private val ORIENTATIONS = SparseIntArray()
 
     init {
-        ORIENTATIONS.append(ExifInterface.ORIENTATION_NORMAL, 0)
-        ORIENTATIONS.append(ExifInterface.ORIENTATION_ROTATE_90, 90)
-        ORIENTATIONS.append(ExifInterface.ORIENTATION_ROTATE_180, 180)
-        ORIENTATIONS.append(ExifInterface.ORIENTATION_ROTATE_270, 270)
+        ORIENTATIONS.append(ExifInterface.ORIENTATION_NORMAL, 180)
+        ORIENTATIONS.append(ExifInterface.ORIENTATION_ROTATE_90, 270)
+        ORIENTATIONS.append(ExifInterface.ORIENTATION_ROTATE_180, 0)
+        ORIENTATIONS.append(ExifInterface.ORIENTATION_ROTATE_270, 90)
     }
+
+
+    // 이미지 post
+    var url_postImg: Uri? = null
+
 
     // =======================
 
@@ -155,8 +117,6 @@ class PracticeActivity : AppCompatActivity() {
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         setContentView(R.layout.activity_practice)
 
-        mSurfaceView = findViewById<SurfaceView>(R.id.camera_preview)
-
 
         // 기본 버튼
         mtMain1.setOnClickListener {
@@ -167,6 +127,10 @@ class PracticeActivity : AppCompatActivity() {
         mtResult1.setOnClickListener {
             val intent = Intent(this, Practice_Result::class.java)
             startActivity(intent)
+
+            CoroutineScope(Dispatchers.Main).launch {
+
+            }
         }
 
         mtPractice_vowel.setOnClickListener {
@@ -186,13 +150,13 @@ class PracticeActivity : AppCompatActivity() {
         vowel_getby = intent.getStringExtra("vowel_tolearn").toString()
 
         when (vowel_getby) {
-            "a" -> textView_vowel.setText("ㅏ 학습 영상 영역")
-            "eo" -> textView_vowel.setText("ㅓ 학습 영상 영역")
-            "i" -> textView_vowel.setText("ㅣ 학습 영상 영역")
-            "o" -> textView_vowel.setText("ㅗ 학습 영상 영역")
-            "u" -> textView_vowel.setText("ㅜ 학습 영상 영역")
-            "e" -> textView_vowel.setText("ㅐ/ㅔ 학습 영상 영역")
-            else -> textView_vowel.setText("error")
+            "a" -> textView_vowel.text = "ㅏ 학습 영상 영역"
+            "eo" -> textView_vowel.text = "ㅓ 학습 영상 영역"
+            "i" -> textView_vowel.text = "ㅣ 학습 영상 영역"
+            "o" -> textView_vowel.text = "ㅗ 학습 영상 영역"
+            "u" -> textView_vowel.text = "ㅜ 학습 영상 영역"
+            "e" -> textView_vowel.text = "ㅐ/ㅔ 학습 영상 영역"
+            else -> textView_vowel.text = "error"
         }
 
 
@@ -236,7 +200,6 @@ class PracticeActivity : AppCompatActivity() {
 
         }
 
-
         // amplitude level bar
 
 
@@ -257,7 +220,7 @@ class PracticeActivity : AppCompatActivity() {
         }
     }
 
-    private fun startRecording() {
+    private fun startRecording(): Boolean {
 
         // 기존
         val fileName: String = Date().time.toString() + ".mp3"
@@ -281,10 +244,10 @@ class PracticeActivity : AppCompatActivity() {
             e.printStackTrace()
         }
 
-        /* 0818 봉인
+
         // 0804 봉인
-        val fileName: String = Date().time.toString() + ".mp3"
-        recordoutput = Environment.getExternalStorageDirectory().absolutePath + "/files/" + fileName //내장메모리 밑에 위치
+        val fileName_voice: String = Date().time.toString() + ".mp3"
+        recordoutput = Environment.getExternalStorageDirectory().absolutePath + "/files/" + fileName_voice //내장메모리 밑에 위치
 
 
         try {
@@ -319,7 +282,6 @@ class PracticeActivity : AppCompatActivity() {
             e.printStackTrace()
         }
         return false
-         */
     }
 
     // file name
@@ -331,7 +293,7 @@ class PracticeActivity : AppCompatActivity() {
 
     /*
     //powerDb = 20 * log10(getAmplitude() / referenceAmp);
-    // decibel level
+    // ============ decibel level
     private fun getMaxAmplitude() : Int {
         if (mRecorder != null) {
             try {
@@ -383,258 +345,13 @@ class PracticeActivity : AppCompatActivity() {
 
     // ======================================
 
-    // ============== take pic
-    /* 기존
-    private fun takePicture() {
-
-
-        if (null == mCameraDevice) return
-
-        val captureRequestBuilder: CaptureRequest.Builder
-        try {
-            captureRequestBuilder = mCameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_STILL_CAPTURE)
-            captureRequestBuilder.addTarget(mImageReader.getSurface())
-
-            captureRequestBuilder.set(CaptureRequest.CONTROL_AF_MODE, CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_PICTURE)
-            captureRequestBuilder.set(CaptureRequest.CONTROL_AE_MODE, CaptureRequest.CONTROL_AE_MODE_ON_AUTO_FLASH)
-
-            // 0804 added
-            //mDeviceRotation = ORIENTATIONS.get(deviceOrientation.getOrientation())
-            val rotation = getWindowManager().getDefaultDisplay().getRotation()
-
-            captureRequestBuilder.set(CaptureRequest.JPEG_ORIENTATION, ORIENTATIONS.get(rotation))
-            val mCaptureRequest : CaptureRequest = captureRequestBuilder.build()
-            mSession.capture(mCaptureRequest, null, mHandler)
-
-
-        } catch ( e : CameraAccessException) {
-            e.printStackTrace()
-        }
-    }
-     */
-
-    // 시도중
-
-    // https://webnautes.tistory.com/822
-    // ======================================
-
     // ============== camera surfaceview part
-/*
     private fun initSensor() {
+        mSurfaceView = findViewById(R.id.camera_preview)
         mSensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
         mMagnetometer = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD)
-    }
-
-    private fun initView() {
-        // 0819 봉인
-        with(DisplayMetrics()){
-            windowManager.defaultDisplay.getMetrics(this)
-            mHeight = heightPixels
-            mWidth = widthPixels
-        }
-
-
-        // 0819 추가
-        //mSurfaceView = findViewById<SurfaceView>(R.id.camera_preview)
-
-        mSurfaceViewHolder = camera_preview.holder
-        mSurfaceViewHolder.addCallback(object : SurfaceHolder.Callback {
-            // 뷰 생성 시점
-            override fun surfaceCreated(holder: SurfaceHolder) {
-                initCameraAndPreview()
-            }
-            // 뷰 소멸 시점
-            override fun surfaceDestroyed(holder: SurfaceHolder) {
-                mCameraDevice.close()
-            }
-            // 뷰 변동 시점(화면 회전)
-            override fun surfaceChanged(
-                holder: SurfaceHolder, format: Int,
-                width: Int, height: Int
-            ) {
-
-            }
-        })
-
-        btn_convert.setOnClickListener { switchCamera() }
-    }
-
-    private fun switchCamera() {
-        when(mCameraId){
-            CAMERA_BACK -> {
-                mCameraId = CAMERA_FRONT
-                mCameraDevice.close()
-                openCamera()
-            }
-            else -> {
-                mCameraId = CAMERA_BACK
-                mCameraDevice.close()
-                openCamera()
-            }
-        }
-    }
-
-
-    fun initCameraAndPreview() {
-        val handlerThread = HandlerThread("CAMERA2")
-        handlerThread.start()
-        mHandler = Handler(handlerThread.looper)
-
-        openCamera()
-/*
-        private val = object : imageReader.OnImageAvailableListener m)m
-        @Override
-        fun onImageAvailable(reader: ImageReader) {
-            /*
-            var image: Image = reader.acquireNextImage()
-            var buffer: ByteBuffer = image.planes[0].getBuffer()
-            var bytes: byte
-             */
-            var image: Image = reader.acquireNextImage()
-            var buffer = image.planes[0].buffer
-            var bytes = ByteArray(buffer.remaining())
-            Buffer.get(bytes) //Save the byte array from the buffer
-
-            var bitmap : Bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
-
-        }
-*/
-
-    }
-
-    private fun openCamera() {
-        try {
-            val mCameraManager = this.getSystemService(CAMERA_SERVICE) as CameraManager
-            val characteristics = mCameraManager.getCameraCharacteristics(mCameraId)
-            val map = characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP)
-
-            val largestPreviewSize = map!!.getOutputSizes(ImageFormat.JPEG)[0]
-            setAspectRatioTextureView(largestPreviewSize.height, largestPreviewSize.width)
-
-            mImageReader = ImageReader.newInstance(
-                largestPreviewSize.width,
-                largestPreviewSize.height,
-                ImageFormat.JPEG,
-                7
-            )
-
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
-                != PackageManager.PERMISSION_GRANTED
-            ) return
-
-
-
-            mCameraManager.openCamera(mCameraId, deviceStateCallback, mHandler)
-
-
-        } catch (e: CameraAccessException) {
-            //toast("카메라를 열지 못했습니다.")
-        }
-    }
-
-    private val deviceStateCallback = object : CameraDevice.StateCallback() {
-        @RequiresApi(api = Build.VERSION_CODES.P)
-        override fun onOpened(camera: CameraDevice) {
-            mCameraDevice = camera
-            try {
-                takePreview()
-            } catch (e: CameraAccessException) {
-                e.printStackTrace()
-            }
-        }
-
-        override fun onDisconnected(camera: CameraDevice) {
-            mCameraDevice.close()
-        }
-
-        override fun onError(camera: CameraDevice, error: Int) {
-            // toast("카메라를 열지 못했습니다.")
-        }
-    }
-
-    @Throws(CameraAccessException::class)
-    fun takePreview() {
-        mPreviewBuilder = mCameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW)
-        mPreviewBuilder.addTarget(mSurfaceViewHolder.surface)
-        mCameraDevice.createCaptureSession(
-            listOf(mSurfaceViewHolder.surface, mImageReader.surface), mSessionPreviewStateCallback, mHandler
-        )
-    }
-
-    private val mSessionPreviewStateCallback = object : CameraCaptureSession.StateCallback() {
-        override fun onConfigured(session: CameraCaptureSession) {
-            mSession = session
-            try {
-                // Key-Value 구조로 설정
-                // 오토포커싱이 계속 동작
-                mPreviewBuilder.set(
-                    CaptureRequest.CONTROL_AF_MODE,
-                    CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_PICTURE
-                )
-                // 필요할 경우 플래시가 자동으로 켜짐
-                mPreviewBuilder.set(
-                    CaptureRequest.CONTROL_AE_MODE,
-                    CaptureRequest.CONTROL_AE_MODE_ON_AUTO_FLASH
-                )
-                mSession.setRepeatingRequest(mPreviewBuilder.build(), null, mHandler)
-            } catch (e: CameraAccessException) {
-                e.printStackTrace()
-            }
-
-        }
-
-
-        override fun onConfigureFailed(session: CameraCaptureSession) {
-            Toast.makeText(this@PracticeActivity, "카메라 구성 실패", Toast.LENGTH_SHORT).show()
-        }
-
-    }
-
-
-    override fun onResume() {
-        super.onResume()
-
-        mSensorManager.registerListener(
-            deviceOrientation.eventListener, mAccelerometer, SensorManager.SENSOR_DELAY_UI
-        )
-        mSensorManager.registerListener(
-            deviceOrientation.eventListener, mMagnetometer, SensorManager.SENSOR_DELAY_UI
-        )
-    }
-
-    override fun onPause() {
-        super.onPause()
-        mSensorManager.unregisterListener(deviceOrientation.eventListener)
-    }
-
-    private fun setAspectRatioTextureView(ResolutionWidth: Int, ResolutionHeight: Int) {
-        if (ResolutionWidth > ResolutionHeight) {
-            val newWidth = mWidth
-            val newHeight = mWidth * ResolutionWidth / ResolutionHeight
-            updateTextureViewSize(newWidth, newHeight)
-
-        } else {
-            val newWidth = mWidth
-            val newHeight = mWidth * ResolutionHeight / ResolutionWidth
-            updateTextureViewSize(newWidth, newHeight)
-        }
-
-    }
-
-    private fun updateTextureViewSize(viewWidth: Int, viewHeight: Int) {
-        //Log.d("ViewSize", "TextureView Width : $viewWidth TextureView Height : $viewHeight")
-        camera_preview.layoutParams = FrameLayout.LayoutParams(viewWidth, viewHeight)
-    }
-
-    // ======================================
-*/
-    private fun initSensor() {
-        mSurfaceView = findViewById<SurfaceView>(R.id.camera_preview)
-        mSensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
-        mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
-        mMagnetometer = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD)
-        var deviceOrientation: DeviceOrientation
+        //var deviceOrientation: DeviceOrientation
     }
 
     override fun onResume() {
@@ -683,6 +400,8 @@ class PracticeActivity : AppCompatActivity() {
             ) {
             }
         })
+
+        mSurfaceViewHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS)
     }
 
     @TargetApi(19)
@@ -692,19 +411,19 @@ class PracticeActivity : AppCompatActivity() {
         mHandler = Handler(handlerThread.looper)
         val mainHandler = Handler(mainLooper)
         try {
-            val mCameraId = "" + CameraCharacteristics.LENS_FACING_BACK // 후면 카메라 사용
+            val mCameraId = "" + CameraCharacteristics.LENS_FACING_BACK // front-후면 카메라 사용
             val mCameraManager = this.getSystemService(CAMERA_SERVICE) as CameraManager
             val characteristics = mCameraManager.getCameraCharacteristics(mCameraId)
             val map = characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP)
             val largestPreviewSize: Size = map!!.getOutputSizes(ImageFormat.JPEG)[0]
             Log.i(
                 "LargestSize",
-                largestPreviewSize.getWidth().toString() + " " + largestPreviewSize.getHeight()
-            )
-            setAspectRatioTextureView(largestPreviewSize.getHeight(), largestPreviewSize.getWidth())
+                largestPreviewSize.width.toString() + " " + largestPreviewSize.height)
+
+            setAspectRatioTextureView(largestPreviewSize.height, largestPreviewSize.width)
             mImageReader = ImageReader.newInstance(
-                largestPreviewSize.getWidth(),
-                largestPreviewSize.getHeight(),
+                largestPreviewSize.width,
+                largestPreviewSize.height,
                 ImageFormat.JPEG,  /*maxImages*/
                 7
             )
@@ -722,10 +441,10 @@ class PracticeActivity : AppCompatActivity() {
         }
     }
 
-    private val OnImageAvailableListener =
+    private val ImageAvailableListener =
         ImageReader.OnImageAvailableListener { reader ->
             val image: Image = reader.acquireNextImage()
-            val buffer: ByteBuffer = image.getPlanes().get(0).getBuffer()
+            val buffer: ByteBuffer = image.planes.get(0).getBuffer()
             val bytes = ByteArray(buffer.remaining())
             buffer.get(bytes)
             val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
@@ -781,8 +500,17 @@ class PracticeActivity : AppCompatActivity() {
                     )
                     mPreviewBuilder.set(
                         CaptureRequest.CONTROL_AE_MODE,
+                        //CaptureRequest.CONTROL_AE_MODE_OFF
                         CaptureRequest.CONTROL_AE_MODE_ON_AUTO_FLASH
                     )
+                    // added
+                    /*
+                    mPreviewBuilder.set(
+                        CaptureRequest.SENSOR_EXPOSURE_TIME,
+                        1000000000 / 80
+                    )
+                     */
+
                     mSession.setRepeatingRequest(mPreviewBuilder.build(), null, mHandler)
                 } catch (e: CameraAccessException) {
                     e.printStackTrace()
@@ -856,7 +584,7 @@ class PracticeActivity : AppCompatActivity() {
         buffer[bytes]
         val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
         //SaveImageTask().execute(bitmap)
-        insertImage(getContentResolver(), bitmap, "" + System.currentTimeMillis(), "")
+        insertImage(getContentResolver(), bitmap, "Img" + System.currentTimeMillis(), "")
     }
 
     open fun getRotatedBitmap(bitmap: Bitmap, degrees: Int): Bitmap? {
@@ -899,6 +627,7 @@ class PracticeActivity : AppCompatActivity() {
         description: String?
     ): String? {
         val values = ContentValues()
+
         values.put(MediaStore.Images.Media.TITLE, title)
         values.put(MediaStore.Images.Media.DISPLAY_NAME, title)
         values.put(MediaStore.Images.Media.DESCRIPTION, description)
@@ -906,26 +635,65 @@ class PracticeActivity : AppCompatActivity() {
         // Add the date meta data to ensure the image is added at the front of the gallery
         values.put(MediaStore.Images.Media.DATE_ADDED, System.currentTimeMillis())
         values.put(MediaStore.Images.Media.DATE_TAKEN, System.currentTimeMillis())
+
         var url: Uri? = null
         var stringUrl: String? = null /* value to be returned */
+        var test_Onputstream : OutputStream //+
+
         try {
             url = cr.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
             if (source != null) {
                 val imageOut: OutputStream? = cr.openOutputStream(url!!)
+                //+
+                val immm = ByteArrayOutputStream()
+
                 try {
                     source.compress(Bitmap.CompressFormat.JPEG, 20, imageOut)
+                    source.compress(Bitmap.CompressFormat.JPEG, 20, immm)  //+
+                    //test_bitmap.compress(Bitmap.CompressFormat.JPEG, 20, immm)  //+
+                    Log.d("retrofit_image_check", "사진 bitmap : "+source)
+
+                    // 코루틴 :  서버 전송
+
+                    val test_post_image = CoroutineScope(Dispatchers.IO).launch {
+                        var post_filename = Date().time.toString()
+                        post_filename = "PostImg_" + post_filename + ".jpeg"
+                        Log.d("post_img_name : ", post_filename)
+
+                        val requestBody: RequestBody = RequestBody.create(
+                            MediaType.parse("image/jpg"), immm.toByteArray())
+                        Log.d("retrofit_image_check", "사진 requestBody : "+requestBody)
+                        val uploadFile =
+                            MultipartBody.Part.createFormData("postImg", post_filename, requestBody)
+
+                        RetrofitBuilder.api.post_image(uploadFile)
+                        Log.d("Post", "line done")
+                    }
+
+
 
                     /*
-                    //==== retrofit
+                    //==== retrofit  //+
+                    var post_filename = Date().time.toString()
+                    post_filename = "/IMG_AD_" + post_filename + ".jpeg"
+                    Log.d("post_img_name : ", post_filename)
+
                     val requestBody: RequestBody = RequestBody.create(
-                        MediaType.parse("image/jpg"),
-                        byteArrayOutputStream.toByteArray()
-                    )
+                        MediaType.parse("image/jpg"), immm.toByteArray())
+                    Log.d("retrofit_image_check", "사진 requestBody : "+requestBody)
                     val uploadFile =
-                        MultipartBody.Part.createFormData("postImg", file.getName(), requestBody)
+                        MultipartBody.Part.createFormData("postImg", post_filename, requestBody)
+
+                    RetrofitBuilder.api.post_image(uploadFile)
+                    Log.d("Post", "line done")
                     //=====
+
                      */
 
+
+                }catch (e:Exception){
+                    Log.d("Post", "error")
+                    e.printStackTrace()
                 } finally {
                     imageOut!!.close()
                 }
@@ -941,9 +709,33 @@ class PracticeActivity : AppCompatActivity() {
         }
         if (url != null) {
             stringUrl = url.toString()
+            Log.d("retrofit_image_check", "사진 url : " + stringUrl)  //+
+
         }
+
         return stringUrl
     }
+
+
+    /* --> cor
+    fun SaveImageTask(data: Bitmap) {
+        CoroutineScope(Dispatchers.IO).launch {
+            var bitmap: Bitmap? = null
+
+            CoroutineScope(Dispatchers.Main).launch {
+                try {
+                    bitmap = getRotatedBitmap(data[0], mDeviceRotation)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+                insertImage(getContentResolver(), bitmap, "" + System.currentTimeMillis(), "")
+
+            }
+        }
+
+    }
+
+     */
 
     /*
     private class SaveImageTask : AsyncTask<Bitmap, Void?, Void?>() {
@@ -961,7 +753,6 @@ class PracticeActivity : AppCompatActivity() {
                 e.printStackTrace()
             }
             insertImage(getContentResolver(), bitmap, "" + System.currentTimeMillis(), "")
-
 
             return null
         }
@@ -984,8 +775,8 @@ class PracticeActivity : AppCompatActivity() {
 
     private fun updateTextureViewSize(viewWidth: Int, viewHeight: Int) {
         Log.d("@@@", "TextureView Width : $viewWidth TextureView Height : $viewHeight")
-        mSurfaceView.layoutParams = FrameLayout.LayoutParams(viewWidth, viewHeight)
+        //mSurfaceView.layoutParams = FrameLayout.LayoutParams(viewWidth, viewHeight)
+        //mSurfaceView.layoutParams = FrameLayout.LayoutParams(320, 480)
     }
-
-
+    //==============================================
 }
