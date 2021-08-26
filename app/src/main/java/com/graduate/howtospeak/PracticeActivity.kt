@@ -32,6 +32,8 @@ import android.util.Size
 import android.util.SparseIntArray
 import android.view.SurfaceHolder
 import android.view.SurfaceView
+import android.view.WindowInsets
+import android.view.WindowManager
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -110,6 +112,14 @@ class PracticeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         setContentView(R.layout.activity_practice)
+
+
+        // 상태바 없애기
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.insetsController?.hide(WindowInsets.Type.statusBars())
+        } else {
+            window.setFlags( WindowManager.LayoutParams.FLAG_FULLSCREEN ,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN ) }
 
 
         // 기본 버튼

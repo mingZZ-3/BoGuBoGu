@@ -67,13 +67,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="240dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+
+            android:layout_marginTop="10dp">
 
             <TextView
                 android:id="@+id/learning_View"
-                android:layout_width="320dp"
+                android:layout_width="390dp"
                 android:layout_height="240dp"
                 android:layout_gravity="left"
+
                 android:layout_marginLeft="30dp"
 
                 android:text="학습 영상 영역"
@@ -87,12 +90,12 @@
 
                 <SurfaceView
                     android:id="@+id/camera_preview"
-                    android:layout_width="320dp"
+                    android:layout_width="390dp"
                     android:layout_height="240dp"
                     android:layout_gravity="right"
 
-                    android:layout_marginRight="30dp"
-                    android:layout_marginLeft="10dp"/>
+
+                    android:layout_marginRight="30dp" />
 
             </FrameLayout>
 
@@ -122,9 +125,13 @@
     -->
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:layout_gravity="bottom"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="15dp"
+            >
 
             <TableRow
                 android:layout_width="300dp"

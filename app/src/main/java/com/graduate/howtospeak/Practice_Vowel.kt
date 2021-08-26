@@ -4,6 +4,8 @@ import android.content.Intent
 import android.content.pm.ActivityInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.*
+import android.view.WindowInsets
+import android.view.WindowManager
 import android.widget.ImageButton
 import kotlinx.android.synthetic.main.activity_learn.mtMain1
 import kotlinx.android.synthetic.main.activity_learn__vowel.*
@@ -24,6 +26,13 @@ class Practice_Vowel : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         setContentView(R.layout.activity_practice__vowel)
+
+        // 상태바 없애기
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.insetsController?.hide(WindowInsets.Type.statusBars())
+        } else {
+            window.setFlags( WindowManager.LayoutParams.FLAG_FULLSCREEN ,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN ) }
 
         bt_name1 = findViewById(R.id.pvowel_a)
         bt_name2 = findViewById(R.id.pvowel_eo)

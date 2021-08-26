@@ -2,12 +2,14 @@ package com.graduate.howtospeak
 
 import android.content.Intent
 import android.content.pm.ActivityInfo
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.view.WindowInsets
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.ImageButton
-import kotlinx.android.synthetic.main.activity_learn__consonant.*
 import kotlinx.android.synthetic.main.activity_learn__vowel.*
 
 class Learn_Vowel : AppCompatActivity() {
@@ -24,6 +26,14 @@ class Learn_Vowel : AppCompatActivity() {
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         setContentView(R.layout.activity_learn__vowel)
 
+        // 상태바 없애기
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.insetsController?.hide(WindowInsets.Type.statusBars())
+        } else {
+            window.setFlags( WindowManager.LayoutParams.FLAG_FULLSCREEN ,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN ) }
+
+        // 버튼값
         bt_name1 = findViewById(R.id.lvowel_a)
         bt_name2 = findViewById(R.id.lvowel_eo)
         bt_name3 = findViewById(R.id.lvowel_u)

@@ -2,9 +2,12 @@ package com.graduate.howtospeak
 
 import android.content.Intent
 import android.content.pm.ActivityInfo
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.WindowInsets
+import android.view.WindowManager
 import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_learn.mtMain1
 import kotlinx.android.synthetic.main.activity_practice__result.*
@@ -28,8 +31,15 @@ class Practice_Result : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         setContentView(R.layout.activity_practice__result)
-        bring_opencvResult()
 
+        // 상태바 없애기
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.insetsController?.hide(WindowInsets.Type.statusBars())
+        } else {
+            window.setFlags( WindowManager.LayoutParams.FLAG_FULLSCREEN ,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN ) }
+
+        // 버튼
         mtMain1.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent) }
@@ -43,6 +53,7 @@ class Practice_Result : AppCompatActivity() {
             startActivity(intent) }
 
 
+        // opencv 결과값
         test_Jsoup = findViewById(R.id.test_view)
         val result = bring_opencvResult()
         test_Jsoup.text = result
@@ -58,7 +69,7 @@ class Practice_Result : AppCompatActivity() {
             try {
                 val doc : Document = Jsoup.connect(searchUrl).get()
                 val contents: Elements = doc.select("body")
-                //contents.text()
+                contents.text()
                 result_opencv = contents.toString()
 
                 Log.d("Test", result_opencv)

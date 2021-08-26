@@ -2,7 +2,10 @@ package com.graduate.howtospeak
 
 import android.content.Intent
 import android.content.pm.ActivityInfo
+import android.os.Build
 import android.os.Bundle
+import android.view.WindowInsets
+import android.view.WindowManager
 import androidx.annotation.RawRes
 import androidx.appcompat.app.AppCompatActivity
 //import kotlinx.android.synthetic.main.activity_learn.mtMain1
@@ -20,13 +23,18 @@ class Practice_RDetail : AppCompatActivity() {
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         setContentView(R.layout.activity_practice__r_detail)
 
+        // 상태바 없애기
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.insetsController?.hide(WindowInsets.Type.statusBars())
+        } else {
+            window.setFlags( WindowManager.LayoutParams.FLAG_FULLSCREEN ,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN ) }
 
-        // 홈 버튼
+
+        // 버튼
         mtMain1.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent) }
-
-        // 뒤로가기 버튼
         mtPractice_result.setOnClickListener {
             val intent = Intent(this, Practice_Result::class.java)
             startActivity(intent) }

@@ -3,8 +3,11 @@ package com.graduate.howtospeak
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.media.MediaPlayer
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.WindowInsets
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_learn.*
@@ -20,6 +23,13 @@ class LearnActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         setContentView(R.layout.activity_learn)
+
+        // 상태바 없애기
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.insetsController?.hide(WindowInsets.Type.statusBars())
+        } else {
+            window.setFlags( WindowManager.LayoutParams.FLAG_FULLSCREEN ,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN ) }
 
         textView_vowel = findViewById(R.id.whichVoweltoLearn) as TextView
         vowel_getby = intent.getStringExtra("vowel_tolearn").toString()
