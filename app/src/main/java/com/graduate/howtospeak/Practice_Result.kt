@@ -68,11 +68,11 @@ class Practice_Result : AppCompatActivity() {
         val bring_html = CoroutineScope(Dispatchers.IO).async {
             try {
                 val doc : Document = Jsoup.connect(searchUrl).get()
-                val contents: Elements = doc.select("body")
-                contents.text()
+                val contents: String = doc.select("body h1").text()
+
                 result_opencv = contents.toString()
 
-                Log.d("Test", result_opencv)
+                Log.d("OpenCv result : ", result_opencv)
                 result_opencv
             } catch (e: Exception) {
                 Log.i("get_result_opencv","error")

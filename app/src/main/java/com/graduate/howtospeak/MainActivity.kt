@@ -70,8 +70,13 @@ class MainActivity : AppCompatActivity() {
         if(checkPermission(CAMERA_PERMISSION, CAMERA_PERMISSION_FLAG)){
             checkPermission(STORAGE_PERMISSION, STORAGE_PERMISSION_FLAG)
         }
+        requirePremission_audio
 
     }
+    private val requirePremission_audio = arrayOf(
+        android.Manifest.permission.RECORD_AUDIO
+    )
+
 
 
 

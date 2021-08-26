@@ -418,7 +418,7 @@ class PracticeActivity : AppCompatActivity() {
         mHandler = Handler(handlerThread.looper)
         val mainHandler = Handler(mainLooper)
         try {
-            val mCameraId = "" + CameraCharacteristics.LENS_FACING_BACK // front-후면 카메라 사용
+            val mCameraId = "" + CameraCharacteristics.LENS_FACING_FRONT // front-후면 카메라 사용
             val mCameraManager = this.getSystemService(CAMERA_SERVICE) as CameraManager
             val characteristics = mCameraManager.getCameraCharacteristics(mCameraId)
             val map = characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP)
@@ -666,7 +666,7 @@ class PracticeActivity : AppCompatActivity() {
                         }
                         var post_bitmap : Bitmap = BitmapFactory.decodeStream(post_inputstream)
                         val post_byteArrayOutputStream = ByteArrayOutputStream()
-                        post_bitmap.compress(Bitmap.CompressFormat.JPEG, 80, post_byteArrayOutputStream)
+                        post_bitmap.compress(Bitmap.CompressFormat.JPEG, 100, post_byteArrayOutputStream)
 
                         val requestBody : RequestBody = RequestBody
                             .create(MediaType.parse("image/*"), post_byteArrayOutputStream.toByteArray())

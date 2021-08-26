@@ -73,7 +73,7 @@
 
             <TextView
                 android:id="@+id/learning_View"
-                android:layout_width="390dp"
+                android:layout_width="324dp"
                 android:layout_height="240dp"
                 android:layout_gravity="left"
 
@@ -90,7 +90,7 @@
 
                 <SurfaceView
                     android:id="@+id/camera_preview"
-                    android:layout_width="390dp"
+                    android:layout_width="334dp"
                     android:layout_height="240dp"
                     android:layout_gravity="right"
 
