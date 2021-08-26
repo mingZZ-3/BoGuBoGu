@@ -37,7 +37,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.google.gson.annotations.SerializedName
 import com.graduate.howtospeak.Retrofit.RetrofitBuilder
 import kotlinx.android.synthetic.main.activity_learn.mtMain1
 import kotlinx.android.synthetic.main.activity_practice.*
@@ -54,6 +53,8 @@ import java.util.*
 import java.util.concurrent.Semaphore
 
 
+//   cd /srv/django_aws_test/media/tmp/
+
 @Suppress("DEPRECATION")
 class PracticeActivity : AppCompatActivity() {
 
@@ -61,7 +62,7 @@ class PracticeActivity : AppCompatActivity() {
     private lateinit var textView_vowel: TextView
     private lateinit var vowel_getby: String
 
-    // surfaceview 시도중 -- done
+    // surfaceview
     private lateinit var mSurfaceView: SurfaceView
     private lateinit var mCameraPreview: CameraPreview
     private lateinit var mSurfaceViewHolder: SurfaceHolder
@@ -96,13 +97,10 @@ class PracticeActivity : AppCompatActivity() {
 
     // voice
     private var mRecorder: MediaRecorder? = null
-
     //private var recordoutput: File? =null
     var recordoutput: String? = null
     private var isRecording: Boolean = false
     private var recordingStopped: Boolean = false
-    // take pic
-    //private var file: File? = null
     // dB
     //private var dBvalue: Int? = 0
 
@@ -191,7 +189,7 @@ class PracticeActivity : AppCompatActivity() {
         bt_rstop.setOnClickListener {
             // recording 중지
             stopRecording()
-            // take pic 실행 
+            // take pic 실행 - done
             takePicture()
 
         }
@@ -218,7 +216,6 @@ class PracticeActivity : AppCompatActivity() {
 
     private fun startRecording(): Boolean {
 
-        /*
         // 기존
         val fileName: String = Date().time.toString() + ".mp3"
         recordoutput =
@@ -240,14 +237,12 @@ class PracticeActivity : AppCompatActivity() {
         } catch (e: IOException) {
             e.printStackTrace()
         }
-         */
 
 
+/*
         // 0804 봉인
         val fileName_voice: String = Date().time.toString() + ".mp3"
         recordoutput = Environment.getExternalStorageDirectory().absolutePath + "/files/" + fileName_voice //내장메모리 밑에 위치
-
-
         try {
             mRecorder = MediaRecorder()
             mRecorder?.setAudioSource((MediaRecorder.AudioSource.MIC))
@@ -277,6 +272,10 @@ class PracticeActivity : AppCompatActivity() {
             isRecording = false
             e.printStackTrace()
         }
+
+ */
+
+
         return false
     }
 
@@ -475,7 +474,7 @@ class PracticeActivity : AppCompatActivity() {
         }
 
     }
-    private val cameraOpenCloseLock = Semaphore(1)
+    //private val cameraOpenCloseLock = Semaphore(1)
 
     @Throws(CameraAccessException::class)
     fun takePreview() {
@@ -500,7 +499,6 @@ class PracticeActivity : AppCompatActivity() {
                     )
                     mPreviewBuilder.set(
                         CaptureRequest.CONTROL_AE_MODE,
-                        //CaptureRequest.CONTROL_AE_MODE_OFF
                         CaptureRequest.CONTROL_AE_MODE_ON_AUTO_FLASH
                     )
                     mSession.setRepeatingRequest(mPreviewBuilder.build(), null, mHandler)
@@ -630,7 +628,6 @@ class PracticeActivity : AppCompatActivity() {
 
         var url: Uri? = null
         var stringUrl: String? = null /* value to be returned */
-        var test_Onputstream : OutputStream //+
 
         try {
             url = cr.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
@@ -639,15 +636,13 @@ class PracticeActivity : AppCompatActivity() {
 
                 try {
                     source.compress(Bitmap.CompressFormat.JPEG, 20, imageOut)
-                    //source.compress(Bitmap.CompressFormat.JPEG, 20, immm)
-                    //test_bitmap.compress(Bitmap.CompressFormat.JPEG, 20, immm)  //+
                     Log.d("retrofit_image_check", "사진 bitmap : "+source)
 
                     Log.d("path 확", url.toString())
                     Log.d("path 확", url.path.toString())
 
 
-                    //시도중_inputstream
+                    // 사진 서버 전송
                     val test_post_image = CoroutineScope(Dispatchers.IO).launch {
                         var post_filename = Date().time.toString()
                         post_filename = "PostImg_" + post_filename + ".jpeg"
@@ -661,7 +656,7 @@ class PracticeActivity : AppCompatActivity() {
                         }
                         var post_bitmap : Bitmap = BitmapFactory.decodeStream(post_inputstream)
                         val post_byteArrayOutputStream = ByteArrayOutputStream()
-                        post_bitmap.compress(Bitmap.CompressFormat.JPEG, 70, post_byteArrayOutputStream)
+                        post_bitmap.compress(Bitmap.CompressFormat.JPEG, 80, post_byteArrayOutputStream)
 
                         val requestBody : RequestBody = RequestBody
                             .create(MediaType.parse("image/*"), post_byteArrayOutputStream.toByteArray())
@@ -678,24 +673,6 @@ class PracticeActivity : AppCompatActivity() {
                             }
                         })
                     }
-
-                    /*
-                    // 코루틴 :  서버 전송
-                    val test_post_image = CoroutineScope(Dispatchers.IO).launch {
-                        var post_filename = Date().time.toString()
-                        post_filename = "PostImg_" + post_filename + ".jpeg"
-                        Log.d("post_img_name : ", post_filename)
-
-                        val requestBody: RequestBody = RequestBody.create(
-                            MediaType.parse("image/jpg"), immm.toByteArray())
-
-                        val uploadFile =
-                            MultipartBody.Part.createFormData("image", post_filename, requestBody)
-
-                        RetrofitBuilder.api.post_image(uploadFile)
-                        Log.d("Post", "line done")
-                    }
-                     */
 
                 }catch (e:Exception){
                     Log.d("Post", "error")

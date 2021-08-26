@@ -18,10 +18,9 @@ import org.jsoup.select.Elements
 import java.lang.Exception
 
 class Practice_Result : AppCompatActivity() {
-    // 크롤링 테스트
+    // opencv
     private lateinit var test_Jsoup: TextView
-    private val searchUrl = "http://13.124.114.1/result/"
-    //private val searchUrl = "http://13.124.114.1/vowel_recognition/"
+    private val searchUrl = "http://13.124.114.1/vowel_recognition/result"
     var result_opencv :String = ""
 
 
