@@ -3,19 +3,20 @@ package com.graduate.howtospeak
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.media.MediaPlayer
+import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.WindowInsets
 import android.view.WindowManager
-import android.widget.Button
-import android.widget.TextView
+import android.widget.*
 import kotlinx.android.synthetic.main.activity_learn.*
 //import kotlinx.android.synthetic.main.activity_main.*
 //import kotlinx.android.synthetic.main.activity_main.mtPractice1
 
 class LearnActivity : AppCompatActivity() {
-    private lateinit var textView_vowel: TextView
+    private lateinit var imageView_vowel: ImageView
+    private lateinit var videoView_vowel: VideoView
 
     private lateinit var vowel_getby: String
 
@@ -24,6 +25,7 @@ class LearnActivity : AppCompatActivity() {
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         setContentView(R.layout.activity_learn)
 
+
         // 상태바 없애기
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             window.insetsController?.hide(WindowInsets.Type.statusBars())
@@ -31,18 +33,80 @@ class LearnActivity : AppCompatActivity() {
             window.setFlags( WindowManager.LayoutParams.FLAG_FULLSCREEN ,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN ) }
 
-        textView_vowel = findViewById(R.id.whichVoweltoLearn) as TextView
+
+        // 학습 내용 사진 변경
+        imageView_vowel = findViewById(R.id.whichVoweltoLearn) as ImageView
         vowel_getby = intent.getStringExtra("vowel_tolearn").toString()
 
         when (vowel_getby) {
-            "a" -> textView_vowel.setText("ㅏ")
-            "eo" -> textView_vowel.setText("ㅓ")
-            "i" -> textView_vowel.setText("ㅣ")
-            "o" -> textView_vowel.setText("ㅗ")
-            "u" -> textView_vowel.setText("ㅜ")
-            "e" -> textView_vowel.setText("ㅐ/ㅔ")
-            else -> textView_vowel.setText("error")
+            "a" -> imageView_vowel.setImageResource(R.drawable.learn_a)
+            "eo" -> imageView_vowel.setImageResource(R.drawable.learn_eo)
+            "i" -> imageView_vowel.setImageResource(R.drawable.learn_i)
+            "o" -> imageView_vowel.setImageResource(R.drawable.learn_o)
+            "u" -> imageView_vowel.setImageResource(R.drawable.learn_u)
+            "e" -> imageView_vowel.setImageResource(R.drawable.learn_e)
+            else -> imageView_vowel.setImageResource(R.drawable.learn_error)
         }
+
+
+        // 학습 영상 변경
+        videoView_vowel = findViewById(R.id.learn_videoView) as VideoView
+        videoView_vowel.setMediaController(MediaController(this))
+        videoView_vowel.requestFocus()
+
+        val video_a = Uri.parse(
+            "android.resource://" + packageName + "/"+R.raw.video_a)
+        val video_eo = Uri.parse(
+            "android.resource://" + packageName + "/"+R.raw.video_eo)
+        val video_i = Uri.parse(
+            "android.resource://" + packageName + "/"+R.raw.video_i)
+        val video_o = Uri.parse(
+            "android.resource://" + packageName + "/"+R.raw.video_o)
+        val video_u = Uri.parse(
+            "android.resource://" + packageName + "/"+R.raw.video_u)
+        val video_e = Uri.parse(
+            "android.resource://" + packageName + "/"+R.raw.video_e)
+        val video_uri_test = Uri.parse(
+            "android.resource://" + packageName + "/"+R.raw.video_test_source)
+
+        when(vowel_getby) {
+            "a" -> {
+                videoView_vowel.setVideoURI(video_a)
+                videoView_vowel.setMediaController(MediaController(this))
+                videoView_vowel.requestFocus()
+            }
+            "eo" -> {
+                videoView_vowel.setVideoURI(video_eo)
+                videoView_vowel.setMediaController(MediaController(this))
+                videoView_vowel.requestFocus()
+            }
+            "i" -> {
+                videoView_vowel.setVideoURI(video_i)
+                videoView_vowel.setMediaController(MediaController(this))
+                videoView_vowel.requestFocus()
+            }
+            "o" -> {
+                videoView_vowel.setVideoURI(video_o)
+                videoView_vowel.setMediaController(MediaController(this))
+                videoView_vowel.requestFocus()
+            }
+            "u" -> {
+                videoView_vowel.setVideoURI(video_u)
+                videoView_vowel.setMediaController(MediaController(this))
+                videoView_vowel.requestFocus()
+            }
+            "e" -> {
+                videoView_vowel.setVideoURI(video_e)
+                videoView_vowel.setMediaController(MediaController(this))
+                videoView_vowel.requestFocus()
+            }
+            else -> {
+                videoView_vowel.setVideoURI(video_uri_test)
+                videoView_vowel.setMediaController(MediaController(this))
+                videoView_vowel.requestFocus()
+            }
+        }
+
 
         // 기본
         mtMain1.setOnClickListener {
@@ -53,19 +117,13 @@ class LearnActivity : AppCompatActivity() {
             val intent = Intent(this, Learn_Vowel::class.java)
             startActivity(intent) }
 
-        // 음성 & 영상 재생
-        learnsound_play.setOnClickListener {
-            val mediaPlayer = MediaPlayer.create(this, R.raw.geu).start()
-            startActivity(intent) }
-
         learnVideo_play.setOnClickListener {
-            val mediaPlayer = MediaPlayer.create(this, R.raw.geu).start()
-            startActivity(intent) }
+            videoView_vowel.start()
+            }
 
-
-
+        learnVideo_pause.setOnClickListener {
+            videoView_vowel.pause() }
 
     }
-
 
 }

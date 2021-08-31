@@ -7,6 +7,7 @@ import android.content.pm.PackageManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.WindowInsets
 import android.view.WindowManager
 import androidx.core.app.ActivityCompat
@@ -14,9 +15,10 @@ import androidx.core.content.ContextCompat
 import android.widget.Toast
 //import com.graduate.howtospeak.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_main.*
+import java.security.Permission
+import kotlin.math.log10
 
 class MainActivity : AppCompatActivity() {
-
 
     //Permission
     private val CAMERA_PERMISSION = arrayOf(Manifest.permission.CAMERA)
@@ -41,24 +43,10 @@ class MainActivity : AppCompatActivity() {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN ) }
 
 
-/*
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        val view = binding.root
-
- */
-
-
-        /* learn_con1.setOnClickListener {
-            val intent = Intent(this, Learn_Consonant::class.java)
-            startActivity(intent) } */
-
+        // 버튼
         learn_vowel1.setOnClickListener {
             val intent = Intent(this, Learn_Vowel::class.java)
             startActivity(intent) }
-
-        /* practice_con1.setOnClickListener {
-            val intent = Intent(this, Practice_Consonant::class.java)
-            startActivity(intent) } */
 
         practice_vowel1.setOnClickListener {
             val intent = Intent(this, Practice_Vowel::class.java)
@@ -69,18 +57,30 @@ class MainActivity : AppCompatActivity() {
         // permission
         if(checkPermission(CAMERA_PERMISSION, CAMERA_PERMISSION_FLAG)){
             checkPermission(STORAGE_PERMISSION, STORAGE_PERMISSION_FLAG)
+
         }
-        requirePremission_audio
+        requirePremission_audio()
+
+
+        Log.d("stt_cal_max", (20* (log10(10.0/0.00002))).toString())
+        Log.d("stt_cal-min", (20* (log10(-2.0/0.00002))).toString())
+    }
+
+
+
+    // ================= permission
+    private fun requirePremission_audio() {
+        if (Build.VERSION.SDK_INT >= 23 && ContextCompat
+                .checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
+            != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                arrayOf(Manifest.permission.RECORD_AUDIO), 0)
+        }
+
 
     }
-    private val requirePremission_audio = arrayOf(
-        android.Manifest.permission.RECORD_AUDIO
-    )
 
 
-
-
-    //permission
     private fun checkPermission(permissions : Array<out String>, flag : Int):Boolean{
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             for (permission in permissions) {
@@ -96,6 +96,7 @@ class MainActivity : AppCompatActivity() {
         }
         return true
     }
+
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -125,6 +126,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // =====================================
 
 
 
