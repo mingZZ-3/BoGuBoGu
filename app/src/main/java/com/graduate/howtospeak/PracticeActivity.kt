@@ -57,6 +57,8 @@ import kotlin.math.roundToInt
 
 //   cd /srv/django_aws_test/media/tmp/
 
+
+
 @Suppress("DEPRECATION")
 class PracticeActivity : AppCompatActivity() {
 
@@ -108,9 +110,9 @@ class PracticeActivity : AppCompatActivity() {
     private lateinit var stt_decibelbar: ProgressBar
     private var stt_dB : Int = 0
     // Image/stt result send to Activity
-    var stringUrl: String? = null
-    var stt_result: String = ""
-    //val intent_test = Intent(this, Practice_Result::class.java)
+    private var stringUrl: String = ""
+    private var stt_result: String = ""
+
 
     // ================================== onCreate ==================================== //
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -127,7 +129,6 @@ class PracticeActivity : AppCompatActivity() {
         stt_intent.putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS, true)
         setListener()
 
-        //
 
         // surface Preview
         initSensor()
@@ -144,7 +145,6 @@ class PracticeActivity : AppCompatActivity() {
 
         when (vowel_getby) {
             "a" -> textView_vowel.text = "ㅏ 학습 영상 영역"
-            "eo" -> textView_vowel.text = "ㅓ 학습 영상 영역"
             "i" -> textView_vowel.text = "ㅣ 학습 영상 영역"
             "o" -> textView_vowel.text = "ㅗ 학습 영상 영역"
             "u" -> textView_vowel.text = "ㅜ 학습 영상 영역"
@@ -229,6 +229,26 @@ class PracticeActivity : AppCompatActivity() {
         // 연습 종료 버튼 - stop recording & Take picture
         bt_rstop.setOnClickListener {
             // recording 중지
+            CoroutineScope(Dispatchers.Main).async {
+                async {
+                    stopRecording()
+                    takePicture()
+                    delay(1000)
+                }.await()
+
+                async {
+                    intent_test.putExtra("Vowel_bt", vowel_getby)
+                    intent_test.putExtra("STT_Result", stt_result)
+                    intent_test.putExtra("Record_path", recordoutput)
+                    Log.d("record_path2", recordoutput.toString())
+                    intent_test.putExtra("ImageUri", stringUrl)
+                    Log.d("uri_check", stringUrl)
+                }.await()
+            }
+
+
+            /*
+            // recording 중지
             CoroutineScope(Dispatchers.Main).launch {
                 stopRecording()
             }
@@ -239,8 +259,11 @@ class PracticeActivity : AppCompatActivity() {
             // image intent
             intent_test.putExtra("Vowel_bt", vowel_getby)
             intent_test.putExtra("ImageUri", stringUrl)
+            Log.d("uri_check", stringUrl)
             intent_test.putExtra("STT_Result", stt_result)
-
+            intent_test.putExtra("Record_path", recordoutput)
+            Log.d("recod_path2", recordoutput.toString())
+             */
         }
     }
 
@@ -263,6 +286,8 @@ class PracticeActivity : AppCompatActivity() {
         val fileName: String = Date().time.toString() + ".mp3"
         recordoutput =
             Environment.getExternalStorageDirectory().absolutePath + "/Download/" + fileName //내장메모리 밑에 위치
+
+        Log.d("recod_path1", recordoutput.toString())
 
         mRecorder = MediaRecorder()
         mRecorder?.setAudioSource((MediaRecorder.AudioSource.MIC))
@@ -600,12 +625,12 @@ class PracticeActivity : AppCompatActivity() {
         }
     }
 
-    open fun insertImage(
+    private fun insertImage(
         cr: ContentResolver,
         source: Bitmap?,
         title: String?,
         description: String?
-    ) {
+    ): String {
         val values = ContentValues()
 
         values.put(MediaStore.Images.Media.TITLE, title)
@@ -619,10 +644,14 @@ class PracticeActivity : AppCompatActivity() {
         var url: Uri? = null
         //var stringUrl: String? = null /* value to be returned */
 
+
         try {
             url = cr.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
+
             stringUrl = url.toString()
             Log.d("image_uri_send", stringUrl!!)
+            //intent_test.putExtra("ImageUri", stringUrl)
+
 
             if (source != null) {
                 val imageOut: OutputStream? = cr.openOutputStream(url!!)
@@ -677,6 +706,8 @@ class PracticeActivity : AppCompatActivity() {
                 url = null
             }
         }
+
+        return stringUrl
     }
 
 

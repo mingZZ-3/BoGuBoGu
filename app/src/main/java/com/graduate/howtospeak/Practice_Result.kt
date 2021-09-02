@@ -1,9 +1,11 @@
 package com.graduate.howtospeak
 
+import android.content.ContentResolver
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -46,6 +48,10 @@ class Practice_Result : AppCompatActivity() {
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         setContentView(R.layout.activity_practice__result)
 
+        // record path
+        val recordPath = intent.getStringExtra("Record_path")
+        Log.d("record_path_inR", recordPath.toString())
+
         // 상태바 없애기
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             window.insetsController?.hide(WindowInsets.Type.statusBars())
@@ -60,6 +66,10 @@ class Practice_Result : AppCompatActivity() {
 
         mtRDetail1.setOnClickListener {
             val intent = Intent(this, Practice_RDetail::class.java)
+
+            intent.putExtra("Record_path_send", recordPath.toString())
+
+
             startActivity(intent) }
 
         mtVowelPractice.setOnClickListener {
@@ -106,7 +116,6 @@ class Practice_Result : AppCompatActivity() {
             imageview_opencv = findViewById(R.id.mouthResult)
             when(result_opencv) {
                 "a" -> imageview_opencv.setImageResource(R.drawable.mouth_a)
-                "eo" -> imageview_opencv.setImageResource(R.drawable.mouth_eo)
                 "i" -> imageview_opencv.setImageResource(R.drawable.mouth_i)
                 "o" -> imageview_opencv.setImageResource(R.drawable.mouth_o)
                 "u" -> imageview_opencv.setImageResource(R.drawable.mouth_u)
@@ -118,7 +127,6 @@ class Practice_Result : AppCompatActivity() {
             imageview_stt = findViewById(R.id.voiceResult)
             when(result_stt) {
                 "[아]" -> imageview_stt.setImageResource(R.drawable.voice_a)
-                "[어]" -> imageview_stt.setImageResource(R.drawable.voice_eo)
                 "[이]" -> imageview_stt.setImageResource(R.drawable.voice_i)
                 "[오]" -> imageview_stt.setImageResource(R.drawable.voice_o)
                 "[우]" -> imageview_stt.setImageResource(R.drawable.voice_u)
@@ -140,12 +148,9 @@ class Practice_Result : AppCompatActivity() {
                     } else {
                         imageview_totall.setImageResource(R.drawable.result_tryagain)
                     }
-                }
-                "eo" -> {
-                    if (result_opencv == "eo" && result_stt == "[어]") {
-                        imageview_totall.setImageResource(R.drawable.result_goodjob)
-                    } else {
-                        imageview_totall.setImageResource(R.drawable.result_tryagain)
+
+                    if (result_stt == "") {
+                        imageview_totall.setImageResource(R.drawable.result_error)
                     }
                 }
                 "i" -> {
@@ -154,6 +159,9 @@ class Practice_Result : AppCompatActivity() {
                     } else {
                         imageview_totall.setImageResource(R.drawable.result_tryagain)
                     }
+                    if (result_stt == "") {
+                        imageview_totall.setImageResource(R.drawable.result_error)
+                    }
                 }
                 "o" -> {
                     if (result_opencv == "o" && result_stt == "[오]") {
@@ -161,12 +169,18 @@ class Practice_Result : AppCompatActivity() {
                     } else {
                         imageview_totall.setImageResource(R.drawable.result_tryagain)
                     }
+                    if (result_stt == "") {
+                        imageview_totall.setImageResource(R.drawable.result_error)
+                    }
                 }
                 "u" -> {
                     if (result_opencv == "u" && result_stt == "[우]") {
                         imageview_totall.setImageResource(R.drawable.result_goodjob)
                     } else {
                         imageview_totall.setImageResource(R.drawable.result_tryagain)
+                    }
+                    if (result_stt == "") {
+                        imageview_totall.setImageResource(R.drawable.result_error)
                     }
                 }
 
@@ -176,12 +190,18 @@ class Practice_Result : AppCompatActivity() {
                     } else {
                         imageview_totall.setImageResource(R.drawable.result_tryagain)
                     }
+                    if (result_stt == "") {
+                        imageview_totall.setImageResource(R.drawable.result_error)
+                    }
                 }
                 "e" -> {
                     if (result_opencv == "e" && result_stt == "[애]") {
                         imageview_totall.setImageResource(R.drawable.result_goodjob)
                     } else {
                         imageview_totall.setImageResource(R.drawable.result_tryagain)
+                    }
+                    if (result_stt == "") {
+                        imageview_totall.setImageResource(R.drawable.result_error)
                     }
                 }
                 "e" -> {
@@ -190,18 +210,22 @@ class Practice_Result : AppCompatActivity() {
                     } else {
                         imageview_totall.setImageResource(R.drawable.result_tryagain)
                     }
+                    if (result_stt == "") {
+                        imageview_totall.setImageResource(R.drawable.result_error)
+                    }
                 }
                 else -> {
-                    imageview_totall.setImageResource(R.drawable.voice_error)
+                    imageview_totall.setImageResource(R.drawable.result_error)
                 }
             }
 
 
             // ImageView
             imageView_result = findViewById(R.id.imageResult_view)
-            if (intent.hasExtra("imageuri")) {
+            if (intent.hasExtra("ImageUri")) {
                 imageResult_string = intent.getStringExtra("ImageUri").toString()
                 imageResult_uri = Uri.parse(imageResult_string)
+                Log.d("image_uri_send_test", imageResult_string)
                 imageView_result.setImageURI(imageResult_uri)
             } else {
                 Log.d("이미지 uri 받기", "error")
