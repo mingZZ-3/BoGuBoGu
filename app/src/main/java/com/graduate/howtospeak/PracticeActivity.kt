@@ -33,6 +33,7 @@ import android.view.SurfaceHolder
 import android.view.SurfaceView
 import android.view.WindowInsets
 import android.view.WindowManager
+import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
@@ -63,7 +64,7 @@ import kotlin.math.roundToInt
 class PracticeActivity : AppCompatActivity() {
 
     // ======== 버튼 값 전달
-    private lateinit var textView_vowel: TextView
+    private lateinit var assist_view: ImageView
     private lateinit var vowel_getby: String
 
     // surfaceview
@@ -139,17 +140,17 @@ class PracticeActivity : AppCompatActivity() {
         stt_decibelbar = findViewById(R.id.stt_decibel) as ProgressBar
 
 
-        // vowel 버튼값 전달
-        textView_vowel = findViewById(R.id.learning_View) as TextView
+        // 학습 보조 이미지
+        assist_view = findViewById(R.id.assist_Imageview)
         vowel_getby = intent.getStringExtra("vowel_tolearn").toString()
 
         when (vowel_getby) {
-            "a" -> textView_vowel.text = "ㅏ 학습 영상 영역"
-            "i" -> textView_vowel.text = "ㅣ 학습 영상 영역"
-            "o" -> textView_vowel.text = "ㅗ 학습 영상 영역"
-            "u" -> textView_vowel.text = "ㅜ 학습 영상 영역"
-            "e" -> textView_vowel.text = "ㅐ/ㅔ 학습 영상 영역"
-            else -> textView_vowel.text = "error"
+            "a" -> assist_view.setImageResource(R.drawable.assist_a)
+            "i" -> assist_view.setImageResource(R.drawable.assist_i)
+            "o" -> assist_view.setImageResource(R.drawable.assist_o)
+            "u" -> assist_view.setImageResource(R.drawable.assist_u)
+            "e" -> assist_view.setImageResource(R.drawable.assist_e)
+            else -> assist_view.setImageResource(R.drawable.assist_a)
         }
 
         // 상태바 없애기
@@ -410,7 +411,7 @@ class PracticeActivity : AppCompatActivity() {
         mHandler = Handler(handlerThread.looper)
         val mainHandler = Handler(mainLooper)
         try {
-            val mCameraId = "" + CameraCharacteristics.LENS_FACING_BACK // front-후면 카메라 사용
+            val mCameraId = "" + CameraCharacteristics.LENS_FACING_FRONT // front-후면 카메라 사용
             val mCameraManager = this.getSystemService(CAMERA_SERVICE) as CameraManager
             val characteristics = mCameraManager.getCameraCharacteristics(mCameraId)
             val map = characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP)

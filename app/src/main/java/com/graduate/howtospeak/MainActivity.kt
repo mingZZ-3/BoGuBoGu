@@ -41,6 +41,7 @@ class MainActivity : AppCompatActivity() {
         } else {
             window.setFlags( WindowManager.LayoutParams.FLAG_FULLSCREEN ,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN ) }
+        mtManual.bringToFront()
 
 
         // 버튼
@@ -52,6 +53,9 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, Practice_Vowel::class.java)
             startActivity(intent) }
 
+        mtManual.setOnClickListener {
+            val intent = Intent(this, ManualActivity::class.java)
+            startActivity(intent) }
 
 
         // permission

@@ -38,6 +38,7 @@
 
                 app:srcCompat="@drawable/bt_back" />
 
+
             <ImageButton
                 android:id="@+id/mtMain1"
                 android:layout_width="2dp"
@@ -57,8 +58,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
 
-                android:textColor="#FF000000"
-                android:text="사용자 목소리"/>
+                android:layout_marginTop="5dp"
+                android:text="사용자"
+                android:textColor="#FF000000" />
 
             <com.graduate.howtospeak.Barvisualizer
                  android:id="@+id/barVisualizerPanel1"
@@ -70,7 +72,7 @@
                 android:layout_height="30dp"
 
                 android:textColor="#FF000000"
-                android:text="표준 목소리"/>
+                android:text="표준"/>
 
              <com.graduate.howtospeak.Barvisualizer
                  android:id="@+id/barVisualizerPanel2"
@@ -78,16 +80,23 @@
                  android:layout_height="98dp" />
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp" >
-               <!--
-                <ImageView
-                    android:id="@+id/voicehight"
-                    android:layout_width="701dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    app:srcCompat="@drawable/voicebar" />
-                    -->
+                android:layout_width="63dp"
+                android:layout_height="37dp"
+                android:layout_gravity="right">
+
+                <!--
+                <ImageButton
+                    android:id="@+id/play_spectrum"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="5dp"
+
+                    android:adjustViewBounds="true"
+                    android:background="#FFFFFF"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/play_button" />
+                -->
+
 
             </LinearLayout>
 

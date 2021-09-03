@@ -22,6 +22,20 @@
             android:layout_width="439dp"
             android:layout_height="match_parent">
 
+            <ImageButton
+                android:id="@+id/mtManual"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="top"
+                android:adjustViewBounds="true"
+                android:background="#FFFFFF"
+                android:scaleType="fitCenter"
+
+                app:srcCompat="@drawable/manual_bt" />
+
             <ImageView
                 android:id="@+id/imageView2"
                 android:layout_width="wrap_content"

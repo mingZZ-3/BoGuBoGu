@@ -87,13 +87,13 @@
                 android:id="@+id/lvowel_o"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
-                android:tag="o"
-
                 android:layout_gravity="left"
+                android:layout_marginLeft="40dp"
+
                 android:adjustViewBounds="true"
                 android:background="#FFFFFF"
                 android:scaleType="fitCenter"
+                android:tag="o"
 
                 app:srcCompat="@drawable/o_bt2" />
 
@@ -101,12 +101,12 @@
                 android:id="@+id/lvowel_i"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:tag="i"
-
                 android:layout_gravity="center"
+
                 android:adjustViewBounds="true"
                 android:background="#FFFFFF"
                 android:scaleType="fitCenter"
+                android:tag="i"
 
                 app:srcCompat="@drawable/i_bt" />
 
@@ -114,13 +114,13 @@
                 android:id="@+id/lvowel_e"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="11dp"
-                android:tag="e"
-
                 android:layout_gravity="right"
+                android:layout_marginRight="11dp"
+
                 android:adjustViewBounds="true"
                 android:background="#FFFFFF"
                 android:scaleType="fitCenter"
+                android:tag="e"
 
                 app:srcCompat="@drawable/e_bt2" />
 

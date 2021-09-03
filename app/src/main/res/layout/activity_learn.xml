@@ -62,7 +62,7 @@
             android:orientation="vertical">
 
             <FrameLayout
-                android:layout_width="576dp"
+                android:layout_width="448dp"
                 android:layout_height="25dp"
                 android:layout_gravity="right"
 
@@ -127,16 +127,13 @@
 
                 <ImageView
                     android:id="@+id/whichVoweltoLearn"
-                    android:layout_width="100dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="5dp"
 
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
-                    android:gravity="center_horizontal"
-
-                    android:text=""
-                    android:textColor="#000000"
+                    android:scaleType="centerInside"
 
                     android:textSize="200sp"
                     app:srcCompat="@drawable/learn_a" />

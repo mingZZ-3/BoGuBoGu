@@ -70,7 +70,9 @@ class Practice_Result : AppCompatActivity() {
             intent.putExtra("Record_path_send", recordPath.toString())
             intent.putExtra("Rvowel_bt", bt_vowel)
             intent.putExtra("RSTT_Result", result_stt)
-            intent.putExtra("RImageUri", imageResult_string)
+            if (intent.hasExtra("RImageUri")) {
+                intent.putExtra("RImageUri", imageResult_string)
+            }
 
             startActivity(intent) }
 

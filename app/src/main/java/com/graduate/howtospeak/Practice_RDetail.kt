@@ -21,6 +21,8 @@ class Practice_RDetail : AppCompatActivity() {
     // record path
     lateinit var recordPath_uri: Uri
     lateinit var addpath: String
+    // 표준 음성
+    var vowel_button: String? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,6 +34,8 @@ class Practice_RDetail : AppCompatActivity() {
         var vowelR = intent.getStringExtra("Rvowel_bt")
         var sttR = intent.getStringExtra("RSTT_Result")
         var imageR = intent.getStringExtra("RImageUri")
+        val vowel_bt = intent.getStringExtra("Rvowel_bt")
+        vowel_button = vowel_bt
 
         // record path 설정
         val recordPath_receive = intent.getStringExtra("Record_path_send")
@@ -55,6 +59,7 @@ class Practice_RDetail : AppCompatActivity() {
         mtMain1.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent) }
+
         mtPractice_result.setOnClickListener {
             val intent = Intent(this, Practice_Result::class.java)
 
@@ -63,6 +68,19 @@ class Practice_RDetail : AppCompatActivity() {
             intent.putExtra("ImageUri", imageR)
 
             startActivity(intent) }
+
+        /*
+        play_spectrum.setOnClickListener {
+            if(recordPath_uri != null) {
+                audioPlayer1 = Visualizerutil()
+
+            } else {
+                Log.e("record_Path", "user voice error")
+            }
+            audioPlayer2 = Visualizerutil()
+        }
+
+         */
 
 
         // 음성 시각화
@@ -79,7 +97,16 @@ class Practice_RDetail : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         startPlayingAudio(recordPath_uri)
-        startPlayingAudioId(R.raw.geu)
+
+        when (vowel_button) {
+            "a" -> startPlayingAudioId(R.raw.voice_a)
+            "i" -> startPlayingAudioId(R.raw.voice_i)
+            "o" -> startPlayingAudioId(R.raw.voice_o)
+            "u" -> startPlayingAudioId(R.raw.voice_u)
+            "e" -> startPlayingAudioId(R.raw.voice_e)
+            else -> startPlayingAudioId(R.raw.voice_a)
+        }
+
     }
 
     // 정지
