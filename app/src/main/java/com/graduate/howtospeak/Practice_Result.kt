@@ -68,7 +68,9 @@ class Practice_Result : AppCompatActivity() {
             val intent = Intent(this, Practice_RDetail::class.java)
 
             intent.putExtra("Record_path_send", recordPath.toString())
-
+            intent.putExtra("Rvowel_bt", bt_vowel)
+            intent.putExtra("RSTT_Result", result_stt)
+            intent.putExtra("RImageUri", imageResult_string)
 
             startActivity(intent) }
 
@@ -79,10 +81,6 @@ class Practice_Result : AppCompatActivity() {
 
         // 결과 화면
         bring_opencvResult()
-        //Log.d("OpenCv result3 : ", result_opencv)
-
-
-
     }
 
     //====== openCV & STT 결과
@@ -105,7 +103,6 @@ class Practice_Result : AppCompatActivity() {
         // 메인 화면 결과 반영
         CoroutineScope(Dispatchers.Main).launch {
             result_opencv = bring_html.await().toString()
-            //Log.d("OpenCv result2 : ", result_opencv)
 
             //result_opencv
             bt_vowel = intent.getStringExtra("Vowel_bt").toString()  // button
@@ -128,8 +125,13 @@ class Practice_Result : AppCompatActivity() {
             when(result_stt) {
                 "[아]" -> imageview_stt.setImageResource(R.drawable.voice_a)
                 "[이]" -> imageview_stt.setImageResource(R.drawable.voice_i)
+
                 "[오]" -> imageview_stt.setImageResource(R.drawable.voice_o)
+                "[오오]" -> imageview_stt.setImageResource(R.drawable.voice_o)
+
                 "[우]" -> imageview_stt.setImageResource(R.drawable.voice_u)
+                "[우우]" -> imageview_stt.setImageResource(R.drawable.voice_u)
+                "[우와]" -> imageview_stt.setImageResource(R.drawable.voice_u)
 
                 "[에]" -> imageview_stt.setImageResource(R.drawable.voice_e)
                 "[애]" -> imageview_stt.setImageResource(R.drawable.voice_e)
@@ -148,10 +150,6 @@ class Practice_Result : AppCompatActivity() {
                     } else {
                         imageview_totall.setImageResource(R.drawable.result_tryagain)
                     }
-
-                    if (result_stt == "") {
-                        imageview_totall.setImageResource(R.drawable.result_error)
-                    }
                 }
                 "i" -> {
                     if (result_opencv == "i" && result_stt == "[이]") {
@@ -159,28 +157,28 @@ class Practice_Result : AppCompatActivity() {
                     } else {
                         imageview_totall.setImageResource(R.drawable.result_tryagain)
                     }
-                    if (result_stt == "") {
-                        imageview_totall.setImageResource(R.drawable.result_error)
-                    }
                 }
                 "o" -> {
                     if (result_opencv == "o" && result_stt == "[오]") {
-                        imageview_totall.setImageResource(R.drawable.result_goodjob)
-                    } else {
+                        imageview_totall.setImageResource(R.drawable.result_goodjob) }
+                    if(result_opencv == "o" && result_stt == "[오오]"){
+                        imageview_totall.setImageResource(R.drawable.result_goodjob) }
+                    else {
                         imageview_totall.setImageResource(R.drawable.result_tryagain)
-                    }
-                    if (result_stt == "") {
-                        imageview_totall.setImageResource(R.drawable.result_error)
                     }
                 }
                 "u" -> {
                     if (result_opencv == "u" && result_stt == "[우]") {
                         imageview_totall.setImageResource(R.drawable.result_goodjob)
-                    } else {
-                        imageview_totall.setImageResource(R.drawable.result_tryagain)
                     }
-                    if (result_stt == "") {
-                        imageview_totall.setImageResource(R.drawable.result_error)
+                    if (result_opencv == "u" && result_stt == "[우우]") {
+                        imageview_totall.setImageResource(R.drawable.result_goodjob)
+                    }
+                    if (result_opencv == "u" && result_stt == "[우와]") {
+                        imageview_totall.setImageResource(R.drawable.result_goodjob)
+                    }
+                    else {
+                        imageview_totall.setImageResource(R.drawable.result_tryagain)
                     }
                 }
 
@@ -190,18 +188,12 @@ class Practice_Result : AppCompatActivity() {
                     } else {
                         imageview_totall.setImageResource(R.drawable.result_tryagain)
                     }
-                    if (result_stt == "") {
-                        imageview_totall.setImageResource(R.drawable.result_error)
-                    }
                 }
                 "e" -> {
                     if (result_opencv == "e" && result_stt == "[애]") {
                         imageview_totall.setImageResource(R.drawable.result_goodjob)
                     } else {
                         imageview_totall.setImageResource(R.drawable.result_tryagain)
-                    }
-                    if (result_stt == "") {
-                        imageview_totall.setImageResource(R.drawable.result_error)
                     }
                 }
                 "e" -> {
@@ -210,12 +202,9 @@ class Practice_Result : AppCompatActivity() {
                     } else {
                         imageview_totall.setImageResource(R.drawable.result_tryagain)
                     }
-                    if (result_stt == "") {
-                        imageview_totall.setImageResource(R.drawable.result_error)
-                    }
                 }
                 else -> {
-                    imageview_totall.setImageResource(R.drawable.result_error)
+                    imageview_totall.setImageResource(R.drawable.result_tryagain)
                 }
             }
 
@@ -235,21 +224,4 @@ class Practice_Result : AppCompatActivity() {
 
     }
 
-
-
-    /*
-
-    // uri --> bitmap
-    private fun getImageUri(context: Context, inImage: Bitmap): Uri? {
-        val bytes = ByteArrayOutputStream()
-        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
-        val path: String = MediaStore.Images.Media.insertImage(
-            context.getContentResolver(),
-            inImage,
-            "Title",
-            null
-        )
-        return Uri.parse(path)
-    }
-    */
 }

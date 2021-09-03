@@ -30,9 +30,10 @@ class Visualizerutil {
                 completedCallback()
             }
 
-            this.isLooping = true
+            //this.setVolume(0F,0F)
+            //this.isLooping = true
             this.start()
-            this.isLooping
+            //this.isLooping
         }
     }
 
@@ -48,9 +49,10 @@ class Visualizerutil {
                         completedCallback()
                     }
 
-                    this.isLooping = true
+                    //this.setVolume(0F,0F)
+                    //this.isLooping = true
                     this.start()
-                    this.isLooping
+                    //this.isLooping
                 }
         }
 

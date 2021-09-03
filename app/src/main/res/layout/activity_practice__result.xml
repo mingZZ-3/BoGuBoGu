@@ -41,62 +41,46 @@
 
             <ImageView
                 android:id="@+id/imageResult_view"
-                android:layout_width="431dp"
+                android:layout_width="411dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="left"
-                android:layout_marginLeft="15dp" />
+                android:layout_marginLeft="5dp" />
 
             <LinearLayout
-                android:layout_width="473dp"
+                android:layout_width="346dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="right"
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:layout_width="473dp"
+                    android:layout_width="match_parent"
                     android:layout_height="121dp"
                     android:layout_gravity="right"
                     android:orientation="horizontal">
 
-                    <FrameLayout
-                        android:layout_width="250dp"
+                    <ImageView
+                        android:id="@+id/mouthResult"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_marginRight="5dp"
-
                         android:layout_marginBottom="5dp"
-                        android:layout_weight="1">
+                        android:layout_weight="1"
+                        android:scaleType="centerInside" />
 
-                        <ImageView
-                            android:id="@+id/mouthResult"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            />
-                    </FrameLayout>
-
-                    <FrameLayout
-                        android:layout_width="250dp"
+                    <ImageView
+                        android:id="@+id/voiceResult"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_weight="2"
-
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginBottom="5dp">
-                        <ImageView
-                            android:id="@+id/voiceResult"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-                    </FrameLayout>
+                        android:layout_marginBottom="5dp"
+                        android:layout_weight="1"
+                        android:scaleType="centerInside" />
                 </LinearLayout>
 
-                <FrameLayout
+                <ImageView
+                    android:id="@+id/totallResult"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-
-                    android:layout_marginTop="5dp">
-                    <ImageView
-                        android:id="@+id/totallResult"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                </FrameLayout>
+                    android:layout_marginTop="5dp"
+                    android:scaleType="centerInside" />
 
             </LinearLayout>
 

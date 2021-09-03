@@ -80,12 +80,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp" >
+               <!--
                 <ImageView
                     android:id="@+id/voicehight"
                     android:layout_width="701dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center"
                     app:srcCompat="@drawable/voicebar" />
+                    -->
 
             </LinearLayout>
 

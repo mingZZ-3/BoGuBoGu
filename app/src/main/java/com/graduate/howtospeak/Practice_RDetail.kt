@@ -28,6 +28,11 @@ class Practice_RDetail : AppCompatActivity() {
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         setContentView(R.layout.activity_practice__r_detail)
 
+        // 뒤로 돌아갈때 값 남기기
+        var vowelR = intent.getStringExtra("Rvowel_bt")
+        var sttR = intent.getStringExtra("RSTT_Result")
+        var imageR = intent.getStringExtra("RImageUri")
+
         // record path 설정
         val recordPath_receive = intent.getStringExtra("Record_path_send")
         if (recordPath_receive != null) {
@@ -53,7 +58,9 @@ class Practice_RDetail : AppCompatActivity() {
         mtPractice_result.setOnClickListener {
             val intent = Intent(this, Practice_Result::class.java)
 
-
+            intent.putExtra("Vowel_bt", vowelR)
+            intent.putExtra("STT_Result", sttR)
+            intent.putExtra("ImageUri", imageR)
 
             startActivity(intent) }
 

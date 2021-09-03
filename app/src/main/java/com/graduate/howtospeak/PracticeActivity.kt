@@ -165,17 +165,6 @@ class PracticeActivity : AppCompatActivity() {
             startActivity(intent)
         }
         mtResult1.setOnClickListener {
-            /*
-            val intent = Intent(this, Practice_Result::class.java)
-            intent.putExtra("Vowel_bt", vowel_getby)
-            if (intent.hasExtra("ImageUri") && intent.hasExtra("STT_Result")) {
-                intent.putExtra("ImageUri", stringUrl)
-                intent.putExtra("STT_Result", stt_result)
-            } else {
-                Log.d("Send value", "error")
-            }
-            //startActivity(intent)
-             */
             startActivity(intent_test)
         }
         mtPractice_vowel.setOnClickListener {
@@ -245,25 +234,6 @@ class PracticeActivity : AppCompatActivity() {
                     Log.d("uri_check", stringUrl)
                 }.await()
             }
-
-
-            /*
-            // recording 중지
-            CoroutineScope(Dispatchers.Main).launch {
-                stopRecording()
-            }
-
-            // take pic 실행
-            takePicture()
-
-            // image intent
-            intent_test.putExtra("Vowel_bt", vowel_getby)
-            intent_test.putExtra("ImageUri", stringUrl)
-            Log.d("uri_check", stringUrl)
-            intent_test.putExtra("STT_Result", stt_result)
-            intent_test.putExtra("Record_path", recordoutput)
-            Log.d("recod_path2", recordoutput.toString())
-             */
         }
     }
 
@@ -440,7 +410,7 @@ class PracticeActivity : AppCompatActivity() {
         mHandler = Handler(handlerThread.looper)
         val mainHandler = Handler(mainLooper)
         try {
-            val mCameraId = "" + CameraCharacteristics.LENS_FACING_FRONT // front-후면 카메라 사용
+            val mCameraId = "" + CameraCharacteristics.LENS_FACING_BACK // front-후면 카메라 사용
             val mCameraManager = this.getSystemService(CAMERA_SERVICE) as CameraManager
             val characteristics = mCameraManager.getCameraCharacteristics(mCameraId)
             val map = characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP)
