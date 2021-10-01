@@ -69,7 +69,6 @@ class PracticeActivity : AppCompatActivity() {
 
     // surfaceview
     private lateinit var mSurfaceView: SurfaceView
-    //private lateinit var mCameraPreview: CameraPreview
     private lateinit var mSurfaceViewHolder: SurfaceHolder
     private lateinit var mImageReader: ImageReader
     private var mCameraDevice: CameraDevice? = null
@@ -121,7 +120,7 @@ class PracticeActivity : AppCompatActivity() {
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         setContentView(R.layout.activity_practice)
 
-        val intent_test = Intent(this, Practice_Result::class.java)
+        val intent_result = Intent(this, Practice_Result::class.java)
 
         // STT
         var stt_intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
@@ -145,11 +144,48 @@ class PracticeActivity : AppCompatActivity() {
         vowel_getby = intent.getStringExtra("vowel_tolearn").toString()
 
         when (vowel_getby) {
+            //a
             "a" -> assist_view.setImageResource(R.drawable.assist_a)
+            "ga" -> assist_view.setImageResource(R.drawable.assist_a)
+            "na" -> assist_view.setImageResource(R.drawable.assist_a)
+            "da" -> assist_view.setImageResource(R.drawable.assist_a)
+
+            //eo
+            "eo" -> assist_view.setImageResource(R.drawable.assist_eo)
+            "geo" -> assist_view.setImageResource(R.drawable.assist_eo)
+            "neo" -> assist_view.setImageResource(R.drawable.assist_eo)
+            "deo" -> assist_view.setImageResource(R.drawable.assist_eo)
+
+            //i
             "i" -> assist_view.setImageResource(R.drawable.assist_i)
+            "gi" -> assist_view.setImageResource(R.drawable.assist_i)
+            "ni" -> assist_view.setImageResource(R.drawable.assist_i)
+            "di" -> assist_view.setImageResource(R.drawable.assist_i)
+
+            //o
             "o" -> assist_view.setImageResource(R.drawable.assist_o)
+            "go" -> assist_view.setImageResource(R.drawable.assist_o)
+            "no" -> assist_view.setImageResource(R.drawable.assist_o)
+            "do" -> assist_view.setImageResource(R.drawable.assist_o)
+
+            //u
             "u" -> assist_view.setImageResource(R.drawable.assist_u)
+            "gu" -> assist_view.setImageResource(R.drawable.assist_u)
+            "nu" -> assist_view.setImageResource(R.drawable.assist_u)
+            "du" -> assist_view.setImageResource(R.drawable.assist_u)
+
+            //e
             "e" -> assist_view.setImageResource(R.drawable.assist_e)
+            "ge" -> assist_view.setImageResource(R.drawable.assist_e)
+            "ne" -> assist_view.setImageResource(R.drawable.assist_e)
+            "de" -> assist_view.setImageResource(R.drawable.assist_e)
+
+            //eu
+            "eu" -> assist_view.setImageResource(R.drawable.assist_eu)
+            "geu" -> assist_view.setImageResource(R.drawable.assist_eu)
+            "neu" -> assist_view.setImageResource(R.drawable.assist_eu)
+            "deu" -> assist_view.setImageResource(R.drawable.assist_eu)
+
             else -> assist_view.setImageResource(R.drawable.assist_a)
         }
 
@@ -166,11 +202,103 @@ class PracticeActivity : AppCompatActivity() {
             startActivity(intent)
         }
         mtResult1.setOnClickListener {
-            startActivity(intent_test)
+            startActivity(intent_result)
         }
         mtPractice_vowel.setOnClickListener {
-            val intent = Intent(this, Practice_Vowel::class.java)
-            startActivity(intent)
+            when (vowel_getby) {
+                "a" -> {
+                    val intent = Intent(this, Practice_Vowel::class.java)
+                    startActivity(intent) }
+                "eo" -> {
+                    val intent = Intent(this, Practice_Vowel::class.java)
+                    startActivity(intent) }
+                "u" -> {
+                    val intent = Intent(this, Practice_Vowel::class.java)
+                    startActivity(intent) }
+                "o" -> {
+                    val intent = Intent(this, Practice_Vowel::class.java)
+                    startActivity(intent) }
+                "i" -> {
+                    val intent = Intent(this, Practice_Vowel::class.java)
+                    startActivity(intent) }
+                "e" -> {
+                    val intent = Intent(this, Practice_Vowel::class.java)
+                    startActivity(intent) }
+                "eu" -> {
+                    val intent = Intent(this, Practice_Vowel::class.java)
+                    startActivity(intent) }
+
+                "ga" -> {
+                    val intent = Intent(this, Practice_Enrichment::class.java)
+                    startActivity(intent) }
+                "na" -> {
+                    val intent = Intent(this, Practice_Enrichment::class.java)
+                    startActivity(intent) }
+                "da" -> {
+                    val intent = Intent(this, Practice_Enrichment::class.java)
+                    startActivity(intent) }
+
+                "geo" -> {
+                    val intent = Intent(this, Practice_Enrichment::class.java)
+                    startActivity(intent) }
+                "neo" -> {
+                    val intent = Intent(this, Practice_Enrichment::class.java)
+                    startActivity(intent) }
+                "deo" -> {
+                    val intent = Intent(this, Practice_Enrichment::class.java)
+                    startActivity(intent) }
+
+                "gu" -> {
+                    val intent = Intent(this, Practice_Enrichment::class.java)
+                    startActivity(intent) }
+                "nu" -> {
+                    val intent = Intent(this, Practice_Enrichment::class.java)
+                    startActivity(intent) }
+                "du" -> {
+                    val intent = Intent(this, Practice_Enrichment::class.java)
+                    startActivity(intent) }
+
+                "go" -> {
+                    val intent = Intent(this, Practice_Enrichment::class.java)
+                    startActivity(intent) }
+                "no" -> {
+                    val intent = Intent(this, Practice_Enrichment::class.java)
+                    startActivity(intent) }
+                "do" -> {
+                    val intent = Intent(this, Practice_Enrichment::class.java)
+                    startActivity(intent) }
+
+                "gi" -> {
+                    val intent = Intent(this, Practice_Enrichment::class.java)
+                    startActivity(intent) }
+                "ni" -> {
+                    val intent = Intent(this, Practice_Enrichment::class.java)
+                    startActivity(intent) }
+                "di" -> {
+                    val intent = Intent(this, Practice_Enrichment::class.java)
+                    startActivity(intent) }
+
+                "ge" -> {
+                    val intent = Intent(this, Practice_Enrichment::class.java)
+                    startActivity(intent) }
+                "ne" -> {
+                    val intent = Intent(this, Practice_Enrichment::class.java)
+                    startActivity(intent) }
+                "de" -> {
+                    val intent = Intent(this, Practice_Enrichment::class.java)
+                    startActivity(intent) }
+
+                "geu" -> {
+                    val intent = Intent(this, Practice_Enrichment::class.java)
+                    startActivity(intent) }
+                "neu" -> {
+                    val intent = Intent(this, Practice_Enrichment::class.java)
+                    startActivity(intent) }
+                "deu" -> {
+                    val intent = Intent(this, Practice_Enrichment::class.java)
+                    startActivity(intent) }
+            }
+
         }
 
         // 연습 시작 버튼
@@ -227,11 +355,11 @@ class PracticeActivity : AppCompatActivity() {
                 }.await()
 
                 async {
-                    intent_test.putExtra("Vowel_bt", vowel_getby)
-                    intent_test.putExtra("STT_Result", stt_result)
-                    intent_test.putExtra("Record_path", recordoutput)
+                    intent_result.putExtra("Vowel_bt", vowel_getby)
+                    intent_result.putExtra("STT_Result", stt_result)
+                    intent_result.putExtra("Record_path", recordoutput)
                     Log.d("record_path2", recordoutput.toString())
-                    intent_test.putExtra("ImageUri", stringUrl)
+                    intent_result.putExtra("ImageUri", stringUrl)
                     Log.d("uri_check", stringUrl)
                 }.await()
             }
@@ -647,8 +775,25 @@ class PracticeActivity : AppCompatActivity() {
 
                         val requestBody : RequestBody = RequestBody
                             .create(MediaType.parse("image/*"), post_byteArrayOutputStream.toByteArray())
-                        val uploadFile = MultipartBody.Part
-                            .createFormData("image", post_filename, requestBody)
+
+                        var uploadFile : MultipartBody.Part
+
+                        when (vowel_getby) {
+                            "a" -> uploadFile = MultipartBody.Part
+                                .createFormData("a", post_filename, requestBody)
+                            "i" -> uploadFile = MultipartBody.Part
+                                .createFormData("i", post_filename, requestBody)
+                            "o" -> uploadFile = MultipartBody.Part
+                                .createFormData("o", post_filename, requestBody)
+                            "u" -> uploadFile = MultipartBody.Part
+                                .createFormData("u", post_filename, requestBody)
+                            "e" -> uploadFile = MultipartBody.Part
+                                .createFormData("e", post_filename, requestBody)
+                            else -> uploadFile = MultipartBody.Part
+                                .createFormData("image", post_filename, requestBody)
+                        }
+                        Log.d("server check::", uploadFile.toString())
+
 
                         RetrofitBuilder.api.post_image(uploadFile).enqueue(object: Callback<String>{
                             override fun onFailure(call: Call<String>, t: Throwable) {

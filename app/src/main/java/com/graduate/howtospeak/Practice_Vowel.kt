@@ -16,6 +16,7 @@ import kotlinx.android.synthetic.main.activity_practice__vowel.*
 class Practice_Vowel : AppCompatActivity() {
 
     private lateinit var bt_name1: ImageButton
+    private lateinit var bt_name2: ImageButton
     private lateinit var bt_name3: ImageButton
     private lateinit var bt_name4: ImageButton
     private lateinit var bt_name5: ImageButton
@@ -34,6 +35,7 @@ class Practice_Vowel : AppCompatActivity() {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN ) }
 
         bt_name1 = findViewById(R.id.pvowel_a)
+        bt_name2 = findViewById(R.id.pvowel_eo)
         bt_name3 = findViewById(R.id.pvowel_u)
         bt_name4 = findViewById(R.id.pvowel_o)
         bt_name5 = findViewById(R.id.pvowel_i)
@@ -44,15 +46,16 @@ class Practice_Vowel : AppCompatActivity() {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent) }
 
-        pvowel_a.setOnClickListener {
-            val intent = Intent(this, PracticeActivity::class.java)
-            startActivity(intent) }
-
 
         // vowel 버튼
         pvowel_a.setOnClickListener {
             val intent = Intent(this, PracticeActivity::class.java)
             intent.putExtra("vowel_tolearn", bt_name1.tag.toString())
+            startActivity(intent) }
+
+        pvowel_eo.setOnClickListener {
+            val intent = Intent(this, PracticeActivity::class.java)
+            intent.putExtra("vowel_tolearn", bt_name2.tag.toString())
             startActivity(intent) }
 
         pvowel_u.setOnClickListener {
@@ -74,6 +77,8 @@ class Practice_Vowel : AppCompatActivity() {
             val intent = Intent(this, PracticeActivity::class.java)
             intent.putExtra("vowel_tolearn", bt_name6.tag.toString())
             startActivity(intent) }
+
+
 
 
     }

@@ -2,10 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".PracticeActivity"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    tools:context=".PracticeActivity">
+    android:background="#FFFFFF">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,7 +20,7 @@
 
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="346dp"
+                android:layout_width="571dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
                 android:scaleType="fitStart"
@@ -40,7 +41,7 @@
 
             <ImageButton
                 android:id="@+id/mtMain1"
-                android:layout_width="53dp"
+                android:layout_width="46dp"
                 android:layout_height="match_parent"
 
                 android:layout_gravity="right"
@@ -48,7 +49,6 @@
                 android:background="#FFFFFF"
                 android:scaleType="fitCenter"
 
-                android:layout_margin="5dp"
                 app:srcCompat="@drawable/home" />
         </LinearLayout>
 

@@ -16,6 +16,8 @@ class Visualizerutil {
         }
     }
 
+
+    // user voice spectrum _ Uri
     fun play(context: Context, resUri: Uri, completedCallback: () -> Unit) {
         stop()
 
@@ -30,31 +32,26 @@ class Visualizerutil {
                 completedCallback()
             }
 
-            //this.setVolume(0F,0F)
-            //this.isLooping = true
             this.start()
-            //this.isLooping
         }
     }
 
-        fun playId(context: Context, @RawRes resId: Int, completedCallback: () -> Unit) {
-            stop()
+    // defalt voice spectrum _ file
+    fun playId(context: Context, @RawRes resId: Int, completedCallback: () -> Unit) {
+        stop()
 
-            MediaPlayer.create(context, resId)
-                .apply {
-                    mediaPlayer = this
+        MediaPlayer.create(context, resId)
+            .apply {
+                mediaPlayer = this
 
-                    this.setOnCompletionListener {
-                        stop()
-                        completedCallback()
-                    }
-
-                    //this.setVolume(0F,0F)
-                    //this.isLooping = true
-                    this.start()
-                    //this.isLooping
+                this.setOnCompletionListener {
+                    stop()
+                    completedCallback()
                 }
-        }
+
+                this.start()
+            }
+    }
 
     fun getAudioSessionId(): Int? = mediaPlayer?.audioSessionId
 }

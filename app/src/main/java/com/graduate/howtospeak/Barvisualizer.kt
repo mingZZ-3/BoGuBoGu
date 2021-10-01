@@ -34,7 +34,7 @@ constructor(
     init {
         paint = Paint()
             .apply {
-                this.color = Color.GREEN
+                this.color = Color.GRAY
                 this.style = Paint.Style.FILL
                 this.isAntiAlias = true
             }

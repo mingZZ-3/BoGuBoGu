@@ -40,6 +40,7 @@ class LearnActivity : AppCompatActivity() {
 
         when (vowel_getby) {
             "a" -> imageView_vowel.setImageResource(R.drawable.learn_a)
+            "eo" -> imageView_vowel.setImageResource(R.drawable.learn_eo)
             "i" -> imageView_vowel.setImageResource(R.drawable.learn_i)
             "o" -> imageView_vowel.setImageResource(R.drawable.learn_o)
             "u" -> imageView_vowel.setImageResource(R.drawable.learn_u)
@@ -55,6 +56,8 @@ class LearnActivity : AppCompatActivity() {
 
         val video_a = Uri.parse(
             "android.resource://" + packageName + "/"+R.raw.video_a)
+        val video_eo = Uri.parse(
+            "android.resource://" + packageName + "/"+R.raw.video_eo)
         val video_i = Uri.parse(
             "android.resource://" + packageName + "/"+R.raw.video_i)
         val video_o = Uri.parse(
@@ -69,6 +72,11 @@ class LearnActivity : AppCompatActivity() {
         when(vowel_getby) {
             "a" -> {
                 videoView_vowel.setVideoURI(video_a)
+                videoView_vowel.setMediaController(MediaController(this))
+                videoView_vowel.requestFocus()
+            }
+            "eo" -> {
+                videoView_vowel.setVideoURI(video_eo)
                 videoView_vowel.setMediaController(MediaController(this))
                 videoView_vowel.requestFocus()
             }

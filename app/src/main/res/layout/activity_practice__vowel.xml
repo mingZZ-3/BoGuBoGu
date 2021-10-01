@@ -36,7 +36,7 @@
         </LinearLayout>
 
         <FrameLayout
-            android:layout_width="440dp"
+            android:layout_width="650dp"
             android:layout_height="95dp"
             android:layout_gravity="center"
             android:layout_marginTop="50dp"
@@ -46,9 +46,9 @@
                 android:id="@+id/pvowel_a"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
-
                 android:layout_gravity="left"
+
+                android:layout_marginLeft="40dp"
                 android:adjustViewBounds="true"
                 android:background="#FFFFFF"
                 android:scaleType="fitCenter"
@@ -57,12 +57,25 @@
                 app:srcCompat="@drawable/a_bt2" />
 
             <ImageButton
+                android:id="@+id/pvowel_eo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:background="#FFFFFF"
+                android:scaleType="fitCenter"
+
+                android:tag="eo"
+                app:srcCompat="@drawable/eo_bt2" />
+
+            <ImageButton
                 android:id="@+id/pvowel_u"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="40dp"
-
                 android:layout_gravity="right"
+
+                android:layout_marginRight="40dp"
                 android:adjustViewBounds="true"
                 android:background="#FFFFFF"
                 android:scaleType="fitCenter"

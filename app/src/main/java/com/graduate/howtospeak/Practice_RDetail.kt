@@ -31,16 +31,19 @@ class Practice_RDetail : AppCompatActivity() {
         setContentView(R.layout.activity_practice__r_detail)
 
         // 뒤로 돌아갈때 값 남기기
-        var vowelR = intent.getStringExtra("Rvowel_bt")
-        var sttR = intent.getStringExtra("RSTT_Result")
-        var imageR = intent.getStringExtra("RImageUri")
+        val vowelR = intent.getStringExtra("Rvowel_bt")
+        Log.d("vowel-result_inRD", vowelR.toString())
+        val sttR = intent.getStringExtra("RSTT_Result")
+        Log.d("STT_result_inRD", sttR.toString())
+        val imageR = intent.getStringExtra("RImageUri")
+        Log.d("image_inRD", imageR.toString())
         val vowel_bt = intent.getStringExtra("Rvowel_bt")
+        Log.d("button_inRD", vowel_bt.toString())
         vowel_button = vowel_bt
 
         // record path 설정
         val recordPath_receive = intent.getStringExtra("Record_path_send")
         if (recordPath_receive != null) {
-            //addpath = "content://media/external/" + recordPath_receive
             recordPath_uri = Uri.parse(recordPath_receive)
             Log.d("recordPath_inRD", recordPath_uri.toString())
         } else {
@@ -66,21 +69,36 @@ class Practice_RDetail : AppCompatActivity() {
             intent.putExtra("Vowel_bt", vowelR)
             intent.putExtra("STT_Result", sttR)
             intent.putExtra("ImageUri", imageR)
+            intent.putExtra("Record_path", recordPath_receive)
 
             startActivity(intent) }
 
-        /*
         play_spectrum.setOnClickListener {
             if(recordPath_uri != null) {
-                audioPlayer1 = Visualizerutil()
+                startPlayingAudio(recordPath_uri)
 
             } else {
                 Log.e("record_Path", "user voice error")
             }
-            audioPlayer2 = Visualizerutil()
-        }
+            when (vowel_button) {
+                //a
+                "a" -> startPlayingAudioId(R.raw.voice_a)
+                //eo
+                "eo" -> startPlayingAudioId(R.raw.voice_eo)
+                //i
+                "i" -> startPlayingAudioId(R.raw.voice_i)
+                //o
+                "o" -> startPlayingAudioId(R.raw.voice_o)
+                //u
+                "u" -> startPlayingAudioId(R.raw.voice_u)
+                //e
+                "e" -> startPlayingAudioId(R.raw.voice_e)
+                //eu
+                "eu" -> startPlayingAudioId(R.raw.voice_eu)
 
-         */
+                else -> startPlayingAudioId(R.raw.voice_e)
+            }
+        }
 
 
         // 음성 시각화
@@ -100,11 +118,13 @@ class Practice_RDetail : AppCompatActivity() {
 
         when (vowel_button) {
             "a" -> startPlayingAudioId(R.raw.voice_a)
+            "eo" -> startPlayingAudioId(R.raw.voice_eo)
             "i" -> startPlayingAudioId(R.raw.voice_i)
             "o" -> startPlayingAudioId(R.raw.voice_o)
             "u" -> startPlayingAudioId(R.raw.voice_u)
             "e" -> startPlayingAudioId(R.raw.voice_e)
-            else -> startPlayingAudioId(R.raw.voice_a)
+            "eu" -> startPlayingAudioId(R.raw.voice_eu)
+            else -> startPlayingAudioId(R.raw.voice_e)
         }
 
     }
@@ -115,7 +135,7 @@ class Practice_RDetail : AppCompatActivity() {
         stopPlayingAudio()
     }
 
-    //
+    // 실행 파일 설정
     private fun startPlayingAudio(resUri_user: Uri) {
         audioPlayer1.play(this, resUri_user) {
         }

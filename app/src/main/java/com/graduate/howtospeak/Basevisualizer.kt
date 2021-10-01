@@ -21,8 +21,6 @@ constructor(
     private var visualizer: Visualizer? = null
 
 
-    // Sets the audio session id for the currently playing audio
-
     fun setAudioSessionId(audioSessionId: Int) {
         release()
 

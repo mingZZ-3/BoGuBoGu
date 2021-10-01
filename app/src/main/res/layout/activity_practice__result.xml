@@ -87,18 +87,30 @@
         </FrameLayout>
 
         <FrameLayout
-            android:layout_width="297dp"
+            android:layout_width="478dp"
             android:layout_height="match_parent"
             android:layout_gravity="right"
 
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp">
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
+
+            <ImageButton
+                android:id="@+id/mtEnrichment"
+                android:layout_width="150dp"
+                android:layout_height="56dp"
+                android:layout_gravity="left"
+
+                android:adjustViewBounds="true"
+                android:background="#FFFFFF"
+                android:scaleType="fitCenter"
+
+                app:srcCompat="@drawable/enrich_bt2" />
 
             <ImageButton
                 android:id="@+id/mtRDetail1"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left"
+                android:layout_gravity="center_horizontal"
 
                 android:adjustViewBounds="true"
                 android:background="#FFFFFF"
@@ -110,8 +122,8 @@
                 android:id="@+id/mtVowelPractice"
                 android:layout_width="130dp"
                 android:layout_height="wrap_content"
-
                 android:layout_gravity="right"
+
                 android:adjustViewBounds="true"
                 android:background="#FFFFFF"
                 android:scaleType="fitCenter"

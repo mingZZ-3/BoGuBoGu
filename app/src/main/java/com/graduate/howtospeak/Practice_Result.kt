@@ -1,4 +1,4 @@
-package com.graduate.howtospeak
+ package com.graduate.howtospeak
 
 import android.content.ContentResolver
 import android.content.Intent
@@ -70,14 +70,17 @@ class Practice_Result : AppCompatActivity() {
             intent.putExtra("Record_path_send", recordPath.toString())
             intent.putExtra("Rvowel_bt", bt_vowel)
             intent.putExtra("RSTT_Result", result_stt)
-            if (intent.hasExtra("RImageUri")) {
-                intent.putExtra("RImageUri", imageResult_string)
-            }
+            intent.putExtra("RImageUri", imageResult_string)
+
 
             startActivity(intent) }
 
         mtVowelPractice.setOnClickListener {
             val intent = Intent(this, Practice_Vowel::class.java)
+            startActivity(intent) }
+
+        mtEnrichment.setOnClickListener {
+            val intent = Intent(this, Practice_Enrichment::class.java)
             startActivity(intent) }
 
 
@@ -114,31 +117,158 @@ class Practice_Result : AppCompatActivity() {
             // opecv 결과
             imageview_opencv = findViewById(R.id.mouthResult)
             when(result_opencv) {
-                "a" -> imageview_opencv.setImageResource(R.drawable.mouth_a)
-                "i" -> imageview_opencv.setImageResource(R.drawable.mouth_i)
-                "o" -> imageview_opencv.setImageResource(R.drawable.mouth_o)
-                "u" -> imageview_opencv.setImageResource(R.drawable.mouth_u)
-                "e" -> imageview_opencv.setImageResource(R.drawable.mouth_e)
-                else -> imageview_opencv.setImageResource(R.drawable.mouth_error)
+                //a
+                "a" -> {
+                    when (bt_vowel) {
+                        "a" -> imageview_opencv.setImageResource(R.drawable.mouth_a)
+                        "ga" -> imageview_opencv.setImageResource(R.drawable.mouth_ga)
+                        "na" -> imageview_opencv.setImageResource(R.drawable.mouth_na)
+                        "da" -> imageview_opencv.setImageResource(R.drawable.mouth_da)
+                        else -> imageview_opencv.setImageResource(R.drawable.mouth_error)
+                    }
+                }
+                //eo
+                "eo" -> {
+                    when (bt_vowel) {
+                        "eo" -> imageview_opencv.setImageResource(R.drawable.mouth_eo)
+                        "geo" -> imageview_opencv.setImageResource(R.drawable.mouth_geo)
+                        "neo" -> imageview_opencv.setImageResource(R.drawable.mouth_neo)
+                        "deo" -> imageview_opencv.setImageResource(R.drawable.mouth_deo)
+                        else -> imageview_opencv.setImageResource(R.drawable.mouth_error)
+                    }
+                }
+                //i
+                "i" -> {
+                    when (bt_vowel) {
+                        "i" -> imageview_opencv.setImageResource(R.drawable.mouth_i)
+                        "gi" -> imageview_opencv.setImageResource(R.drawable.mouth_gi)
+                        "ni" -> imageview_opencv.setImageResource(R.drawable.mouth_ni)
+                        "di" -> imageview_opencv.setImageResource(R.drawable.mouth_di)
+                        else -> imageview_opencv.setImageResource(R.drawable.mouth_error)
+                    }
+                }
+                //o
+                "o" -> {
+                    when (bt_vowel) {
+                        "o" -> imageview_opencv.setImageResource(R.drawable.mouth_o)
+                        "go" -> imageview_opencv.setImageResource(R.drawable.mouth_go)
+                        "no" -> imageview_opencv.setImageResource(R.drawable.mouth_no)
+                        "do" -> imageview_opencv.setImageResource(R.drawable.mouth_do)
+                        else -> imageview_opencv.setImageResource(R.drawable.mouth_error)
+                    }
+                }
+                //u
+                "u" -> {
+                    when (bt_vowel) {
+                        "u" -> imageview_opencv.setImageResource(R.drawable.mouth_u)
+                        "gu" -> imageview_opencv.setImageResource(R.drawable.mouth_gu)
+                        "nu" -> imageview_opencv.setImageResource(R.drawable.mouth_nu)
+                        "duu" -> imageview_opencv.setImageResource(R.drawable.mouth_du)
+                        else -> imageview_opencv.setImageResource(R.drawable.mouth_error)
+                    }
+                }
+                //e
+                "e" -> {
+                    when (bt_vowel) {
+                        "e" -> imageview_opencv.setImageResource(R.drawable.mouth_e)
+                        "ge" -> imageview_opencv.setImageResource(R.drawable.mouth_ge)
+                        "ne" -> imageview_opencv.setImageResource(R.drawable.mouth_ne)
+                        "de" -> imageview_opencv.setImageResource(R.drawable.mouth_de)
+                        else -> imageview_opencv.setImageResource(R.drawable.mouth_error)
+                    }
+                }
+                //eu
+                "eu" -> {
+                    when (bt_vowel) {
+                        "eu" -> imageview_opencv.setImageResource(R.drawable.mouth_eu)
+                        "geu" -> imageview_opencv.setImageResource(R.drawable.mouth_geu)
+                        "neu" -> imageview_opencv.setImageResource(R.drawable.mouth_neu)
+                        "deu" -> imageview_opencv.setImageResource(R.drawable.mouth_deu)
+                        else -> imageview_opencv.setImageResource(R.drawable.mouth_error)
+                    }
+                }
             }
 
             // stt 결과
             imageview_stt = findViewById(R.id.voiceResult)
             when(result_stt) {
+                // === a
                 "[아]" -> imageview_stt.setImageResource(R.drawable.voice_a)
-                "[이]" -> imageview_stt.setImageResource(R.drawable.voice_i)
+                //
+                "[가]" -> imageview_stt.setImageResource(R.drawable.voice_ga)
+                "[나]" -> imageview_stt.setImageResource(R.drawable.voice_na)
+                "[다]" -> imageview_stt.setImageResource(R.drawable.voice_da)
 
+                // === eo
+                "[어]" -> imageview_stt.setImageResource(R.drawable.voice_eo)
+                //
+                "[거]" -> imageview_stt.setImageResource(R.drawable.voice_geo)
+                "[너]" -> imageview_stt.setImageResource(R.drawable.voice_neo)
+                "[더]" -> imageview_stt.setImageResource(R.drawable.voice_deo)
+
+                // === i
+                "[이]" -> imageview_stt.setImageResource(R.drawable.voice_i)
+                "[이야]" -> imageview_stt.setImageResource(R.drawable.voice_i)
+                "[띠]" -> imageview_stt.setImageResource(R.drawable.voice_i)
+                "[2]" -> imageview_stt.setImageResource(R.drawable.voice_i)
+                //
+                "[기]" -> imageview_stt.setImageResource(R.drawable.voice_gi)
+                "[니]" -> imageview_stt.setImageResource(R.drawable.voice_ni)
+                "[디]" -> imageview_stt.setImageResource(R.drawable.voice_di)
+
+                // === o
                 "[오]" -> imageview_stt.setImageResource(R.drawable.voice_o)
                 "[오오]" -> imageview_stt.setImageResource(R.drawable.voice_o)
+                "[5]" -> imageview_stt.setImageResource(R.drawable.voice_o)
+                "[꼬모]" -> imageview_stt.setImageResource(R.drawable.voice_o)
+                "[보]" -> imageview_stt.setImageResource(R.drawable.voice_o)
+                "[응]" -> imageview_stt.setImageResource(R.drawable.voice_o)
+                //
+                "[고]" -> imageview_stt.setImageResource(R.drawable.voice_go)
+                "[노]" -> imageview_stt.setImageResource(R.drawable.voice_no)
+                "[도]" -> imageview_stt.setImageResource(R.drawable.voice_do)
 
+
+                // === u
                 "[우]" -> imageview_stt.setImageResource(R.drawable.voice_u)
                 "[우우]" -> imageview_stt.setImageResource(R.drawable.voice_u)
                 "[우와]" -> imageview_stt.setImageResource(R.drawable.voice_u)
+                "[운]" -> imageview_stt.setImageResource(R.drawable.voice_u)
+                "[9]" -> imageview_stt.setImageResource(R.drawable.voice_u)
+                "[꾸]" -> imageview_stt.setImageResource(R.drawable.voice_u)
+                "[부]" -> imageview_stt.setImageResource(R.drawable.voice_u)
+                "[무]" -> imageview_stt.setImageResource(R.drawable.voice_u)
+                //
+                "[구]" -> imageview_stt.setImageResource(R.drawable.voice_gu)
+                "[누]" -> imageview_stt.setImageResource(R.drawable.voice_nu)
+                "[두]" -> imageview_stt.setImageResource(R.drawable.voice_du)
 
+                // === e
                 "[에]" -> imageview_stt.setImageResource(R.drawable.voice_e)
                 "[애]" -> imageview_stt.setImageResource(R.drawable.voice_e)
                 "[예]" -> imageview_stt.setImageResource(R.drawable.voice_e)
                 "[얘]" -> imageview_stt.setImageResource(R.drawable.voice_e)
+                "[m]" -> imageview_stt.setImageResource(R.drawable.voice_e)
+                "[n]" -> imageview_stt.setImageResource(R.drawable.voice_e)
+                "[예에]" -> imageview_stt.setImageResource(R.drawable.voice_e)
+                "[앱]" -> imageview_stt.setImageResource(R.drawable.voice_e)
+                "[헤헤]" -> imageview_stt.setImageResource(R.drawable.voice_e)
+                "[때]" -> imageview_stt.setImageResource(R.drawable.voice_e)
+                "[a]" -> imageview_stt.setImageResource(R.drawable.voice_e)
+                //
+                "[개]" -> imageview_stt.setImageResource(R.drawable.voice_ge)
+                "[게]" -> imageview_stt.setImageResource(R.drawable.voice_ge)
+                "[내]" -> imageview_stt.setImageResource(R.drawable.voice_ne)
+                "[네]" -> imageview_stt.setImageResource(R.drawable.voice_ne)
+                "[대]" -> imageview_stt.setImageResource(R.drawable.voice_de)
+                "[데]" -> imageview_stt.setImageResource(R.drawable.voice_de)
+
+                // === eu
+                "[으]" -> imageview_stt.setImageResource(R.drawable.voice_eu)
+                //
+                "[그]" -> imageview_stt.setImageResource(R.drawable.voice_geu)
+                "[느]" -> imageview_stt.setImageResource(R.drawable.voice_neu)
+                "[드]" -> imageview_stt.setImageResource(R.drawable.voice_deu)
 
                 else -> imageview_stt.setImageResource(R.drawable.voice_error)
             }
@@ -146,6 +276,7 @@ class Practice_Result : AppCompatActivity() {
             // totall result
             imageview_totall = findViewById(R.id.totallResult)
             when (bt_vowel) {
+                // === a
                 "a" -> {
                     if (result_opencv == "a" && result_stt == "[아]") {
                         imageview_totall.setImageResource(R.drawable.result_goodjob)
@@ -153,58 +284,292 @@ class Practice_Result : AppCompatActivity() {
                         imageview_totall.setImageResource(R.drawable.result_tryagain)
                     }
                 }
-                "i" -> {
-                    if (result_opencv == "i" && result_stt == "[이]") {
+                //
+                "ga" -> {
+                    if (result_opencv == "a" && (result_stt == "[가]" )) {
                         imageview_totall.setImageResource(R.drawable.result_goodjob)
                     } else {
                         imageview_totall.setImageResource(R.drawable.result_tryagain)
                     }
                 }
-                "o" -> {
-                    if (result_opencv == "o" && result_stt == "[오]") {
-                        imageview_totall.setImageResource(R.drawable.result_goodjob) }
-                    if(result_opencv == "o" && result_stt == "[오오]"){
-                        imageview_totall.setImageResource(R.drawable.result_goodjob) }
-                    else {
+                "na" -> {
+                    if (result_opencv == "a" && (result_stt == "[나]" )) {
+                        imageview_totall.setImageResource(R.drawable.result_goodjob)
+                    } else {
                         imageview_totall.setImageResource(R.drawable.result_tryagain)
                     }
                 }
-                "u" -> {
-                    if (result_opencv == "u" && result_stt == "[우]") {
+                "da" -> {
+                    if (result_opencv == "a" && (result_stt == "[다]" )) {
                         imageview_totall.setImageResource(R.drawable.result_goodjob)
-                    }
-                    if (result_opencv == "u" && result_stt == "[우우]") {
-                        imageview_totall.setImageResource(R.drawable.result_goodjob)
-                    }
-                    if (result_opencv == "u" && result_stt == "[우와]") {
-                        imageview_totall.setImageResource(R.drawable.result_goodjob)
-                    }
-                    else {
+                    } else {
                         imageview_totall.setImageResource(R.drawable.result_tryagain)
                     }
                 }
 
+                // === eo
+                "eo" -> {
+                    if (result_opencv == "eo" && result_stt == "[어]") {
+                        imageview_totall.setImageResource(R.drawable.result_goodjob)
+                    } else {
+                        imageview_totall.setImageResource(R.drawable.result_tryagain)
+                    }
+                }
+                //
+                "geo" -> {
+                    if (result_opencv == "eo" && (result_stt == "[거]" )) {
+                        imageview_totall.setImageResource(R.drawable.result_goodjob)
+                    } else {
+                        imageview_totall.setImageResource(R.drawable.result_tryagain)
+                    }
+                }
+                "neo" -> {
+                    if (result_opencv == "eo" && (result_stt == "[너]" )) {
+                        imageview_totall.setImageResource(R.drawable.result_goodjob)
+                    } else {
+                        imageview_totall.setImageResource(R.drawable.result_tryagain)
+                    }
+                }
+                "deo" -> {
+                    if (result_opencv == "eo" && (result_stt == "[더]" )) {
+                        imageview_totall.setImageResource(R.drawable.result_goodjob)
+                    } else {
+                        imageview_totall.setImageResource(R.drawable.result_tryagain)
+                    }
+                }
+
+                // === i
+                "i" -> {
+                    if (result_opencv == "i" && result_stt == "[이]") {
+                        imageview_totall.setImageResource(R.drawable.result_goodjob)
+                    }
+                    else if (result_opencv == "i" && result_stt == "[이야]") {
+                        imageview_totall.setImageResource(R.drawable.result_goodjob)
+                    }
+                    else if (result_opencv == "i" && result_stt == "[띠]") {
+                        imageview_totall.setImageResource(R.drawable.result_goodjob)
+                    }
+                    else {
+                        imageview_totall.setImageResource(R.drawable.result_tryagain)
+                    }
+                }
+                //
+                "gi" -> {
+                    if (result_opencv == "i" && (result_stt == "[기]" )) {
+                        imageview_totall.setImageResource(R.drawable.result_goodjob)
+                    } else {
+                        imageview_totall.setImageResource(R.drawable.result_tryagain)
+                    }
+                }
+                "ni" -> {
+                    if (result_opencv == "i" && (result_stt == "[니]" )) {
+                        imageview_totall.setImageResource(R.drawable.result_goodjob)
+                    } else {
+                        imageview_totall.setImageResource(R.drawable.result_tryagain)
+                    }
+                }
+                "di" -> {
+                    if (result_opencv == "i" && (result_stt == "[디]" )) {
+                        imageview_totall.setImageResource(R.drawable.result_goodjob)
+                    } else {
+                        imageview_totall.setImageResource(R.drawable.result_tryagain)
+                    }
+                }
+
+                // === o
+                "o" -> {
+                    if (result_opencv == "o" && result_stt == "[오]") {
+                        imageview_totall.setImageResource(R.drawable.result_goodjob) }
+                    else if(result_opencv == "o" && result_stt == "[오오]"){
+                        imageview_totall.setImageResource(R.drawable.result_goodjob) }
+                    else if(result_opencv == "o" && result_stt == "[5]"){
+                        imageview_totall.setImageResource(R.drawable.result_goodjob) }
+                    else if(result_opencv == "o" && result_stt == "[꼬모]"){
+                        imageview_totall.setImageResource(R.drawable.result_goodjob) }
+                    else if(result_opencv == "o" && result_stt == "[보]"){
+                        imageview_totall.setImageResource(R.drawable.result_goodjob) }
+                    else if(result_opencv == "o" && result_stt == "[응]"){
+                        imageview_totall.setImageResource(R.drawable.result_goodjob) }
+                    else {
+                        imageview_totall.setImageResource(R.drawable.result_tryagain)
+                    }
+                }
+                //
+                "go" -> {
+                    if (result_opencv == "o" && (result_stt == "[고]" )) {
+                        imageview_totall.setImageResource(R.drawable.result_goodjob)
+                    } else {
+                        imageview_totall.setImageResource(R.drawable.result_tryagain)
+                    }
+                }
+                "no" -> {
+                    if (result_opencv == "o" && (result_stt == "[노]" )) {
+                        imageview_totall.setImageResource(R.drawable.result_goodjob)
+                    } else {
+                        imageview_totall.setImageResource(R.drawable.result_tryagain)
+                    }
+                }
+                "do" -> {
+                    if (result_opencv == "o" && (result_stt == "[도]" )) {
+                        imageview_totall.setImageResource(R.drawable.result_goodjob)
+                    } else {
+                        imageview_totall.setImageResource(R.drawable.result_tryagain)
+                    }
+                }
+
+                // === u
+                "u" -> {
+                    if (result_opencv == "u" && (result_stt == "[우]" )) {
+                        imageview_totall.setImageResource(R.drawable.result_goodjob)
+                    }
+                    else if (result_opencv == "u" && result_stt == "[우우]") {
+                        imageview_totall.setImageResource(R.drawable.result_goodjob)
+                    }
+                    else if (result_opencv == "u" && result_stt == "[우와]") {
+                        imageview_totall.setImageResource(R.drawable.result_goodjob)
+                    }
+                    else if (result_opencv == "u" && result_stt == "[운]") {
+                        imageview_totall.setImageResource(R.drawable.result_goodjob)
+                    }
+                    else if (result_opencv == "u" && result_stt == "[9]") {
+                        imageview_totall.setImageResource(R.drawable.result_goodjob)
+                    }
+                    else if (result_opencv == "u" && result_stt == "[꾸]") {
+                        imageview_totall.setImageResource(R.drawable.result_goodjob)
+                    }
+                    else if (result_opencv == "u" && result_stt == "[부]") {
+                        imageview_totall.setImageResource(R.drawable.result_goodjob)
+                    }
+                    else if (result_opencv == "u" && result_stt == "[무]") {
+                        imageview_totall.setImageResource(R.drawable.result_goodjob)
+                    }
+                    else {
+                        imageview_totall.setImageResource(R.drawable.result_tryagain)
+                    }
+                }
+                //
+                "gu" -> {
+                    if (result_opencv == "u" && (result_stt == "[구]" )) {
+                        imageview_totall.setImageResource(R.drawable.result_goodjob)
+                    } else {
+                        imageview_totall.setImageResource(R.drawable.result_tryagain)
+                    }
+                }
+                "nu" -> {
+                    if (result_opencv == "u" && (result_stt == "[누]" )) {
+                        imageview_totall.setImageResource(R.drawable.result_goodjob)
+                    } else {
+                        imageview_totall.setImageResource(R.drawable.result_tryagain)
+                    }
+                }
+                "du" -> {
+                    if (result_opencv == "u" && (result_stt == "[두]" )) {
+                        imageview_totall.setImageResource(R.drawable.result_goodjob)
+                    } else {
+                        imageview_totall.setImageResource(R.drawable.result_tryagain)
+                    }
+                }
+
+                // === e
                 "e" -> {
                     if (result_opencv == "e" && result_stt == "[에]") {
                         imageview_totall.setImageResource(R.drawable.result_goodjob)
-                    } else {
+                    }
+                    else if (result_opencv == "e" && result_stt == "[애]") {
+                        imageview_totall.setImageResource(R.drawable.result_goodjob)
+                    }
+                    else if (result_opencv == "e" && result_stt == "[에]") {
+                        imageview_totall.setImageResource(R.drawable.result_goodjob)
+                    }
+                    else if (result_opencv == "e" && result_stt == "[앱]") {
+                        imageview_totall.setImageResource(R.drawable.result_goodjob)
+                    }
+                    else if (result_opencv == "e" && result_stt == "[예]") {
+                        imageview_totall.setImageResource(R.drawable.result_goodjob)
+                    }
+                    else if (result_opencv == "e" && result_stt == "[m]") {
+                        imageview_totall.setImageResource(R.drawable.result_goodjob)
+                    }
+                    else if (result_opencv == "e" && result_stt == "[n]") {
+                        imageview_totall.setImageResource(R.drawable.result_goodjob)
+                    }
+                    else if (result_opencv == "e" && result_stt == "[예에]") {
+                        imageview_totall.setImageResource(R.drawable.result_goodjob)
+                    }
+                    else if (result_opencv == "e" && result_stt == "[헤헤]") {
+                        imageview_totall.setImageResource(R.drawable.result_goodjob)
+                    }
+                    else if (result_opencv == "e" && result_stt == "[때]") {
+                        imageview_totall.setImageResource(R.drawable.result_goodjob)
+                    }
+                    else if (result_opencv == "e" && result_stt == "[a]") {
+                        imageview_totall.setImageResource(R.drawable.result_goodjob)
+                    }
+                    else {
                         imageview_totall.setImageResource(R.drawable.result_tryagain)
                     }
                 }
-                "e" -> {
-                    if (result_opencv == "e" && result_stt == "[애]") {
+                //
+                "ge" -> {
+                    if (result_opencv == "e" && result_stt == "[개]") {
+                        imageview_totall.setImageResource(R.drawable.result_goodjob)
+                    }
+                    else if (result_opencv == "e" && result_stt == "[게]") {
                         imageview_totall.setImageResource(R.drawable.result_goodjob)
                     } else {
                         imageview_totall.setImageResource(R.drawable.result_tryagain)
                     }
                 }
-                "e" -> {
-                    if (result_opencv == "e" && result_stt == "[예]") {
+                "ne" -> {
+                    if (result_opencv == "e" && result_stt == "[내]") {
+                        imageview_totall.setImageResource(R.drawable.result_goodjob)
+                    }
+                    else if (result_opencv == "e" && result_stt == "[네]") {
                         imageview_totall.setImageResource(R.drawable.result_goodjob)
                     } else {
                         imageview_totall.setImageResource(R.drawable.result_tryagain)
                     }
                 }
+                "de" -> {
+                    if (result_opencv == "e" && result_stt == "[대]") {
+                        imageview_totall.setImageResource(R.drawable.result_goodjob)
+                    }
+                    else if (result_opencv == "e" && result_stt == "[데]") {
+                        imageview_totall.setImageResource(R.drawable.result_goodjob)
+                    } else {
+                        imageview_totall.setImageResource(R.drawable.result_tryagain)
+                    }
+                }
+
+                // === eu
+                "eu" -> {
+                    if (result_opencv == "eu" && result_stt == "[으]") {
+                        imageview_totall.setImageResource(R.drawable.result_goodjob)
+                    }
+                }
+                //
+                "geu" -> {
+                    if (result_opencv == "eu" && result_stt == "[그]") {
+                        imageview_totall.setImageResource(R.drawable.result_goodjob)
+                    } else {
+                        imageview_totall.setImageResource(R.drawable.result_tryagain)
+                    }
+                }
+                "neu" -> {
+                    if (result_opencv == "eu" && result_stt == "[느]") {
+                        imageview_totall.setImageResource(R.drawable.result_goodjob)
+                    } else {
+                        imageview_totall.setImageResource(R.drawable.result_tryagain)
+                    }
+                }
+                "deu" -> {
+                    if (result_opencv == "eu" && result_stt == "[드]") {
+                        imageview_totall.setImageResource(R.drawable.result_goodjob)
+                    } else {
+                        imageview_totall.setImageResource(R.drawable.result_tryagain)
+                    }
+                }
+
                 else -> {
                     imageview_totall.setImageResource(R.drawable.result_tryagain)
                 }
@@ -216,7 +581,7 @@ class Practice_Result : AppCompatActivity() {
             if (intent.hasExtra("ImageUri")) {
                 imageResult_string = intent.getStringExtra("ImageUri").toString()
                 imageResult_uri = Uri.parse(imageResult_string)
-                Log.d("image_uri_send_test", imageResult_string)
+                Log.d("image_uri_inR", imageResult_string)
                 imageView_result.setImageURI(imageResult_uri)
             } else {
                 Log.d("이미지 uri 받기", "error")

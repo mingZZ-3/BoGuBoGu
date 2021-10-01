@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.graduate.howtospeak">
+    package="com.graduate.howtospeak" >
+
     <!-- 접근 권한 -->
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
@@ -29,8 +30,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar"
-        android:usesCleartextTraffic="true">
-        <activity android:name=".ManualActivity"
+        android:usesCleartextTraffic="true" >
+        <activity
+            android:name=".Practice_Enrichment"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".ManualActivity"
             android:screenOrientation="landscape" />
         <activity
             android:name=".Practice_RDetail"
@@ -52,7 +57,7 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -64,7 +69,7 @@
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.graduate.howtospeak.fileprovider"
             android:exported="false"
-            android:grantUriPermissions="true">
+            android:grantUriPermissions="true" >
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/filepaths" />

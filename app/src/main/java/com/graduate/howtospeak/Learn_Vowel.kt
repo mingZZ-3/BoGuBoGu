@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.activity_learn__vowel.*
 class Learn_Vowel : AppCompatActivity() {
 
     private lateinit var bt_name1: ImageButton
+    private lateinit var bt_name2: ImageButton
     private lateinit var bt_name3: ImageButton
     private lateinit var bt_name4: ImageButton
     private lateinit var bt_name5: ImageButton
@@ -34,6 +35,7 @@ class Learn_Vowel : AppCompatActivity() {
 
         // 버튼값
         bt_name1 = findViewById(R.id.lvowel_a)
+        bt_name2 = findViewById(R.id.lvowel_eo)
         bt_name3 = findViewById(R.id.lvowel_u)
         bt_name4 = findViewById(R.id.lvowel_o)
         bt_name5 = findViewById(R.id.lvowel_i)
@@ -50,6 +52,11 @@ class Learn_Vowel : AppCompatActivity() {
         lvowel_a.setOnClickListener {
             val intent = Intent(this, LearnActivity::class.java)
             intent.putExtra("vowel_tolearn", bt_name1.tag.toString())
+            startActivity(intent) }
+
+        lvowel_eo.setOnClickListener {
+            val intent = Intent(this, LearnActivity::class.java)
+            intent.putExtra("vowel_tolearn", bt_name2.tag.toString())
             startActivity(intent) }
 
         lvowel_u.setOnClickListener {
