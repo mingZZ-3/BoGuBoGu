@@ -1,4 +1,4 @@
- package com.graduate.howtospeak
+package com.graduate.howtospeak
 
 import android.content.ContentResolver
 import android.content.Intent
@@ -124,7 +124,7 @@ class Practice_Result : AppCompatActivity() {
                         "ga" -> imageview_opencv.setImageResource(R.drawable.mouth_ga)
                         "na" -> imageview_opencv.setImageResource(R.drawable.mouth_na)
                         "da" -> imageview_opencv.setImageResource(R.drawable.mouth_da)
-                        else -> imageview_opencv.setImageResource(R.drawable.mouth_error)
+                        else -> imageview_opencv.setImageResource(R.drawable.mouth_a)
                     }
                 }
                 //eo
@@ -134,7 +134,7 @@ class Practice_Result : AppCompatActivity() {
                         "geo" -> imageview_opencv.setImageResource(R.drawable.mouth_geo)
                         "neo" -> imageview_opencv.setImageResource(R.drawable.mouth_neo)
                         "deo" -> imageview_opencv.setImageResource(R.drawable.mouth_deo)
-                        else -> imageview_opencv.setImageResource(R.drawable.mouth_error)
+                        else -> imageview_opencv.setImageResource(R.drawable.mouth_eo)
                     }
                 }
                 //i
@@ -144,7 +144,7 @@ class Practice_Result : AppCompatActivity() {
                         "gi" -> imageview_opencv.setImageResource(R.drawable.mouth_gi)
                         "ni" -> imageview_opencv.setImageResource(R.drawable.mouth_ni)
                         "di" -> imageview_opencv.setImageResource(R.drawable.mouth_di)
-                        else -> imageview_opencv.setImageResource(R.drawable.mouth_error)
+                        else -> imageview_opencv.setImageResource(R.drawable.mouth_i)
                     }
                 }
                 //o
@@ -154,7 +154,7 @@ class Practice_Result : AppCompatActivity() {
                         "go" -> imageview_opencv.setImageResource(R.drawable.mouth_go)
                         "no" -> imageview_opencv.setImageResource(R.drawable.mouth_no)
                         "do" -> imageview_opencv.setImageResource(R.drawable.mouth_do)
-                        else -> imageview_opencv.setImageResource(R.drawable.mouth_error)
+                        else -> imageview_opencv.setImageResource(R.drawable.mouth_o)
                     }
                 }
                 //u
@@ -164,7 +164,7 @@ class Practice_Result : AppCompatActivity() {
                         "gu" -> imageview_opencv.setImageResource(R.drawable.mouth_gu)
                         "nu" -> imageview_opencv.setImageResource(R.drawable.mouth_nu)
                         "duu" -> imageview_opencv.setImageResource(R.drawable.mouth_du)
-                        else -> imageview_opencv.setImageResource(R.drawable.mouth_error)
+                        else -> imageview_opencv.setImageResource(R.drawable.mouth_u)
                     }
                 }
                 //e
@@ -174,7 +174,7 @@ class Practice_Result : AppCompatActivity() {
                         "ge" -> imageview_opencv.setImageResource(R.drawable.mouth_ge)
                         "ne" -> imageview_opencv.setImageResource(R.drawable.mouth_ne)
                         "de" -> imageview_opencv.setImageResource(R.drawable.mouth_de)
-                        else -> imageview_opencv.setImageResource(R.drawable.mouth_error)
+                        else -> imageview_opencv.setImageResource(R.drawable.mouth_e)
                     }
                 }
                 //eu
@@ -184,9 +184,10 @@ class Practice_Result : AppCompatActivity() {
                         "geu" -> imageview_opencv.setImageResource(R.drawable.mouth_geu)
                         "neu" -> imageview_opencv.setImageResource(R.drawable.mouth_neu)
                         "deu" -> imageview_opencv.setImageResource(R.drawable.mouth_deu)
-                        else -> imageview_opencv.setImageResource(R.drawable.mouth_error)
+                        else -> imageview_opencv.setImageResource(R.drawable.mouth_eu)
                     }
                 }
+                else -> imageview_opencv.setImageResource(R.drawable.mouth_error)
             }
 
             // stt 결과

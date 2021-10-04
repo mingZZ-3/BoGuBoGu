@@ -83,18 +83,39 @@ class Practice_RDetail : AppCompatActivity() {
             when (vowel_button) {
                 //a
                 "a" -> startPlayingAudioId(R.raw.voice_a)
+                "ga" -> startPlayingAudioId(R.raw.voice_ga)
+                "na" -> startPlayingAudioId(R.raw.voice_na)
+                "da" -> startPlayingAudioId(R.raw.voice_da)
                 //eo
                 "eo" -> startPlayingAudioId(R.raw.voice_eo)
+                "geo" -> startPlayingAudioId(R.raw.voice_geo)
+                "neo" -> startPlayingAudioId(R.raw.voice_neo)
+                "deo" -> startPlayingAudioId(R.raw.voice_deo)
                 //i
                 "i" -> startPlayingAudioId(R.raw.voice_i)
+                "gi" -> startPlayingAudioId(R.raw.voice_gi)
+                "ni" -> startPlayingAudioId(R.raw.voice_ni)
+                "di" -> startPlayingAudioId(R.raw.voice_di)
                 //o
                 "o" -> startPlayingAudioId(R.raw.voice_o)
+                "go" -> startPlayingAudioId(R.raw.voice_go)
+                "no" -> startPlayingAudioId(R.raw.voice_no)
+                "do" -> startPlayingAudioId(R.raw.voice_do)
                 //u
                 "u" -> startPlayingAudioId(R.raw.voice_u)
+                "gu" -> startPlayingAudioId(R.raw.voice_gu)
+                "nu" -> startPlayingAudioId(R.raw.voice_nu)
+                "du" -> startPlayingAudioId(R.raw.voice_du)
                 //e
                 "e" -> startPlayingAudioId(R.raw.voice_e)
+                "ge" -> startPlayingAudioId(R.raw.voice_ge)
+                "ne" -> startPlayingAudioId(R.raw.voice_ne)
+                "de" -> startPlayingAudioId(R.raw.voice_de)
                 //eu
                 "eu" -> startPlayingAudioId(R.raw.voice_eu)
+                "geu" -> startPlayingAudioId(R.raw.voice_geu)
+                "neu" -> startPlayingAudioId(R.raw.voice_neu)
+                "deu" -> startPlayingAudioId(R.raw.voice_deu)
 
                 else -> startPlayingAudioId(R.raw.voice_e)
             }
@@ -117,13 +138,41 @@ class Practice_RDetail : AppCompatActivity() {
         startPlayingAudio(recordPath_uri)
 
         when (vowel_button) {
+            //a
             "a" -> startPlayingAudioId(R.raw.voice_a)
+            "ga" -> startPlayingAudioId(R.raw.voice_ga)
+            "na" -> startPlayingAudioId(R.raw.voice_na)
+            "da" -> startPlayingAudioId(R.raw.voice_da)
+            //eo
             "eo" -> startPlayingAudioId(R.raw.voice_eo)
+            "geo" -> startPlayingAudioId(R.raw.voice_geo)
+            "neo" -> startPlayingAudioId(R.raw.voice_neo)
+            "deo" -> startPlayingAudioId(R.raw.voice_deo)
+            //i
             "i" -> startPlayingAudioId(R.raw.voice_i)
+            "gi" -> startPlayingAudioId(R.raw.voice_gi)
+            "ni" -> startPlayingAudioId(R.raw.voice_ni)
+            "di" -> startPlayingAudioId(R.raw.voice_di)
+            //o
             "o" -> startPlayingAudioId(R.raw.voice_o)
+            "go" -> startPlayingAudioId(R.raw.voice_go)
+            "no" -> startPlayingAudioId(R.raw.voice_no)
+            "do" -> startPlayingAudioId(R.raw.voice_do)
+            //u
             "u" -> startPlayingAudioId(R.raw.voice_u)
+            "gu" -> startPlayingAudioId(R.raw.voice_gu)
+            "nu" -> startPlayingAudioId(R.raw.voice_nu)
+            "du" -> startPlayingAudioId(R.raw.voice_du)
+            //e
             "e" -> startPlayingAudioId(R.raw.voice_e)
+            "ge" -> startPlayingAudioId(R.raw.voice_ge)
+            "ne" -> startPlayingAudioId(R.raw.voice_ne)
+            "de" -> startPlayingAudioId(R.raw.voice_de)
+            //eu
             "eu" -> startPlayingAudioId(R.raw.voice_eu)
+            "geu" -> startPlayingAudioId(R.raw.voice_geu)
+            "neu" -> startPlayingAudioId(R.raw.voice_neu)
+            "deu" -> startPlayingAudioId(R.raw.voice_deu)
             else -> startPlayingAudioId(R.raw.voice_e)
         }
 
