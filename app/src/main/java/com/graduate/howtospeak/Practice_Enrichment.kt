@@ -38,6 +38,7 @@ class Practice_Enrichment : AppCompatActivity() {
     private lateinit var bt_name21: ImageButton
      */
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_practice_enrichment)
@@ -89,6 +90,7 @@ class Practice_Enrichment : AppCompatActivity() {
         bt_name20 = findViewById(R.id.Evowel_neu)
         bt_name21 = findViewById(R.id.Evowel_deu)
          */
+
 
 
         //  버튼
@@ -184,7 +186,7 @@ class Practice_Enrichment : AppCompatActivity() {
             val intent = Intent(this, PracticeActivity::class.java)
             intent.putExtra("vowel_tolearn", bt_name21.tag.toString())
             startActivity(intent) }
-         */
+        */
 
     }
 }

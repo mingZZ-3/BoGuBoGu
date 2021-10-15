@@ -301,7 +301,6 @@
                     android:layout_height="95dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="30dp"
-                    android:layout_marginBottom="30dp"
                     android:orientation="horizontal">
 
                     <ImageButton
@@ -347,11 +346,13 @@
 
                 </FrameLayout>
 
+
                 <!--
                 <FrameLayout
                     android:layout_width="650dp"
                     android:layout_height="95dp"
                     android:layout_gravity="center"
+                    android:layout_marginBottom="30dp"
                     android:layout_marginTop="30dp"
                     android:orientation="horizontal">
 
@@ -398,7 +399,6 @@
 
                 </FrameLayout>
                 -->
-
             </LinearLayout>
 
         </ScrollView>

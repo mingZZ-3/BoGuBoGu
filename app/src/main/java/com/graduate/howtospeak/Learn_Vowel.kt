@@ -20,6 +20,7 @@ class Learn_Vowel : AppCompatActivity() {
     private lateinit var bt_name4: ImageButton
     private lateinit var bt_name5: ImageButton
     private lateinit var bt_name6: ImageButton
+    //private lateinit var bt_name7: ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +41,7 @@ class Learn_Vowel : AppCompatActivity() {
         bt_name4 = findViewById(R.id.lvowel_o)
         bt_name5 = findViewById(R.id.lvowel_i)
         bt_name6 = findViewById(R.id.lvowel_e)
+        //bt_name7 = findViewById(R.id.lvowel_eu)
 
 
 
@@ -78,6 +80,13 @@ class Learn_Vowel : AppCompatActivity() {
             val intent = Intent(this, LearnActivity::class.java)
             intent.putExtra("vowel_tolearn", bt_name6.tag.toString())
             startActivity(intent) }
+
+        /*
+        lvowel_eu.setOnClickListener {
+            val intent = Intent(this, LearnActivity::class.java)
+            intent.putExtra("vowel_tolearn", bt_name7.tag.toString())
+            startActivity(intent) }
+         */
 
     }
 }

@@ -64,6 +64,7 @@
                 android:layout_height="wrap_content"
 
                 android:layout_gravity="center"
+
                 android:adjustViewBounds="true"
                 android:background="#FFFFFF"
                 android:scaleType="fitCenter"
@@ -71,6 +72,21 @@
                 android:tag="eo"
                 app:srcCompat="@drawable/eo_bt2" />
 
+            <!--
+            <ImageButton
+                android:id="@+id/lvowel_eu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+
+                android:layout_marginLeft="80dp"
+                android:adjustViewBounds="true"
+                android:background="#FFFFFF"
+                android:scaleType="fitCenter"
+
+                android:tag="eu"
+                app:srcCompat="@drawable/eu_bt" />
+               -->
             <ImageButton
                 android:id="@+id/lvowel_u"
                 android:layout_width="wrap_content"

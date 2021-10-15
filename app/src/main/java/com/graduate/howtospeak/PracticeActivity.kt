@@ -539,7 +539,7 @@ class PracticeActivity : AppCompatActivity() {
         mHandler = Handler(handlerThread.looper)
         val mainHandler = Handler(mainLooper)
         try {
-            val mCameraId = "" + CameraCharacteristics.LENS_FACING_FRONT // front-후면 카메라 사용
+            val mCameraId = "" + CameraCharacteristics.LENS_FACING_BACK // front-후면 카메라 사용
             val mCameraManager = this.getSystemService(CAMERA_SERVICE) as CameraManager
             val characteristics = mCameraManager.getCameraCharacteristics(mCameraId)
             val map = characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP)
