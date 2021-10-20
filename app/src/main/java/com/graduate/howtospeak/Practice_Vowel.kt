@@ -21,7 +21,7 @@ class Practice_Vowel : AppCompatActivity() {
     private lateinit var bt_name4: ImageButton
     private lateinit var bt_name5: ImageButton
     private lateinit var bt_name6: ImageButton
-    //private lateinit var bt_name7: ImageButton
+    private lateinit var bt_name7: ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,12 +36,12 @@ class Practice_Vowel : AppCompatActivity() {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN ) }
 
         bt_name1 = findViewById(R.id.pvowel_a)
-        bt_name2 = findViewById(R.id.pvowel_eo)
+        //bt_name2 = findViewById(R.id.pvowel_eo)
         bt_name3 = findViewById(R.id.pvowel_u)
         bt_name4 = findViewById(R.id.pvowel_o)
         bt_name5 = findViewById(R.id.pvowel_i)
         bt_name6 = findViewById(R.id.pvowel_e)
-        //bt_name7 = findViewById(R.id.pvowel_eu)
+        bt_name7 = findViewById(R.id.pvowel_eu)
 
         // 기본 버튼
         mtMain1.setOnClickListener {
@@ -55,10 +55,12 @@ class Practice_Vowel : AppCompatActivity() {
             intent.putExtra("vowel_tolearn", bt_name1.tag.toString())
             startActivity(intent) }
 
+        /*
         pvowel_eo.setOnClickListener {
             val intent = Intent(this, PracticeActivity::class.java)
             intent.putExtra("vowel_tolearn", bt_name2.tag.toString())
             startActivity(intent) }
+         */
 
         pvowel_u.setOnClickListener {
             val intent = Intent(this, PracticeActivity::class.java)
@@ -80,16 +82,9 @@ class Practice_Vowel : AppCompatActivity() {
             intent.putExtra("vowel_tolearn", bt_name6.tag.toString())
             startActivity(intent) }
 
-        /*
         pvowel_eu.setOnClickListener {
             val intent = Intent(this, PracticeActivity::class.java)
             intent.putExtra("vowel_tolearn", bt_name7.tag.toString())
             startActivity(intent) }
-         */
-
-
-
     }
-
-
 }

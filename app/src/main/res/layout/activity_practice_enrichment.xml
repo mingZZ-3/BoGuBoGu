@@ -96,6 +96,7 @@
 
                 </FrameLayout>
 
+                <!--
                 <FrameLayout
                     android:layout_width="650dp"
                     android:layout_height="95dp"
@@ -145,6 +146,7 @@
                         app:srcCompat="@drawable/deo_bt" />
 
                 </FrameLayout>
+                -->
 
                 <FrameLayout
                     android:layout_width="650dp"
@@ -347,7 +349,6 @@
                 </FrameLayout>
 
 
-                <!--
                 <FrameLayout
                     android:layout_width="650dp"
                     android:layout_height="95dp"
@@ -398,7 +399,7 @@
                         app:srcCompat="@drawable/deu_bt" />
 
                 </FrameLayout>
-                -->
+
             </LinearLayout>
 
         </ScrollView>

@@ -15,12 +15,12 @@ import kotlinx.android.synthetic.main.activity_learn__vowel.*
 class Learn_Vowel : AppCompatActivity() {
 
     private lateinit var bt_name1: ImageButton
-    private lateinit var bt_name2: ImageButton
+    //private lateinit var bt_name2: ImageButton
     private lateinit var bt_name3: ImageButton
     private lateinit var bt_name4: ImageButton
     private lateinit var bt_name5: ImageButton
     private lateinit var bt_name6: ImageButton
-    //private lateinit var bt_name7: ImageButton
+    private lateinit var bt_name7: ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,12 +36,12 @@ class Learn_Vowel : AppCompatActivity() {
 
         // 버튼값
         bt_name1 = findViewById(R.id.lvowel_a)
-        bt_name2 = findViewById(R.id.lvowel_eo)
+        //bt_name2 = findViewById(R.id.lvowel_eo)
         bt_name3 = findViewById(R.id.lvowel_u)
         bt_name4 = findViewById(R.id.lvowel_o)
         bt_name5 = findViewById(R.id.lvowel_i)
         bt_name6 = findViewById(R.id.lvowel_e)
-        //bt_name7 = findViewById(R.id.lvowel_eu)
+        bt_name7 = findViewById(R.id.lvowel_eu)
 
 
 
@@ -56,10 +56,12 @@ class Learn_Vowel : AppCompatActivity() {
             intent.putExtra("vowel_tolearn", bt_name1.tag.toString())
             startActivity(intent) }
 
+        /*
         lvowel_eo.setOnClickListener {
             val intent = Intent(this, LearnActivity::class.java)
             intent.putExtra("vowel_tolearn", bt_name2.tag.toString())
             startActivity(intent) }
+         */
 
         lvowel_u.setOnClickListener {
             val intent = Intent(this, LearnActivity::class.java)
@@ -81,12 +83,10 @@ class Learn_Vowel : AppCompatActivity() {
             intent.putExtra("vowel_tolearn", bt_name6.tag.toString())
             startActivity(intent) }
 
-        /*
         lvowel_eu.setOnClickListener {
             val intent = Intent(this, LearnActivity::class.java)
             intent.putExtra("vowel_tolearn", bt_name7.tag.toString())
             startActivity(intent) }
-         */
 
     }
 }

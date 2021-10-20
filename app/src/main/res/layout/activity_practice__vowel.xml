@@ -73,7 +73,7 @@
             -->
 
             <ImageButton
-                android:id="@+id/pvowel_eo"
+                android:id="@+id/pvowel_eu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
@@ -82,8 +82,8 @@
                 android:background="#FFFFFF"
                 android:scaleType="fitCenter"
 
-                android:tag="eo"
-                app:srcCompat="@drawable/eo_bt2" />
+                android:tag="eu"
+                app:srcCompat="@drawable/eu_bt" />
 
             <ImageButton
                 android:id="@+id/pvowel_u"

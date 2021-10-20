@@ -576,7 +576,6 @@ class Practice_Result : AppCompatActivity() {
                 }
             }
 
-
             // ImageView
             imageView_result = findViewById(R.id.imageResult_view)
             if (intent.hasExtra("ImageUri")) {

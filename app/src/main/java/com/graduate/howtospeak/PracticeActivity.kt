@@ -743,7 +743,6 @@ class PracticeActivity : AppCompatActivity() {
         var url: Uri? = null
         //var stringUrl: String? = null /* value to be returned */
 
-
         try {
             url = cr.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
 

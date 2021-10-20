@@ -131,7 +131,5 @@ class LearnActivity : AppCompatActivity() {
 
         learnVideo_pause.setOnClickListener {
             videoView_vowel.pause() }
-
     }
-
 }

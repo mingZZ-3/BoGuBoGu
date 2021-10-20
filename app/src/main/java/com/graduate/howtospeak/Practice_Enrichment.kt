@@ -17,9 +17,11 @@ class Practice_Enrichment : AppCompatActivity() {
     private lateinit var bt_name1: ImageButton
     private lateinit var bt_name2: ImageButton
     private lateinit var bt_name3: ImageButton
+    /*
     private lateinit var bt_name4: ImageButton
     private lateinit var bt_name5: ImageButton
     private lateinit var bt_name6: ImageButton
+     */
     private lateinit var bt_name7: ImageButton
     private lateinit var bt_name8: ImageButton
     private lateinit var bt_name9: ImageButton
@@ -32,11 +34,9 @@ class Practice_Enrichment : AppCompatActivity() {
     private lateinit var bt_name16: ImageButton
     private lateinit var bt_name17: ImageButton
     private lateinit var bt_name18: ImageButton
-    /*
     private lateinit var bt_name19: ImageButton
     private lateinit var bt_name20: ImageButton
     private lateinit var bt_name21: ImageButton
-     */
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,9 +65,11 @@ class Practice_Enrichment : AppCompatActivity() {
         bt_name2 = findViewById(R.id.Evowel_na)
         bt_name3 = findViewById(R.id.Evowel_da)
         //eo
+        /*
         bt_name4 = findViewById(R.id.Evowel_geo)
         bt_name5 = findViewById(R.id.Evowel_neo)
         bt_name6 = findViewById(R.id.Evowel_deo)
+         */
         //u
         bt_name7 = findViewById(R.id.Evowel_gu)
         bt_name8 = findViewById(R.id.Evowel_nu)
@@ -85,12 +87,9 @@ class Practice_Enrichment : AppCompatActivity() {
         bt_name17 = findViewById(R.id.Evowel_ne)
         bt_name18 = findViewById(R.id.Evowel_de)
         //eu
-        /*
         bt_name19 = findViewById(R.id.Evowel_geu)
         bt_name20 = findViewById(R.id.Evowel_neu)
         bt_name21 = findViewById(R.id.Evowel_deu)
-         */
-
 
 
         //  버튼
@@ -107,6 +106,8 @@ class Practice_Enrichment : AppCompatActivity() {
             val intent = Intent(this, PracticeActivity::class.java)
             intent.putExtra("vowel_tolearn", bt_name3.tag.toString())
             startActivity(intent) }
+
+        /*
         //eo
         Evowel_geo.setOnClickListener {
             val intent = Intent(this, PracticeActivity::class.java)
@@ -120,6 +121,8 @@ class Practice_Enrichment : AppCompatActivity() {
             val intent = Intent(this, PracticeActivity::class.java)
             intent.putExtra("vowel_tolearn", bt_name6.tag.toString())
             startActivity(intent) }
+         */
+
         //u
         Evowel_gu.setOnClickListener {
             val intent = Intent(this, PracticeActivity::class.java)
@@ -173,7 +176,6 @@ class Practice_Enrichment : AppCompatActivity() {
             intent.putExtra("vowel_tolearn", bt_name18.tag.toString())
             startActivity(intent) }
         //eu
-        /*
         Evowel_geu.setOnClickListener {
             val intent = Intent(this, PracticeActivity::class.java)
             intent.putExtra("vowel_tolearn", bt_name19.tag.toString())
@@ -186,7 +188,6 @@ class Practice_Enrichment : AppCompatActivity() {
             val intent = Intent(this, PracticeActivity::class.java)
             intent.putExtra("vowel_tolearn", bt_name21.tag.toString())
             startActivity(intent) }
-        */
 
     }
 }

@@ -212,6 +212,3 @@ class Practice_RDetail : AppCompatActivity() {
         barVisualizerPanel1.release()
     }
 }
-
-
-// https://github.com/AlShevelev/music-visualization/blob/master/app/src/main/java/com/shevelev/music_visualization/demo/DemoActivity.kt
