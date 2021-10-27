@@ -14,6 +14,7 @@ import kotlinx.android.synthetic.main.activity_practice_enrichment.mtMain1
 
 class Practice_Enrichment : AppCompatActivity() {
 
+    //====== 변수 ======//
     private lateinit var bt_name1: ImageButton
     private lateinit var bt_name2: ImageButton
     private lateinit var bt_name3: ImageButton
@@ -38,7 +39,7 @@ class Practice_Enrichment : AppCompatActivity() {
     private lateinit var bt_name20: ImageButton
     private lateinit var bt_name21: ImageButton
 
-
+// ================================== onCreate ==================================== //
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_practice_enrichment)
@@ -95,6 +96,7 @@ class Practice_Enrichment : AppCompatActivity() {
         //  버튼
         //a
         Evowel_ga.setOnClickListener {
+            // tag 값 전달
             val intent = Intent(this, PracticeActivity::class.java)
             intent.putExtra("vowel_tolearn", bt_name1.tag.toString())
             startActivity(intent) }

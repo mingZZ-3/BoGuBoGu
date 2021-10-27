@@ -63,9 +63,14 @@ import kotlin.math.roundToInt
 @Suppress("DEPRECATION")
 class PracticeActivity : AppCompatActivity() {
 
-    // ======== 버튼 값 전달
+    //====== 변수 ======//
+    // 버튼 tag 값에 따른 처리
     private lateinit var assist_view: ImageView
     private lateinit var vowel_getby: String
+
+    // Image/stt 결과 전달
+    private var stringUrl: String = ""
+    private var stt_result: String = ""
 
     // surfaceview
     private lateinit var mSurfaceView: SurfaceView
@@ -92,9 +97,7 @@ class PracticeActivity : AppCompatActivity() {
         ORIENTATIONS.append(ExifInterface.ORIENTATION_NORMAL, 180)
         ORIENTATIONS.append(ExifInterface.ORIENTATION_ROTATE_90, 270)
         ORIENTATIONS.append(ExifInterface.ORIENTATION_ROTATE_180, 0)
-        ORIENTATIONS.append(ExifInterface.ORIENTATION_ROTATE_270, 90)
-    }
-    // =======================
+        ORIENTATIONS.append(ExifInterface.ORIENTATION_ROTATE_270, 90) }
 
 
     // voice
@@ -102,6 +105,7 @@ class PracticeActivity : AppCompatActivity() {
     private var recordoutput: String? = null
     private var isRecording: Boolean = false
     private var recordingStopped: Boolean = false
+
     // STT
     private lateinit var speechRecognizer: SpeechRecognizer
     private lateinit var recognitionListener: RecognitionListener
@@ -109,9 +113,6 @@ class PracticeActivity : AppCompatActivity() {
     // decible
     private lateinit var stt_decibelbar: ProgressBar
     private var stt_dB : Int = 0
-    // Image/stt result send to Activity
-    private var stringUrl: String = ""
-    private var stt_result: String = ""
 
 
     // ================================== onCreate ==================================== //
@@ -120,6 +121,14 @@ class PracticeActivity : AppCompatActivity() {
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         setContentView(R.layout.activity_practice)
 
+        // 상태바 없애기
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.insetsController?.hide(WindowInsets.Type.statusBars())
+        } else {
+            window.setFlags( WindowManager.LayoutParams.FLAG_FULLSCREEN ,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN ) }
+
+        // 액티비티간 전달할 값들 위함
         val intent_result = Intent(this, Practice_Result::class.java)
 
         // STT
@@ -139,7 +148,7 @@ class PracticeActivity : AppCompatActivity() {
         stt_decibelbar = findViewById(R.id.stt_decibel) as ProgressBar
 
 
-        // 학습 보조 이미지
+        // 학습 보조 이미지 설정
         assist_view = findViewById(R.id.assist_Imageview)
         vowel_getby = intent.getStringExtra("vowel_tolearn").toString()
 
@@ -189,14 +198,9 @@ class PracticeActivity : AppCompatActivity() {
             else -> assist_view.setImageResource(R.drawable.assist_a)
         }
 
-        // 상태바 없애기
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            window.insetsController?.hide(WindowInsets.Type.statusBars())
-        } else {
-            window.setFlags( WindowManager.LayoutParams.FLAG_FULLSCREEN ,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN ) }
 
-        // 기본 버튼
+
+        // 버튼
         mtMain1.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
@@ -205,7 +209,9 @@ class PracticeActivity : AppCompatActivity() {
             startActivity(intent_result)
         }
         mtPractice_vowel.setOnClickListener {
+            // 일반 학습 및 심화 학습 전환 구분
             when (vowel_getby) {
+                // 기본 모음 학습 메뉴로
                 "a" -> {
                     val intent = Intent(this, Practice_Vowel::class.java)
                     startActivity(intent) }
@@ -228,6 +234,7 @@ class PracticeActivity : AppCompatActivity() {
                     val intent = Intent(this, Practice_Vowel::class.java)
                     startActivity(intent) }
 
+                // 심화 학습 메뉴로
                 "ga" -> {
                     val intent = Intent(this, Practice_Enrichment::class.java)
                     startActivity(intent) }
@@ -302,6 +309,11 @@ class PracticeActivity : AppCompatActivity() {
         }
 
         // 연습 시작 버튼
+        /*
+        STT 먼저 실행 --4초--> 음성 녹화
+        마이크에는 한번에 하나만 접근 가능하므로 순차접근하도록 구성함.
+        STT는 실행되고 자동 종료됨.
+         */
         bt_rstart.setOnClickListener {
             // voice Permission
             if (ContextCompat.checkSelfPermission(
@@ -320,12 +332,10 @@ class PracticeActivity : AppCompatActivity() {
                 )
                 ActivityCompat.requestPermissions(this, permissions, 0)
             } else {
-
                 Toast.makeText(this, "시작되었습니다.", Toast.LENGTH_SHORT).show()
 
-                //STT & record
+                //STT & record 실행
                 speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this)
-
                 CoroutineScope(Dispatchers.Main).async {
                     // STT
                     async {
@@ -344,16 +354,21 @@ class PracticeActivity : AppCompatActivity() {
             }
         }
 
-        // 연습 종료 버튼 - stop recording & Take picture
+        // 연습 종료 버튼
+        /*
+        1. 녹음 종료 및 사진 촬영
+        2. 액티비티간 전달해야하는 값들 전달
+         */
         bt_rstop.setOnClickListener {
-            // recording 중지
             CoroutineScope(Dispatchers.Main).async {
+                // recording 중지
                 async {
                     stopRecording()
                     takePicture()
                     delay(1000)
                 }.await()
 
+                // 버튼, 결과값 등 전달
                 async {
                     intent_result.putExtra("Vowel_bt", vowel_getby)
                     intent_result.putExtra("STT_Result", stt_result)
@@ -406,6 +421,7 @@ class PracticeActivity : AppCompatActivity() {
         return false
     }
 
+
     // ============= STT part
     private fun setListener() {
         recognitionListener = object: RecognitionListener {
@@ -421,14 +437,10 @@ class PracticeActivity : AppCompatActivity() {
                 //Log.d("STT_dB", rmsdB.toString())
                 stt_dB = (20* (log10(rmsdB/0.00002))).toInt()
                 stt_decibelbar.progress = stt_dB
-
-
             }
             override fun onBufferReceived(buffer: ByteArray?) {
-
             }
             override fun onEndOfSpeech() {
-
             }
             override fun onError(error: Int) {
                 var message: String
@@ -466,20 +478,17 @@ class PracticeActivity : AppCompatActivity() {
             override fun onPartialResults(partialResults: Bundle?) {
             }
             override fun onEvent(eventType: Int, params: Bundle?) {
-
             }
         }
     }
 
-    // ======================================
 
-    // ============== camera surfaceview part
+    // ============= camera surfaceview part
     private fun initSensor() {
         mSurfaceView = findViewById(R.id.camera_preview)
         mSensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
         mMagnetometer = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD)
-        //var deviceOrientation: DeviceOrientation
     }
 
     override fun onResume() {
@@ -539,12 +548,11 @@ class PracticeActivity : AppCompatActivity() {
         mHandler = Handler(handlerThread.looper)
         val mainHandler = Handler(mainLooper)
         try {
-            val mCameraId = "" + CameraCharacteristics.LENS_FACING_BACK // front-후면 카메라 사용
+            val mCameraId = "" + CameraCharacteristics.LENS_FACING_FRONT // front-후면 카메라 사용
             val mCameraManager = this.getSystemService(CAMERA_SERVICE) as CameraManager
             val characteristics = mCameraManager.getCameraCharacteristics(mCameraId)
             val map = characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP)
             val largestPreviewSize: Size = map!!.getOutputSizes(ImageFormat.JPEG)[0]
-            //Log.i( "LargestSize", largestPreviewSize.width.toString() + " " + largestPreviewSize.height)
 
             setAspectRatioTextureView(largestPreviewSize.height, largestPreviewSize.width)
             mImageReader = ImageReader.newInstance(
@@ -588,9 +596,7 @@ class PracticeActivity : AppCompatActivity() {
         override fun onError(cameraDevice: CameraDevice, error: Int) {
             Toast.makeText(this@PracticeActivity, "카메라를 열지 못했습니다.", Toast.LENGTH_SHORT).show();
         }
-
     }
-    //private val cameraOpenCloseLock = Semaphore(1)
 
     @Throws(CameraAccessException::class)
     fun takePreview() {
@@ -669,11 +675,7 @@ class PracticeActivity : AppCompatActivity() {
                 CaptureRequest.CONTROL_AE_MODE_ON_AUTO_FLASH
             )
 
-            // 화면 회전 안되게 고정시켜 놓은 상태에서는 아래 로직으로 방향을 얻을 수 없어서
-            // 센서를 사용하는 것으로 변경
-            //deviceRotation = getResources().getConfiguration().orientation;
             mDeviceRotation = ORIENTATIONS[deviceOrientation.orientation]
-            //Log.d("DeviceRotation", mDeviceRotation.toString() + "")
             captureRequestBuilder.set(CaptureRequest.JPEG_ORIENTATION, mDeviceRotation)
             val mCaptureRequest = captureRequestBuilder.build()
             mSession.capture(mCaptureRequest, mSessionCaptureCallback, mHandler)
@@ -741,7 +743,6 @@ class PracticeActivity : AppCompatActivity() {
         values.put(MediaStore.Images.Media.DATE_TAKEN, System.currentTimeMillis())
 
         var url: Uri? = null
-        //var stringUrl: String? = null /* value to be returned */
 
         try {
             url = cr.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
@@ -756,8 +757,8 @@ class PracticeActivity : AppCompatActivity() {
 
                 try {
                     source.compress(Bitmap.CompressFormat.JPEG, 20, imageOut)
-                    // 사진 서버 전송
-                    val test_post_image = CoroutineScope(Dispatchers.IO).launch {
+                    // send picture to server - Retroifit
+                    val post_image = CoroutineScope(Dispatchers.IO).launch {
                         var post_filename = Date().time.toString()
                         post_filename = "PostImg_" + post_filename + ".jpeg"
                         Log.d("post_img_name : ", post_filename)

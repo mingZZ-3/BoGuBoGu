@@ -18,9 +18,16 @@ import kotlinx.android.synthetic.main.activity_main.*
 import java.security.Permission
 import kotlin.math.log10
 
+/*
+'보구보구' 앱은 android 11/API level 30에 최적화하여 제작됐습니다.
+실행 환경은 갤럭시s21 입니다.
+ */
+
+
 class MainActivity : AppCompatActivity() {
 
-    //Permission
+    //====== 변수 ======//
+    //Permission 변수
     private val CAMERA_PERMISSION = arrayOf(Manifest.permission.CAMERA)
     private val CAMERA_PERMISSION_FLAG = 100
     private val STORAGE_PERMISSION = arrayOf(
@@ -29,7 +36,7 @@ class MainActivity : AppCompatActivity() {
     private val STORAGE_PERMISSION_FLAG = 200
 
 
-
+    // ================================== onCreate ==================================== //
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
@@ -61,13 +68,8 @@ class MainActivity : AppCompatActivity() {
         // permission
         if(checkPermission(CAMERA_PERMISSION, CAMERA_PERMISSION_FLAG)){
             checkPermission(STORAGE_PERMISSION, STORAGE_PERMISSION_FLAG)
-
         }
         requirePremission_audio()
-
-
-        Log.d("stt_cal_max", (20* (log10(10.0/0.00002))).toString())
-        Log.d("stt_cal-min", (20* (log10(-2.0/0.00002))).toString())
     }
 
 
@@ -80,8 +82,6 @@ class MainActivity : AppCompatActivity() {
             ActivityCompat.requestPermissions(this,
                 arrayOf(Manifest.permission.RECORD_AUDIO), 0)
         }
-
-
     }
 
 
@@ -131,7 +131,4 @@ class MainActivity : AppCompatActivity() {
     }
 
     // =====================================
-
-
-
 }

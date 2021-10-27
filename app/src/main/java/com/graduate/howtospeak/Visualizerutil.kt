@@ -37,7 +37,7 @@ class Visualizerutil {
     }
 
     // defalt voice spectrum _ file
-    fun playId(context: Context, @RawRes resId: Int, completedCallback: () -> Unit) {
+    fun playD(context: Context, @RawRes resId: Int, completedCallback: () -> Unit) {
         stop()
 
         MediaPlayer.create(context, resId)

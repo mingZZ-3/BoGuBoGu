@@ -2,7 +2,6 @@ package com.graduate.howtospeak
 
 import android.content.Intent
 import android.content.pm.ActivityInfo
-import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -11,20 +10,22 @@ import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.*
 import kotlinx.android.synthetic.main.activity_learn.*
-//import kotlinx.android.synthetic.main.activity_main.*
-//import kotlinx.android.synthetic.main.activity_main.mtPractice1
+
 
 class LearnActivity : AppCompatActivity() {
+    //====== 변수 ======//
+    //  학습뷰 변수
     private lateinit var imageView_vowel: ImageView
     private lateinit var videoView_vowel: VideoView
-
+    // 전달받은 버튼 tag 값 변수
     private lateinit var vowel_getby: String
 
+
+    // ================================== onCreate ==================================== //
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         setContentView(R.layout.activity_learn)
-
 
         // 상태바 없애기
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
@@ -34,7 +35,7 @@ class LearnActivity : AppCompatActivity() {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN ) }
 
 
-        // 학습 내용 사진 변경
+        // 학습 내용 사진 적용
         imageView_vowel = findViewById(R.id.whichVoweltoLearn) as ImageView
         vowel_getby = intent.getStringExtra("vowel_tolearn").toString()
 
@@ -50,7 +51,7 @@ class LearnActivity : AppCompatActivity() {
         }
 
 
-        // 학습 영상 변경
+        // 학습 영상 적용
         videoView_vowel = findViewById(R.id.learn_videoView) as VideoView
         videoView_vowel.setMediaController(MediaController(this))
         videoView_vowel.requestFocus()
@@ -116,7 +117,7 @@ class LearnActivity : AppCompatActivity() {
         }
 
 
-        // 기본
+        // 기본 버튼
         mtMain1.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent) }
@@ -125,6 +126,7 @@ class LearnActivity : AppCompatActivity() {
             val intent = Intent(this, Learn_Vowel::class.java)
             startActivity(intent) }
 
+        // 영상 실행 관련 버튼
         learnVideo_play.setOnClickListener {
             videoView_vowel.start()
             }

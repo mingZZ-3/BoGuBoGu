@@ -6,8 +6,6 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import androidx.exifinterface.media.ExifInterface;
 
-//import androidx.exifinterface.media.ExifInterface;
-
 // 예제 그대로 가져옴
 public class DeviceOrientation {
     private final int ORIENTATION_PORTRAIT = ExifInterface.ORIENTATION_ROTATE_90; // 6

@@ -15,6 +15,8 @@ import kotlinx.android.synthetic.main.activity_practice__vowel.*
 
 class Practice_Vowel : AppCompatActivity() {
 
+    //====== 변수 ======//
+    // 버튼 변수
     private lateinit var bt_name1: ImageButton
     private lateinit var bt_name2: ImageButton
     private lateinit var bt_name3: ImageButton
@@ -23,6 +25,8 @@ class Practice_Vowel : AppCompatActivity() {
     private lateinit var bt_name6: ImageButton
     private lateinit var bt_name7: ImageButton
 
+
+    // ================================== onCreate ==================================== //
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
@@ -35,6 +39,7 @@ class Practice_Vowel : AppCompatActivity() {
             window.setFlags( WindowManager.LayoutParams.FLAG_FULLSCREEN ,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN ) }
 
+        // 버튼 xml
         bt_name1 = findViewById(R.id.pvowel_a)
         //bt_name2 = findViewById(R.id.pvowel_eo)
         bt_name3 = findViewById(R.id.pvowel_u)
@@ -49,8 +54,9 @@ class Practice_Vowel : AppCompatActivity() {
             startActivity(intent) }
 
 
-        // vowel 버튼
+        // 모음 버튼
         pvowel_a.setOnClickListener {
+            // 버튼 tag 값 전달
             val intent = Intent(this, PracticeActivity::class.java)
             intent.putExtra("vowel_tolearn", bt_name1.tag.toString())
             startActivity(intent) }

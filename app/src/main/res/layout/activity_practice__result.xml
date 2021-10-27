@@ -96,8 +96,8 @@
 
             <ImageButton
                 android:id="@+id/mtEnrichment"
-                android:layout_width="150dp"
-                android:layout_height="56dp"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="left"
 
                 android:adjustViewBounds="true"

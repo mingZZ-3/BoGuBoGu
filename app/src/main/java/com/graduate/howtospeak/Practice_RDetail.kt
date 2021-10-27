@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.activity_practice__r_detail.*
 
 
 class Practice_RDetail : AppCompatActivity() {
+    //====== 변수 ======//
     // 접근 권한
     private lateinit var audioPlayer1: Visualizerutil
     private lateinit var audioPlayer2: Visualizerutil
@@ -24,11 +25,19 @@ class Practice_RDetail : AppCompatActivity() {
     // 표준 음성
     var vowel_button: String? = null
 
-
+// ================================== onCreate ==================================== //
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         setContentView(R.layout.activity_practice__r_detail)
+
+        // 상태바 없애기
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.insetsController?.hide(WindowInsets.Type.statusBars())
+        } else {
+            window.setFlags( WindowManager.LayoutParams.FLAG_FULLSCREEN ,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN ) }
+
 
         // 뒤로 돌아갈때 값 남기기
         val vowelR = intent.getStringExtra("Rvowel_bt")
@@ -50,13 +59,6 @@ class Practice_RDetail : AppCompatActivity() {
             Log.e("recordPath_inRd", "error")
         }
 
-        // 상태바 없애기
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            window.insetsController?.hide(WindowInsets.Type.statusBars())
-        } else {
-            window.setFlags( WindowManager.LayoutParams.FLAG_FULLSCREEN ,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN ) }
-
 
         // 버튼
         mtMain1.setOnClickListener {
@@ -73,59 +75,64 @@ class Practice_RDetail : AppCompatActivity() {
 
             startActivity(intent) }
 
+        // 스펙트럼 실행 버튼
         play_spectrum.setOnClickListener {
+            //user
             if(recordPath_uri != null) {
                 startPlayingAudio(recordPath_uri)
 
             } else {
                 Log.e("record_Path", "user voice error")
             }
-            when (vowel_button) {
-                //a
-                "a" -> startPlayingAudioId(R.raw.voice_a)
-                "ga" -> startPlayingAudioId(R.raw.voice_ga)
-                "na" -> startPlayingAudioId(R.raw.voice_na)
-                "da" -> startPlayingAudioId(R.raw.voice_da)
-                //eo
-                "eo" -> startPlayingAudioId(R.raw.voice_eo)
-                "geo" -> startPlayingAudioId(R.raw.voice_geo)
-                "neo" -> startPlayingAudioId(R.raw.voice_neo)
-                "deo" -> startPlayingAudioId(R.raw.voice_deo)
-                //i
-                "i" -> startPlayingAudioId(R.raw.voice_i)
-                "gi" -> startPlayingAudioId(R.raw.voice_gi)
-                "ni" -> startPlayingAudioId(R.raw.voice_ni)
-                "di" -> startPlayingAudioId(R.raw.voice_di)
-                //o
-                "o" -> startPlayingAudioId(R.raw.voice_o)
-                "go" -> startPlayingAudioId(R.raw.voice_go)
-                "no" -> startPlayingAudioId(R.raw.voice_no)
-                "do" -> startPlayingAudioId(R.raw.voice_do)
-                //u
-                "u" -> startPlayingAudioId(R.raw.voice_u)
-                "gu" -> startPlayingAudioId(R.raw.voice_gu)
-                "nu" -> startPlayingAudioId(R.raw.voice_nu)
-                "du" -> startPlayingAudioId(R.raw.voice_du)
-                //e
-                "e" -> startPlayingAudioId(R.raw.voice_e)
-                "ge" -> startPlayingAudioId(R.raw.voice_ge)
-                "ne" -> startPlayingAudioId(R.raw.voice_ne)
-                "de" -> startPlayingAudioId(R.raw.voice_de)
-                //eu
-                "eu" -> startPlayingAudioId(R.raw.voice_eu)
-                "geu" -> startPlayingAudioId(R.raw.voice_geu)
-                "neu" -> startPlayingAudioId(R.raw.voice_neu)
-                "deu" -> startPlayingAudioId(R.raw.voice_deu)
 
-                else -> startPlayingAudioId(R.raw.voice_e)
+            // default file
+            when (vowel_button) {
+                // 전달받은 버튼 값에 따른 설정
+                //a
+                "a" -> startPlayingAudioD(R.raw.voice_a)
+                "ga" -> startPlayingAudioD(R.raw.voice_ga)
+                "na" -> startPlayingAudioD(R.raw.voice_na)
+                "da" -> startPlayingAudioD(R.raw.voice_da)
+                //eo
+                "eo" -> startPlayingAudioD(R.raw.voice_eo)
+                "geo" -> startPlayingAudioD(R.raw.voice_geo)
+                "neo" -> startPlayingAudioD(R.raw.voice_neo)
+                "deo" -> startPlayingAudioD(R.raw.voice_deo)
+                //i
+                "i" -> startPlayingAudioD(R.raw.voice_i)
+                "gi" -> startPlayingAudioD(R.raw.voice_gi)
+                "ni" -> startPlayingAudioD(R.raw.voice_ni)
+                "di" -> startPlayingAudioD(R.raw.voice_di)
+                //o
+                "o" -> startPlayingAudioD(R.raw.voice_o)
+                "go" -> startPlayingAudioD(R.raw.voice_go)
+                "no" -> startPlayingAudioD(R.raw.voice_no)
+                "do" -> startPlayingAudioD(R.raw.voice_do)
+                //u
+                "u" -> startPlayingAudioD(R.raw.voice_u)
+                "gu" -> startPlayingAudioD(R.raw.voice_gu)
+                "nu" -> startPlayingAudioD(R.raw.voice_nu)
+                "du" -> startPlayingAudioD(R.raw.voice_du)
+                //e
+                "e" -> startPlayingAudioD(R.raw.voice_e)
+                "ge" -> startPlayingAudioD(R.raw.voice_ge)
+                "ne" -> startPlayingAudioD(R.raw.voice_ne)
+                "de" -> startPlayingAudioD(R.raw.voice_de)
+                //eu
+                "eu" -> startPlayingAudioD(R.raw.voice_eu)
+                "geu" -> startPlayingAudioD(R.raw.voice_geu)
+                "neu" -> startPlayingAudioD(R.raw.voice_neu)
+                "deu" -> startPlayingAudioD(R.raw.voice_deu)
+
+                else -> startPlayingAudioD(R.raw.voice_e)
             }
         }
 
 
-        // 음성 시각화
+        // 음성 스펙트럼 시각화
         if(recordPath_uri != null) {
+            //
             audioPlayer1 = Visualizerutil()
-
         } else {
             Log.e("record_Path", "user voice error")
         }
@@ -139,41 +146,41 @@ class Practice_RDetail : AppCompatActivity() {
 
         when (vowel_button) {
             //a
-            "a" -> startPlayingAudioId(R.raw.voice_a)
-            "ga" -> startPlayingAudioId(R.raw.voice_ga)
-            "na" -> startPlayingAudioId(R.raw.voice_na)
-            "da" -> startPlayingAudioId(R.raw.voice_da)
+            "a" -> startPlayingAudioD(R.raw.voice_a)
+            "ga" -> startPlayingAudioD(R.raw.voice_ga)
+            "na" -> startPlayingAudioD(R.raw.voice_na)
+            "da" -> startPlayingAudioD(R.raw.voice_da)
             //eo
-            "eo" -> startPlayingAudioId(R.raw.voice_eo)
-            "geo" -> startPlayingAudioId(R.raw.voice_geo)
-            "neo" -> startPlayingAudioId(R.raw.voice_neo)
-            "deo" -> startPlayingAudioId(R.raw.voice_deo)
+            "eo" -> startPlayingAudioD(R.raw.voice_eo)
+            "geo" -> startPlayingAudioD(R.raw.voice_geo)
+            "neo" -> startPlayingAudioD(R.raw.voice_neo)
+            "deo" -> startPlayingAudioD(R.raw.voice_deo)
             //i
-            "i" -> startPlayingAudioId(R.raw.voice_i)
-            "gi" -> startPlayingAudioId(R.raw.voice_gi)
-            "ni" -> startPlayingAudioId(R.raw.voice_ni)
-            "di" -> startPlayingAudioId(R.raw.voice_di)
+            "i" -> startPlayingAudioD(R.raw.voice_i)
+            "gi" -> startPlayingAudioD(R.raw.voice_gi)
+            "ni" -> startPlayingAudioD(R.raw.voice_ni)
+            "di" -> startPlayingAudioD(R.raw.voice_di)
             //o
-            "o" -> startPlayingAudioId(R.raw.voice_o)
-            "go" -> startPlayingAudioId(R.raw.voice_go)
-            "no" -> startPlayingAudioId(R.raw.voice_no)
-            "do" -> startPlayingAudioId(R.raw.voice_do)
+            "o" -> startPlayingAudioD(R.raw.voice_o)
+            "go" -> startPlayingAudioD(R.raw.voice_go)
+            "no" -> startPlayingAudioD(R.raw.voice_no)
+            "do" -> startPlayingAudioD(R.raw.voice_do)
             //u
-            "u" -> startPlayingAudioId(R.raw.voice_u)
-            "gu" -> startPlayingAudioId(R.raw.voice_gu)
-            "nu" -> startPlayingAudioId(R.raw.voice_nu)
-            "du" -> startPlayingAudioId(R.raw.voice_du)
+            "u" -> startPlayingAudioD(R.raw.voice_u)
+            "gu" -> startPlayingAudioD(R.raw.voice_gu)
+            "nu" -> startPlayingAudioD(R.raw.voice_nu)
+            "du" -> startPlayingAudioD(R.raw.voice_du)
             //e
-            "e" -> startPlayingAudioId(R.raw.voice_e)
-            "ge" -> startPlayingAudioId(R.raw.voice_ge)
-            "ne" -> startPlayingAudioId(R.raw.voice_ne)
-            "de" -> startPlayingAudioId(R.raw.voice_de)
+            "e" -> startPlayingAudioD(R.raw.voice_e)
+            "ge" -> startPlayingAudioD(R.raw.voice_ge)
+            "ne" -> startPlayingAudioD(R.raw.voice_ne)
+            "de" -> startPlayingAudioD(R.raw.voice_de)
             //eu
-            "eu" -> startPlayingAudioId(R.raw.voice_eu)
-            "geu" -> startPlayingAudioId(R.raw.voice_geu)
-            "neu" -> startPlayingAudioId(R.raw.voice_neu)
-            "deu" -> startPlayingAudioId(R.raw.voice_deu)
-            else -> startPlayingAudioId(R.raw.voice_e)
+            "eu" -> startPlayingAudioD(R.raw.voice_eu)
+            "geu" -> startPlayingAudioD(R.raw.voice_geu)
+            "neu" -> startPlayingAudioD(R.raw.voice_neu)
+            "deu" -> startPlayingAudioD(R.raw.voice_deu)
+            else -> startPlayingAudioD(R.raw.voice_e)
         }
 
     }
@@ -184,7 +191,7 @@ class Practice_RDetail : AppCompatActivity() {
         stopPlayingAudio()
     }
 
-    // 실행 파일 설정
+    // User 실행 파일 설정
     private fun startPlayingAudio(resUri_user: Uri) {
         audioPlayer1.play(this, resUri_user) {
         }
@@ -194,9 +201,10 @@ class Practice_RDetail : AppCompatActivity() {
             }
     }
 
-    private fun startPlayingAudioId(@RawRes resId: Int) {
+    // 표준 발음 실행
+    private fun startPlayingAudioD(@RawRes resId: Int) {
 
-        audioPlayer2.playId(this, resId) {
+        audioPlayer2.playD(this, resId) {
         }
         audioPlayer2.getAudioSessionId()
             ?.also {
