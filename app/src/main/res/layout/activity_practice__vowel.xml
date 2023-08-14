@@ -4,18 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    tools:context=".Practice_Vowel">
+    android:background="@color/white"
+    tools:context=".view.practice.Practice_Vowel">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <LinearLayout
+            android:id="@+id/topPanel"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/imageView"
@@ -25,135 +26,113 @@
                 android:scaleType="fitStart"
                 app:srcCompat="@drawable/practice1" />
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/mtMain1"
                 android:layout_width="2dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="#FFFFFF"
                 android:scaleType="centerInside"
                 app:srcCompat="@drawable/home" />
         </LinearLayout>
 
-        <FrameLayout
-            android:layout_width="650dp"
+        <LinearLayout
+            android:id="@+id/lvowel_layout1"
+            android:layout_width="0dp"
             android:layout_height="95dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="50dp"
-            android:orientation="horizontal">
+            android:layout_marginHorizontal="50dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/topPanel"
+            app:layout_constraintBottom_toTopOf="@+id/lvowel_layout2">
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/pvowel_a"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left"
-
-                android:layout_marginLeft="40dp"
                 android:adjustViewBounds="true"
-                android:background="#FFFFFF"
                 android:scaleType="fitCenter"
-
                 android:tag="a"
                 app:srcCompat="@drawable/a_bt2" />
 
-            <!--
-            <ImageButton
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+            <ImageView
                 android:id="@+id/pvowel_eu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-
-                android:layout_marginLeft="80dp"
                 android:adjustViewBounds="true"
-                android:background="#FFFFFF"
                 android:scaleType="fitCenter"
-
                 android:tag="eu"
                 app:srcCompat="@drawable/eu_bt" />
-            -->
 
-            <ImageButton
-                android:id="@+id/pvowel_eu"
+            <View
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"/>
 
-                android:layout_gravity="center"
-                android:adjustViewBounds="true"
-                android:background="#FFFFFF"
-                android:scaleType="fitCenter"
-
-                android:tag="eu"
-                app:srcCompat="@drawable/eu_bt" />
-
-            <ImageButton
+            <ImageView
                 android:id="@+id/pvowel_u"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
-
-                android:layout_marginRight="40dp"
                 android:adjustViewBounds="true"
-                android:background="#FFFFFF"
                 android:scaleType="fitCenter"
-
                 android:tag="u"
                 app:srcCompat="@drawable/u_bt2" />
+        </LinearLayout>
 
-
-        </FrameLayout>
-
-        <FrameLayout
-            android:layout_width="650dp"
+        <LinearLayout
+            android:id="@+id/lvowel_layout2"
+            android:layout_width="0dp"
             android:layout_height="95dp"
             android:layout_gravity="center"
-            android:layout_margin="30dp"
+            android:orientation="horizontal"
+            android:layout_marginHorizontal="50dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lvowel_layout1"
+            app:layout_constraintBottom_toBottomOf="parent">
 
-            android:orientation="horizontal">
-
-            <ImageButton
+            <ImageView
                 android:id="@+id/pvowel_o"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
-
-                android:layout_gravity="left"
                 android:adjustViewBounds="true"
-                android:background="#FFFFFF"
                 android:scaleType="fitCenter"
-
                 android:tag="o"
                 app:srcCompat="@drawable/o_bt2" />
 
-            <ImageButton
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+            <ImageView
                 android:id="@+id/pvowel_i"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
-                android:layout_gravity="center"
                 android:adjustViewBounds="true"
-                android:background="#FFFFFF"
                 android:scaleType="fitCenter"
-
                 android:tag="i"
                 app:srcCompat="@drawable/i_bt" />
 
-            <ImageButton
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.11"/>
+
+            <ImageView
                 android:id="@+id/pvowel_e"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="11dp"
-
-                android:layout_gravity="right"
                 android:adjustViewBounds="true"
-                android:background="#FFFFFF"
                 android:scaleType="fitCenter"
-
                 android:tag="e"
                 app:srcCompat="@drawable/e_bt2" />
 
-
-        </FrameLayout>
-
-    </LinearLayout>
-
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
